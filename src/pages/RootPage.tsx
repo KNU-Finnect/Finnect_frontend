@@ -5,6 +5,7 @@ const RootPage = () => {
     <>
       <main>
         <Outlet />
+        This is RootPage
       </main>
     </>
   );
