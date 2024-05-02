@@ -20,6 +20,9 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22.x
+      
+      - name: Sdks error fix
+        run: yarn add @yarnpkg/sdks -D yarn dlx @yarnpkg/sdks vscode
 
       - name: Install dependencies
         run: yarn install --immutable --immutable-cache --check-cache
