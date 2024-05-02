@@ -1,5 +1,14 @@
 import ReactDOM from 'react-dom/client';
 
-import App from '@finnect/App.tsx';
+import App from './App.tsx';
+import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
-ReactDOM.createRoot(document.getElementById('root')!).render(<App />);
+const queryClient = new QueryClient();
+
+ReactDOM.createRoot(document.getElementById('root')!).render(
+  <QueryClientProvider client={queryClient}>
+    <ReactQueryDevtools initialIsOpen={true} />
+    <App />
+  </QueryClientProvider>
+);
