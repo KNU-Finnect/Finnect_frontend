@@ -14,7 +14,7 @@
     "@tanstack/react-query": "^5.32.1",
     "@tanstack/react-query-devtools": "^5.32.1",
     "ag-grid-react": "^31.2.1",
-    "antd": "^5.16.5",
+    "antd": "^5.17.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.51.3",
