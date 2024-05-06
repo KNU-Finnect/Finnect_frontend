@@ -13,7 +13,9 @@ const CustomLayout = styled(Layout)`
 const RootPage = () => {
   return (
     <CustomLayout>
-      <Outlet />
+      <Layout>
+        <Outlet />
+      </Layout>
     </CustomLayout>
   );
 };
