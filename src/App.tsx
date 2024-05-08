@@ -2,7 +2,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import ErrorPage from './pages/ErrorPage';
 import RootPage from './pages/RootPage';
-import WorkSpacePage from '@finnect/pages/workspace/SigninPage';
+import SigninPage from '@finnect/pages/SigninPage';
 import WorkSpacePage from '@finnect/pages/workspace/WorkSpacePage';
 import { GlobalStyle } from '@finnect/styles/GlobalStyle';
 
