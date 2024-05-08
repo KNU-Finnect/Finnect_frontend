@@ -52,7 +52,7 @@ const WorkSpace = () => {
           <Menu.SubMenu key={menu.key} title={menu.title}>
             {menu.items.map((item: WorkSpaceMenuItem) => (
               <Menu.Item key={item.key}>
-                <Link to={item.link}>{item.title}</Link>
+                <>{item.title}</>
               </Menu.Item>
             ))}
             <Menu.Item key={`add_${menu.key}`} onClick={handleAddMenuItemClick}>

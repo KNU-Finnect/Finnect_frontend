@@ -1,5 +1,3 @@
-import { Link } from 'react-router-dom';
-
 import { Menu } from 'antd';
 
 const Views = () => {
@@ -7,7 +5,7 @@ const Views = () => {
     <Menu theme='light' mode='inline' style={{ width: '100%' }}>
       <Menu.SubMenu key='views' title='Views'>
         <Menu.Item key='1'>
-          <Link to='/views/fundingraise'>Funding Raise</Link>
+          <>Funding Raise</>
         </Menu.Item>
       </Menu.SubMenu>
     </Menu>

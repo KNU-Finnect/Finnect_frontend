@@ -1,5 +1,3 @@
-import { Link } from 'react-router-dom';
-
 import { Menu } from 'antd';
 
 const Records = () => {
@@ -7,13 +5,13 @@ const Records = () => {
     <Menu theme='light' mode='inline' style={{ width: '100%' }}>
       <Menu.SubMenu key='records' title='Records'>
         <Menu.Item key='1'>
-          <Link to='/records/companies'>Companies</Link>
+          <>Companies</>
         </Menu.Item>
         <Menu.Item key='2'>
-          <Link to='/records/people'>People</Link>
+          <>People</>
         </Menu.Item>
         <Menu.Item key='3'>
-          <Link to='/records/deals'>Deals</Link>
+          <>Deals</>
         </Menu.Item>
       </Menu.SubMenu>
     </Menu>
