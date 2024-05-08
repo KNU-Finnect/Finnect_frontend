@@ -1,4 +1,5 @@
 import { Layout } from 'antd';
+import { Menu } from 'antd';
 
 import Records from './Records';
 import Views from './Views';
@@ -22,8 +23,10 @@ const Slider = () => {
       <br />
       <br />
       <br />
-      <Records />
-      <Views />
+      <Menu theme='light' mode='inline' style={{ width: '100%' }}>
+        <Records />
+        <Views />
+      </Menu>
     </Sider>
   );
 };

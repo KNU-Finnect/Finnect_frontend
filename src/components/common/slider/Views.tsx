@@ -1,14 +1,19 @@
 import { Menu } from 'antd';
 
+import { BookOutlined } from '@ant-design/icons';
+
 const Views = () => {
   return (
-    <Menu theme='light' mode='inline' style={{ width: '100%' }}>
-      <Menu.SubMenu key='views' title='Views'>
-        <Menu.Item key='1'>
-          <>Funding Raise</>
-        </Menu.Item>
-      </Menu.SubMenu>
-    </Menu>
+    <Menu.SubMenu
+      key='views'
+      title='Views'
+      icon={<BookOutlined />}
+      style={{ marginLeft: 10 }}
+    >
+      <Menu.Item key='4'>
+        <>Funding Raise</>
+      </Menu.Item>
+    </Menu.SubMenu>
   );
 };
 
