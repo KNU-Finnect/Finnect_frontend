@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom';
 import { Layout } from 'antd';
 import styled from 'styled-components';
 
-import Slider from '@finnect/components/common/slider/Slider';
+import SiderBox from '@finnect/components/common/sider/SiderBox';
 import { StyledSliderWrapper } from '@finnect/styles/Layout';
 
 const CustomLayout = styled(Layout)`
@@ -18,7 +18,7 @@ const RootPage = () => {
     <CustomLayout>
       <Layout style={{ width: '100%', display: 'flex' }}>
         <StyledSliderWrapper>
-          <Slider />
+          <SiderBox />
         </StyledSliderWrapper>
         <Layout>
           <Outlet />

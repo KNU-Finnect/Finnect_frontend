@@ -7,7 +7,7 @@ import WorkSpace from './WorkSpace';
 
 const { Sider } = Layout;
 
-const Slider = () => {
+const SiderBox = () => {
   return (
     <Sider
       theme='light'
@@ -31,4 +31,4 @@ const Slider = () => {
   );
 };
 
-export default Slider;
+export default SiderBox;
