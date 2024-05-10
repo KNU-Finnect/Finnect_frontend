@@ -1,5 +1,16 @@
+import { Layout } from 'antd';
+
+import HeaderBox from '@finnect/components/common/header/HeaderBox';
+
+const { Content } = Layout;
+
 const WorkSpacePage = () => {
-  return <>123</>;
+  return (
+    <Layout>
+      <HeaderBox />
+      <Content></Content>
+    </Layout>
+  );
 };
 
 export default WorkSpacePage;
