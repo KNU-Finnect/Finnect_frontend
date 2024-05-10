@@ -300,7 +300,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/parser@npm:^7.1.0, @babel/parser@npm:^7.20.5, @babel/parser@npm:^7.20.7, @babel/parser@npm:^7.23.0, @babel/parser@npm:^7.24.0, @babel/parser@npm:^7.24.1, @babel/parser@npm:^7.24.4":
+"@babel/parser@npm:7.24.4, @babel/parser@npm:^7.1.0, @babel/parser@npm:^7.20.5, @babel/parser@npm:^7.20.7, @babel/parser@npm:^7.23.0, @babel/parser@npm:^7.24.0, @babel/parser@npm:^7.24.1, @babel/parser@npm:^7.24.4":
   version: 7.24.4
   resolution: "@babel/parser@npm:7.24.4"
   bin:
@@ -3120,6 +3120,7 @@ __metadata:
   resolution: "finnect-frontend@workspace:."
   dependencies:
     "@ant-design/icons": "npm:^5.3.7"
+    "@babel/parser": "npm:7.24.4"
     "@tanstack/react-query": "npm:^5.32.1"
     "@tanstack/react-query-devtools": "npm:^5.32.1"
     "@trivago/prettier-plugin-sort-imports": "npm:^4.3.0"

@@ -1,8 +1,10 @@
 import { useState } from 'react';
 
 import { Menu, Modal, Input } from 'antd';
+import { useRecoilCallback } from 'recoil';
 
 import { PlusOutlined } from '@ant-design/icons';
+import { selectedWorkSpaceState } from '@finnect/atoms/sider/useSelectedMenu';
 import { WorkSpaceMenuItem } from '@finnect/interface/SlideMenuInterface';
 
 const WorkSpace = () => {
@@ -17,12 +19,18 @@ const WorkSpace = () => {
   const [modalVisible, setModalVisible] = useState<boolean>(false);
   const [newItemTitle, setNewItemTitle] = useState<string>('');
 
+  const handleWorkSpaceClick = useRecoilCallback(({ set }) => (e: any) => {
+    const selectedItem = e.domEvent.currentTarget.innerText;
+    set(selectedWorkSpaceState, selectedItem);
+    localStorage.setItem('selectedWorkSpace', selectedItem);
+  });
+
   const handleAddMenuItemClick = () => {
     setModalVisible(true);
   };
 
   const handleModalOk = () => {
-    const newMenuItemKey = `${menus[0].key}_1`; // Assuming only one menu is available
+    const newMenuItemKey = `${menus[0].key}_1`;
     const updatedMenus = menus.map((menu) => ({
       ...menu,
       items: [
@@ -50,7 +58,7 @@ const WorkSpace = () => {
         {menus.map((menu) => (
           <Menu.SubMenu key={menu.key} title={menu.title}>
             {menu.items.map((item: WorkSpaceMenuItem) => (
-              <Menu.Item key={item.key}>
+              <Menu.Item key={item.key} onClick={handleWorkSpaceClick}>
                 <>{item.title}</>
               </Menu.Item>
             ))}
