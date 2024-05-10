@@ -27,6 +27,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./",\
         "packageDependencies": [\
           ["@ant-design/icons", "virtual:b3007d5fc32f8949005e27d6e1151e49f5dd0d420a14300c902217f6700c617586efa3c13089302a8d967511edd1222b9d70d857d3177030ce0c7d8605860222#npm:5.3.7"],\
+          ["@babel/parser", "npm:7.24.4"],\
           ["@tanstack/react-query", "virtual:b3007d5fc32f8949005e27d6e1151e49f5dd0d420a14300c902217f6700c617586efa3c13089302a8d967511edd1222b9d70d857d3177030ce0c7d8605860222#npm:5.32.1"],\
           ["@tanstack/react-query-devtools", "virtual:b3007d5fc32f8949005e27d6e1151e49f5dd0d420a14300c902217f6700c617586efa3c13089302a8d967511edd1222b9d70d857d3177030ce0c7d8605860222#npm:5.32.1"],\
           ["@trivago/prettier-plugin-sort-imports", "virtual:b3007d5fc32f8949005e27d6e1151e49f5dd0d420a14300c902217f6700c617586efa3c13089302a8d967511edd1222b9d70d857d3177030ce0c7d8605860222#npm:4.3.0"],\
@@ -4106,6 +4107,7 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["finnect-frontend", "workspace:."],\
           ["@ant-design/icons", "virtual:b3007d5fc32f8949005e27d6e1151e49f5dd0d420a14300c902217f6700c617586efa3c13089302a8d967511edd1222b9d70d857d3177030ce0c7d8605860222#npm:5.3.7"],\
+          ["@babel/parser", "npm:7.24.4"],\
           ["@tanstack/react-query", "virtual:b3007d5fc32f8949005e27d6e1151e49f5dd0d420a14300c902217f6700c617586efa3c13089302a8d967511edd1222b9d70d857d3177030ce0c7d8605860222#npm:5.32.1"],\
           ["@tanstack/react-query-devtools", "virtual:b3007d5fc32f8949005e27d6e1151e49f5dd0d420a14300c902217f6700c617586efa3c13089302a8d967511edd1222b9d70d857d3177030ce0c7d8605860222#npm:5.32.1"],\
           ["@trivago/prettier-plugin-sort-imports", "virtual:b3007d5fc32f8949005e27d6e1151e49f5dd0d420a14300c902217f6700c617586efa3c13089302a8d967511edd1222b9d70d857d3177030ce0c7d8605860222#npm:4.3.0"],\
