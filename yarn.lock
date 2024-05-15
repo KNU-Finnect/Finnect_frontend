@@ -1541,23 +1541,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ag-grid-community@npm:31.2.1":
-  version: 31.2.1
-  resolution: "ag-grid-community@npm:31.2.1"
-  checksum: 10c0/714f935ae6f18efff84044747a9435f477a00b8a27d5f06541388b0b24fd87d74efbf770dee2041564a8af8b3e9efeaba906a9b0ab4b29a95bf5e35f37844839
+"ag-grid-community@npm:31.3.1, ag-grid-community@npm:^31.3.1":
+  version: 31.3.1
+  resolution: "ag-grid-community@npm:31.3.1"
+  checksum: 10c0/d0fcbc34542667c42736611e73e09d8215816b738e6793c9d96895cabb0483745ff4d6fea85d9578e2514e001e8c95c380825dc47e2bb0aff536c23b5de6472b
   languageName: node
   linkType: hard
 
-"ag-grid-react@npm:^31.2.1":
-  version: 31.2.1
-  resolution: "ag-grid-react@npm:31.2.1"
+"ag-grid-react@npm:^31.3.1":
+  version: 31.3.1
+  resolution: "ag-grid-react@npm:31.3.1"
   dependencies:
-    ag-grid-community: "npm:31.2.1"
+    ag-grid-community: "npm:31.3.1"
     prop-types: "npm:^15.8.1"
   peerDependencies:
     react: ^16.3.0 || ^17.0.0 || ^18.0.0
     react-dom: ^16.3.0 || ^17.0.0 || ^18.0.0
-  checksum: 10c0/0f19cc0fdedcec316e577005116848c417ec2f3668e8247cf1785f2379a32c955636bdb8797302f67815896bdc3e5bcab8a4c52d31958c8886ca906fb68825ea
+  checksum: 10c0/070ea0b86fd315aa21f99bff50f4d39b07c0d7144eb7d2348294e2f63e43d818e08bf90bd9529edf9e41bb10e4a060540304b94728c01b616e40fa047337e078
   languageName: node
   linkType: hard
 
@@ -3130,7 +3130,8 @@ __metadata:
     "@typescript-eslint/parser": "npm:^7.7.1"
     "@vitejs/plugin-react": "npm:^4.2.1"
     "@yarnpkg/sdks": "npm:^3.1.2"
-    ag-grid-react: "npm:^31.2.1"
+    ag-grid-community: "npm:^31.3.1"
+    ag-grid-react: "npm:^31.3.1"
     antd: "npm:^5.17.0"
     eslint: "npm:^9.1.1"
     eslint-config-prettier: "npm:^9.1.0"
