@@ -1,14 +1,13 @@
 import { Layout } from 'antd';
 
 import HeaderBox from '@finnect/components/common/header/HeaderBox';
-
-const { Content } = Layout;
+import CompaniesBox from '@finnect/pages/companies/CompaniesBox';
 
 const WorkSpacePage = () => {
   return (
     <Layout>
       <HeaderBox />
-      <Content></Content>
+      <CompaniesBox />
     </Layout>
   );
 };
