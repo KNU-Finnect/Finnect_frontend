@@ -18,7 +18,6 @@ const InviteModal = ({
     useRecoilState<string[]>(invitedEmailsState);
 
   const handleInvite = () => {
-    // console.log('초대하기:', email);
     setInvitedEmails([...invitedEmails, email]);
     setEmail('');
   };
@@ -42,15 +41,6 @@ const InviteModal = ({
         value={email}
         onChange={(e) => setEmail(e.target.value)}
       />
-      <div style={{ maxHeight: '300px', overflowY: 'auto' }}>
-        <List
-          style={{ marginTop: '16px' }}
-          header={<div>초대된 이메일 목록</div>}
-          bordered
-          dataSource={invitedEmails}
-          renderItem={(item) => <List.Item>{item}</List.Item>}
-        />
-      </div>
     </Modal>
   );
 };
