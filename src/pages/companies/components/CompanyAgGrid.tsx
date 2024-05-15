@@ -1,38 +1,37 @@
-import React, { useMemo, useState, StrictMode } from 'react';
-import { createRoot } from 'react-dom/client';
+import { useMemo, useState } from 'react';
 
-import { ColDef } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
+import { Button, Modal } from 'antd';
 
+import { PlusOutlined } from '@ant-design/icons';
+import ColumnForm from '@finnect/pages/companies/components/ColumnForm';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-quartz.css';
-
-const gridDiv = document.querySelector('#myGrid');
 
 const CompanyAgGrid = () => {
   const [rowData, setRowData] = useState([
     {
-      companies: 'Tesla',
-      domain: 'Model Y',
-      Category: '64950',
+      Companies: 'Tesla',
+      Domains: 'Model Y',
+      Categories: '64950',
       About: 'true',
     },
     {
-      companies: 'Tesla',
-      domain: 'Model Y-Seires',
-      Category: '14950',
+      Companies: 'Microsoft',
+      Domains: 'Model Y-Seires',
+      Categories: '14950',
       About: 'true',
     },
   ]);
 
-  const [columnDefs, setColumnDefs] = useState<ColDef[]>([
+  const [columnDefs, setColumnDefs] = useState([
     {
-      field: 'companies',
+      field: 'Companies',
       checkboxSelection: true,
       editable: true,
     },
-    { field: 'domain', editable: true },
-    { field: 'Category', editable: true },
+    { field: 'Domains', editable: true },
+    { field: 'Categories', editable: true },
     { field: 'About', editable: true },
   ]);
 
@@ -43,18 +42,59 @@ const CompanyAgGrid = () => {
     };
   }, []);
 
+  const handleAddColumn = () => {
+    setColumnModalVisible(true);
+  };
+
+  const handleColumnModalCancel = () => {
+    setColumnModalVisible(false);
+  };
+
+  const handleCreateColumn = (values) => {
+    const { name, type } = values;
+    setColumnDefs((prevDefs) => [
+      ...prevDefs,
+      {
+        field: name,
+        editable: true,
+      },
+    ]);
+    setColumnModalVisible(false);
+  };
+
+  const [columnModalVisible, setColumnModalVisible] = useState(false);
+
   return (
-    <div className='ag-theme-quartz' style={{ height: 500 }}>
-      <AgGridReact
-        rowData={rowData}
-        columnDefs={columnDefs}
-        defaultColDef={defaultColDef}
-        rowSelection='multiple'
-        suppressRowClickSelection={true}
-        pagination={true}
-        paginationPageSize={10}
-        paginationPageSizeSelector={[10, 25, 50]}
-      />
+    <div style={{ padding: '16px' }}>
+      <div style={{ marginBottom: '16px' }}>
+        <Button
+          type='primary'
+          onClick={handleAddColumn}
+          icon={<PlusOutlined />}
+        >
+          속성 추가하기
+        </Button>
+      </div>
+      <div className='ag-theme-quartz' style={{ height: '500px' }}>
+        <AgGridReact
+          rowData={rowData}
+          columnDefs={columnDefs}
+          defaultColDef={defaultColDef}
+          rowSelection='multiple'
+          suppressRowClickSelection={true}
+          pagination={true}
+          paginationPageSize={10}
+          paginationPageSizeSelector={[10, 25, 50]}
+        />
+      </div>
+      <Modal
+        title='속성 추가하기'
+        visible={columnModalVisible}
+        onCancel={handleColumnModalCancel}
+        footer={null}
+      >
+        <ColumnForm onCreate={handleCreateColumn} />
+      </Modal>
     </div>
   );
 };
