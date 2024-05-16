@@ -1,15 +1,18 @@
 import { useMemo, useState } from 'react';
 
+import { ColDef } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
 import { Button, Modal } from 'antd';
 
 import { PlusOutlined } from '@ant-design/icons';
-import ColumnForm from '@finnect/pages/companies/components/ColumnForm';
+import ColumnForm from '@finnect/components/common/modal/company/ColumnForm';
+import CompanyForm from '@finnect/components/common/modal/company/CompanyForm';
+import { CompanyInterface } from '@finnect/interface/CompanyInterface';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-quartz.css';
 
 const CompanyAgGrid = () => {
-  const [rowData, setRowData] = useState([
+  const [rowData, setRowData] = useState<CompanyInterface[]>([
     {
       Companies: 'Tesla',
       Domains: 'Model Y',
@@ -24,16 +27,16 @@ const CompanyAgGrid = () => {
     },
   ]);
 
-  const [columnDefs, setColumnDefs] = useState([
+  const [columnDefs, setColumnDefs] = useState<ColDef[]>([
     {
+      headerName: 'Companies',
       field: 'Companies',
       checkboxSelection: true,
-      editable: true,
     },
-    { field: 'Domains', editable: true },
+    { headerName: 'Domains', field: 'Domains' },
     {
+      headerName: 'Categories',
       field: 'Categories',
-      editable: true,
       cellEditor: 'agSelectCellEditor',
       cellEditorParams: {
         values: [
@@ -172,12 +175,13 @@ const CompanyAgGrid = () => {
         ],
       },
     },
-    { field: 'About', editable: true },
+    { headerName: 'About', field: 'About' },
   ]);
 
   const defaultColDef = useMemo(() => {
     return {
-      filter: 'agTextColumnFilter',
+      filter: true,
+      editable: true,
       floatingFilter: true,
     };
   }, []);
@@ -192,17 +196,58 @@ const CompanyAgGrid = () => {
 
   const handleCreateColumn = (values) => {
     const { name, type } = values;
-    setColumnDefs((prevDefs) => [
-      ...prevDefs,
-      {
+
+    let newColumnDef;
+    if (type === 'text') {
+      newColumnDef = {
+        headerName: name,
+        field: name,
+        cellDataType: 'text',
+        editable: true,
+      };
+    } else if (type === 'number') {
+      newColumnDef = {
+        headerName: name,
         field: name,
         editable: true,
-      },
-    ]);
+        cellDataType: 'number',
+      };
+    } else if (type === 'date') {
+      newColumnDef = {
+        headerName: name,
+        field: name,
+        cellDataType: 'date',
+        editable: true,
+      };
+    }
+
+    setColumnDefs((prevDefs) => [...prevDefs, newColumnDef]);
     setColumnModalVisible(false);
   };
 
   const [columnModalVisible, setColumnModalVisible] = useState(false);
+  const [companyModalVisible, setCompanyModalVisible] = useState(false);
+
+  const handleAddCompany = () => {
+    setCompanyModalVisible(true);
+  };
+
+  const handleCompanyModalCancel = () => {
+    setCompanyModalVisible(false);
+  };
+
+  const handleCreateCompany = (values) => {
+    const { name, domain } = values;
+
+    setRowData((prevData) => [
+      ...prevData,
+      {
+        Companies: name,
+        Domains: domain,
+      },
+    ]);
+    setCompanyModalVisible(false);
+  };
 
   return (
     <div style={{ padding: '16px' }}>
@@ -211,8 +256,16 @@ const CompanyAgGrid = () => {
           type='primary'
           onClick={handleAddColumn}
           icon={<PlusOutlined />}
+          style={{ marginRight: '12px' }}
         >
           속성 추가하기
+        </Button>
+        <Button
+          type='primary'
+          onClick={handleAddCompany}
+          icon={<PlusOutlined />}
+        >
+          회사 추가하기
         </Button>
       </div>
       <div className='ag-theme-quartz' style={{ height: '500px' }}>
@@ -234,6 +287,14 @@ const CompanyAgGrid = () => {
         footer={null}
       >
         <ColumnForm onCreate={handleCreateColumn} />
+      </Modal>
+      <Modal
+        title='회사 추가하기'
+        visible={companyModalVisible}
+        onCancel={handleCompanyModalCancel}
+        footer={null}
+      >
+        <CompanyForm onCreateCompany={handleCreateCompany} />
       </Modal>
     </div>
   );

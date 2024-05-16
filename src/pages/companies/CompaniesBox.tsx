@@ -13,6 +13,7 @@ const { Content } = Layout;
 const ButtonLayout = styled.div`
   display: flex;
   margin-bottom: 24px;
+  width: 100%;
   justify-content: space-between;
 `;
 
@@ -48,9 +49,6 @@ const CompaniesBox = () => {
     >
       <ButtonLayout>
         <div>
-          <Button type='primary' icon={<FilterOutlined />} style={buttonStyle}>
-            Filter
-          </Button>
           <Button type='primary' icon={<SettingOutlined />} style={buttonStyle}>
             View Setting
           </Button>

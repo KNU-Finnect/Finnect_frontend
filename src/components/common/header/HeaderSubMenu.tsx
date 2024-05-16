@@ -10,7 +10,7 @@ import {
   selectedHeaderMenuState,
   selectedInviteModalState,
 } from '@finnect/atoms/header/useHeaderMenu';
-import InviteModal from '@finnect/components/common/modal/InviteModal';
+import InviteModal from '@finnect/components/common/modal/header/InviteModal';
 
 const { Text } = Typography;
 
