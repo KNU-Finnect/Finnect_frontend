@@ -1,5 +1,5 @@
 export interface CompanyInterface {
-  Comapnies: string;
+  Companies: string;
   Domains: string;
   Categories: string;
   About: string;

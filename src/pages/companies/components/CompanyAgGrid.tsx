@@ -194,10 +194,10 @@ const CompanyAgGrid = () => {
     setColumnModalVisible(false);
   };
 
-  const handleCreateColumn = (values) => {
+  const handleCreateColumn = (values: { name: any; type: any }) => {
     const { name, type } = values;
 
-    let newColumnDef;
+    let newColumnDef: ColDef<any, any>;
     if (type === 'text') {
       newColumnDef = {
         headerName: name,
@@ -236,7 +236,7 @@ const CompanyAgGrid = () => {
     setCompanyModalVisible(false);
   };
 
-  const handleCreateCompany = (values) => {
+  const handleCreateCompany = (values: { name: string; domain: string }) => {
     const { name, domain } = values;
 
     setRowData((prevData) => [
@@ -244,6 +244,8 @@ const CompanyAgGrid = () => {
       {
         Companies: name,
         Domains: domain,
+        Categories: '',
+        About: '',
       },
     ]);
     setCompanyModalVisible(false);
