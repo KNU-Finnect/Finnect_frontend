@@ -47,7 +47,7 @@ const CompanyAgGrid = () => {
           'Biotechnology',
           'Broadcasting',
           'Building Materials',
-          'Buisness Supplies',
+          'Business Supplies',
           'Chemicals',
           'Civil Engineering',
           'Cloud Services',

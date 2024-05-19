@@ -1,13 +1,15 @@
-import { Form, Input, Select, Button } from 'antd';
+import { Form, Input, Button } from 'antd';
 
-const { Option } = Select;
-
-const CompanyForm = ({ onCreateCompany }) => {
+const CompanyForm = ({
+  onCreateCompany,
+}: {
+  onCreateCompany: (values: { name: string; domain: string }) => void;
+}) => {
   const [formCompany] = Form.useForm();
 
-  const handleFinish = (values) => {
+  const handleFinish = (values: { name: string; domain: string }) => {
     onCreateCompany(values);
-    form.resetFields();
+    formCompany.resetFields();
   };
 
   return (

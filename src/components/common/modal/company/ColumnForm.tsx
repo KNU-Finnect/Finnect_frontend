@@ -2,10 +2,14 @@ import { Form, Input, Select, Button } from 'antd';
 
 const { Option } = Select;
 
-const ColumnForm = ({ onCreate }) => {
+const ColumnForm = ({
+  onCreate,
+}: {
+  onCreate: (values: { name: string; type: string }) => void;
+}) => {
   const [form] = Form.useForm();
 
-  const handleFinish = (values) => {
+  const handleFinish = (values: { name: string; type: string }) => {
     onCreate(values);
     form.resetFields();
   };
