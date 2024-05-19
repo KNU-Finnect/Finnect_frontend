@@ -1,4 +1,4 @@
-import { Modal, Input, Button, List } from 'antd';
+import { Modal, Input, Button } from 'antd';
 import { useRecoilState } from 'recoil';
 
 import {

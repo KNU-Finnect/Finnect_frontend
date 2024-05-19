@@ -1,11 +1,7 @@
 import { Layout, Button, theme } from 'antd';
 import styled from 'styled-components';
 
-import {
-  SaveOutlined,
-  FilterOutlined,
-  SettingOutlined,
-} from '@ant-design/icons';
+import { SaveOutlined, SettingOutlined } from '@ant-design/icons';
 import CompanyAgGrid from '@finnect/pages/companies/components/CompanyAgGrid';
 
 const { Content } = Layout;
@@ -28,11 +24,6 @@ const CompaniesBox = () => {
     color: '#FFFFFF',
     marginRight: '12px',
   };
-
-  const rowData = [
-    { id: 1, domain: 'company1.com', name: 'Company 1' },
-    { id: 2, domain: 'company2.com', name: 'Company 2' },
-  ];
 
   return (
     <Content
