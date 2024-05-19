@@ -63,13 +63,13 @@ const WorkSpace = () => {
               </Menu.Item>
             ))}
             <Menu.Item key={`add_${menu.key}`} onClick={handleAddMenuItemClick}>
-              <PlusOutlined /> Add Item
+              <PlusOutlined /> Add WorkSpace
             </Menu.Item>
           </Menu.SubMenu>
         ))}
       </Menu>
       <Modal
-        title='Add Item'
+        title='새로운 워크스페이스 추가하기'
         visible={modalVisible}
         onOk={handleModalOk}
         onCancel={handleModalCancel}
@@ -77,7 +77,7 @@ const WorkSpace = () => {
         <Input
           value={newItemTitle}
           onChange={(e) => setNewItemTitle(e.target.value)}
-          placeholder='Enter item title'
+          placeholder='새로운 워크스페이스 이름을 입력해주세요.'
         />
       </Modal>
     </>
