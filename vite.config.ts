@@ -8,5 +8,6 @@ export default defineConfig({
   cacheDir: './.vite',
   resolve: {
     alias: [{ find: '@finnect', replacement: '/src' }],
+    extensions: ['.js', '.ts', '.jsx', '.tsx'],
   },
 });
