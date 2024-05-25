@@ -4,7 +4,8 @@ import { ThemeProvider } from 'styled-components';
 
 import ErrorPage from './pages/ErrorPage';
 import RootPage from './pages/RootPage';
-import SigninPage from '@finnect/pages/SigninPage';
+import SigninPage from '@finnect/pages/login/SigninPage';
+import SignupPage from '@finnect/pages/login/SignupPage';
 import WorkSpacePage from '@finnect/pages/workspace/WorkSpacePage';
 import { GlobalStyle } from '@finnect/styles/GlobalStyle';
 import Theme from '@finnect/styles/Theme';
@@ -17,6 +18,7 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       { path: 'signin', element: <SigninPage /> },
+      { path: 'signup', element: <SignupPage /> },
       { path: '/:workspaceId', element: <WorkSpacePage /> }
     ],
   },
