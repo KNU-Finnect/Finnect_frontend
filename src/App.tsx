@@ -2,11 +2,12 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import { ThemeProvider } from 'styled-components';
 
-import ErrorPage from './pages/ErrorPage';
-import RootPage from './pages/RootPage';
+import ErrorPage from '@finnect/pages/ErrorPage';
+import RootPage from '@finnect/pages/RootPage';
 import SigninPage from '@finnect/pages/login/SigninPage';
 import SignupPage from '@finnect/pages/login/SignupPage';
 import WorkSpacePage from '@finnect/pages/workspace/WorkSpacePage';
+
 import { GlobalStyle } from '@finnect/styles/GlobalStyle';
 import Theme from '@finnect/styles/Theme';
 
@@ -19,7 +20,7 @@ const router = createBrowserRouter([
     children: [
       { path: 'signin', element: <SigninPage /> },
       { path: 'signup', element: <SignupPage /> },
-      { path: '/:workspaceId', element: <WorkSpacePage /> }
+      { path: '/:workspaceId', element: <WorkSpacePage /> },
     ],
   },
 ]);
