@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { Input, Typography,Space,Button } from 'antd';
+import { Input, Typography, Space, Button } from 'antd';
 
 const IDCheckbox: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -28,20 +28,20 @@ const IDCheckbox: React.FC = () => {
       <Typography.Title level={5}>E-mail</Typography.Title>
       <InputWrapper>
         <Space direction="vertical" style={{ width: '100%' }}>
-          <Space direction="horizontal" style={{ width: '100%' }}>
+          <EmailInputWrapper>
             <Input 
               style={{ width: '100%' }}
               placeholder='input e-mail' 
               value={email}
               onChange={handleChange}
             />
-            <Button type="primary" style={{ width: '100%' }}>인증</Button>
-            {!isValidEmail && <ErrorMessage>잘못된 형식입니다.</ErrorMessage>}
-          </Space>
-          <Space direction="horizontal" style={{ width: '100%' }}>
-            <Input placeholder='인증번호' style={{ width: '100%' }}/>
-            <Button type="primary" style={{ width: '100%' }}>확인</Button>
-          </Space>
+            <Button type="primary" style={{ marginLeft: '8px' }}>인증</Button>
+          </EmailInputWrapper>
+          {!isValidEmail && <ErrorMessage>잘못된 형식입니다.</ErrorMessage>}
+          <CheckInputWrapper>
+              <Input placeholder='인증번호' style={{ width: '100%' }}/>
+              <Button type="primary" style={{ marginLeft: '8px' }}>확인</Button>
+          </CheckInputWrapper>
         </Space>  
       </InputWrapper>
     </IdCheckboxWrapper>
@@ -56,6 +56,18 @@ const IdCheckboxWrapper = styled.div`
 `;
 
 const InputWrapper = styled.div`
+  position: relative;
+`;
+
+const EmailInputWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  position: relative;
+`;
+
+const CheckInputWrapper = styled.div`
+  display: flex;
+  align-items: center;
   position: relative;
 `;
 

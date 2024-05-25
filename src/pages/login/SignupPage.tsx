@@ -45,6 +45,7 @@ const SignupWrapper = styled.div`
 
 const InputWrapper = styled.div`
     margin-bottom:1rem;
+    width : 100%;
 `;
 
 const SignupContainer = styled.div`
