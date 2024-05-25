@@ -1,10 +1,17 @@
+import React, { useState } from 'react';
 import IDbox from '@finnect/components/login/IDbox';
 import PWbox from '@finnect/components/login/PWbox';
 import styled from 'styled-components';
 import reactLogo from '@finnect/assets/react.svg';
 import { Button,Space } from 'antd';
 
-const SigninPage = () => {
+const SigninPage: React.FC = () => {
+    const [password, setPassword] = useState('');
+  
+    const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      setPassword(e.target.value);
+    };
+
     return (
         <SignInWrapper>
             <SignInContainer>
@@ -18,7 +25,7 @@ const SigninPage = () => {
                 </LogoWrapper>
                 <InputWrapper>
                     <IDbox />
-                    <PWbox/>
+                    <PWbox password={password} onPasswordChange={handlePasswordChange}/>
                 </InputWrapper>
                 <Space direction="vertical" style={{ width: '100%' }}>
                     <Button type="primary" style={{ width: '100%' }}>로그인</Button>   

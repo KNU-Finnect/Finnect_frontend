@@ -1,6 +1,5 @@
 import styled from 'styled-components';
-import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
-import { Input,Typography, Space,Button } from 'antd';
+import { Input,Typography, Space } from 'antd';
 
 const Namebox = () => {
     return (
@@ -19,4 +18,4 @@ export default Namebox;
 const NameboxWrapper = styled.div`
     margin-bottom: 0;
     position: relative;
-`
+`;
