@@ -1,45 +1,40 @@
 name: Frontend Deploy
 
 on:
-  push:
-    branches:
-      - develop
-  pull_request:
-    branches:
-      - develop
-
+    push:
+        branches:
+            - dev
+    pull_request:
+        branches:
+            - dev
 jobs:
-  build:
-    runs-on: ubuntu-latest
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout source code.
+              uses: actions/checkout@v3
 
-    steps:
-      - name: Checkout source code
-        uses: actions/checkout@v4
-      
-      - name: Set up Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22.x
-      
-      - name: Sdks error fix
-        run: yarn add @yarnpkg/sdks -D yarn dlx @yarnpkg/sdks vscode
+            - name: Set up Node
+              uses: actions/setup-node@v3
+              with:
+                  node-version: 22
 
-      - name: Install dependencies
-        run: yarn install --immutable --immutable-cache --check-cache
+            - name: Install dependencies
+              run: npm install
 
-      - name: Run build
-        run: yarn run build
+            - name: Generate build
+              run: npm run build
 
-      - name: Configure AWS credentials
-        uses: aws-action/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{secrets.AWS_ACCESS_KEY_ID}}
-          aws-secret-access-key: ${{secrets.AWS_SECRET_ACCESS_KEY}}
-          aws-region: ap-northeast-2
+            - name: Configure AWS credentials
+              uses: aws-action/configure-aws-credentials@v1
+              with:
+                  aws-access-key-id: ${{secrets.AWS_ACCESS_KEY_ID}}
+                  aws-secret-access-key: ${{secrets.AWS_SECRET_ACCESS_KEY}}
+                  aws-region: ap-northeast-2
 
-      - name: Uploasd to S3
-        run: |
-          aws s3 cp \
-          --recursive \
-          --region ap-northeast-2 \
-          dist s3://finnectfront
+            - name: Uploasd to S3
+              run: |
+                  aws s3 cp \
+                  --recursive \
+                  --region ap-northeast-2 \
+                  dist s3://finnectfront
