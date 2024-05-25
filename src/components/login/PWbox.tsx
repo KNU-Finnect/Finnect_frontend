@@ -17,4 +17,6 @@ const PWbox = () => {
 export default PWbox;
 
 const PWboxWrapper = styled.div`
-`
+    margin-bottom: 0;
+    position: relative;
+`;

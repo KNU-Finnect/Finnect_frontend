@@ -28,7 +28,7 @@ const IDbox: React.FC = () => {
       <Typography.Title level={5}>E-mail</Typography.Title>
       <InputWrapper>
         <Input 
-          placeholder='input id' 
+          placeholder='input e-mail' 
           value={email}
           onChange={handleChange}
         />

@@ -1,5 +1,7 @@
-import IDbox from '@finnect/components/signin/IDbox';
-import PWbox from '@finnect/components/signin/PWbox';
+import IDCheckbox from '@finnect/components/login/IDCheckbox';
+import PWbox from '@finnect/components/login/PWbox';
+import PWCheckbox from '@finnect/components/login/PWCheckbox';
+import Namebox from '@finnect/components/login/Namebox';
 import styled from 'styled-components';
 import reactLogo from '@finnect/assets/react.svg';
 import { Button,Space } from 'antd';
@@ -17,8 +19,10 @@ const SignupPage = () => {
                 </figure>
                 </LogoWrapper>
                 <InputWrapper>
-                    <IDbox />
+                    <Namebox/>
                     <PWbox/>
+                    <PWCheckbox/>
+                    <IDCheckbox />
                 </InputWrapper>
                 <Space direction="vertical" style={{ width: '100%' }}>
                     <Button type="primary" style={{ width: '100%' }}>회원가입</Button>   
