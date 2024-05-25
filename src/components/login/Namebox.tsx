@@ -5,7 +5,7 @@ const Namebox = () => {
     return (
         <NameboxWrapper>
             <Typography.Title level={5}>Name</Typography.Title>
-            <Space direction="colum">
+            <Space direction="horizontal">
                 <Input placeholder="first name"/>
                 <Input placeholder="last name"/>
             </Space>
