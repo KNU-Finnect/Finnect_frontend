@@ -18,11 +18,20 @@ const router = createBrowserRouter([
     id: 'root',
     errorElement: <ErrorPage />,
     children: [
-      { path: 'signin', element: <SigninPage /> },
-      { path: 'signup', element: <SignupPage /> },
-      { path: '/:workspaceId', element: <WorkSpacePage /> },
+      { path: '/:workspaceId', element: <WorkSpacePage /> }
+
     ],
   },
+  {
+    path: '/signin',
+    element: <SigninPage />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: '/signup',
+    element: <SignupPage />,
+    errorElement: <ErrorPage />,
+  }
 ]);
 
 const App = () => {
