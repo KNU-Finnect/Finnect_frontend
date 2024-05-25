@@ -1,9 +1,11 @@
 import styled from 'styled-components';
+import { Input,Typography } from 'antd';
 
 const IDbox = () => {
     return (
         <IdboxWrapper>
-            <IdInput type="text" placeholder="아이디를 입력해주세요" />
+            <Typography.Title level={5}>E-mail</Typography.Title>
+            <Input placeholder='input id'/>
         </IdboxWrapper>
     );
 }
@@ -11,10 +13,5 @@ const IDbox = () => {
 export default IDbox;
 
 const IdboxWrapper = styled.div`
-    width: 100px;
-    height: 30px;
-`
-
-const IdInput = styled.input`
-
+    margin-bottom: 0;
 `

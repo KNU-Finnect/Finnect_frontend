@@ -1,9 +1,15 @@
 import styled from 'styled-components';
+import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
+import { Input,Typography } from 'antd';
 
 const PWbox = () => {
     return (
         <PWboxWrapper>
-            <PWInput type="password" placeholder="비밀번호를 입력해주세요" />
+            <Typography.Title level={5}>Password</Typography.Title>
+            <Input.Password
+                placeholder="input password"
+                iconRender={(visible) => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
+            />
         </PWboxWrapper>
     );
 }
@@ -11,10 +17,4 @@ const PWbox = () => {
 export default PWbox;
 
 const PWboxWrapper = styled.div`
-    width: 100px;
-    height: 30px;
-`
-
-const PWInput = styled.input`
-
 `
