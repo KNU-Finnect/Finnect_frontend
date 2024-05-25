@@ -73,7 +73,7 @@ const CheckInputWrapper = styled.div`
 
 const ErrorMessage = styled.div`
   color: red;
-  position: absolute;
+  position: relative;
   top: 100%;
   left: 0;
   margin-top: 0.5rem;
