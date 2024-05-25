@@ -1,17 +1,18 @@
 {
   "compilerOptions": {
-    "target": "ES6",
+    "target": "ES2020",
     "useDefineForClassFields": true,
-    "lib": ["ES6", "DOM", "DOM.Iterable"],
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "skipLibCheck": true,
 
     /* Bundler mode */
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "esModuleInterop": true,
 
     /* Linting */
     "strict": true,
@@ -22,7 +23,7 @@
     "baseUrl": ".",
     "paths": {
       "@finnect/*": ["src/*"]
-    }
+    },
   },
   "include": ["src", "vite.config.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
