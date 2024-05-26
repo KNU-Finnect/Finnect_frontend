@@ -1,40 +1,41 @@
-name: Frontend Deploy
-
+name: dev front deploy
 on:
-    push:
-        branches:
-            - develop
-    pull_request:
-        branches:
-            - develop
+
+  push:
+    branches:
+      - develop
+  pull_request:
+    branches:
+      - develop
 jobs:
-    build:
-        runs-on: ubuntu-latest
-        steps:
-            - name: Checkout source code.
-              uses: actions/checkout@v3
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source code.
+        uses: actions/checkout@v3
 
-            - name: Set up Node
-              uses: actions/setup-node@v3
-              with:
-                  node-version: 22
+      - name: Set up Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 22
+      - name: Create env file
+        run: |
+          touch .env
+          echo VITE_APP_BASE_URL=${{ secrets.VITE_APP_BASE_URL }} >> .env
+          cat .env
 
-            - name: Install dependencies
-              run: npm install
+      - name: Install dependencies
+        run: npm install
 
-            - name: Generate build
-              run: npm run build
+      - name: Generate build
+        run: npm run build
 
-            - name: Configure AWS credentials
-              uses: aws-action/configure-aws-credentials@v1
-              with:
-                  aws-access-key-id: ${{secrets.AWS_ACCESS_KEY_ID}}
-                  aws-secret-access-key: ${{secrets.AWS_SECRET_ACCESS_KEY}}
-                  aws-region: ap-northeast-2
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-northeast-2
 
-            - name: Uploasd to S3
-              run: |
-                  aws s3 cp \
-                  --recursive \
-                  --region ap-northeast-2 \
-                  dist s3://finnectfront
+      - name: Upload to S3
+        run: aws s3 sync dist s3://finnectfront --region ap-northeast-2
