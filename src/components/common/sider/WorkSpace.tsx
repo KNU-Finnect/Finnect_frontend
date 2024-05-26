@@ -1,23 +1,23 @@
-import { useState } from 'react';
+import { NavLink } from 'react-router-dom';
 
 import { Menu, Modal, Input } from 'antd';
-import { useRecoilCallback } from 'recoil';
+import { useRecoilCallback, useRecoilState } from 'recoil';
 
 import { PlusOutlined } from '@ant-design/icons';
+import {
+  menusState,
+  modalVisibleState,
+  newItemTitleState,
+} from '@finnect/atoms/header/useHeaderMenu';
 import { selectedWorkSpaceState } from '@finnect/atoms/sider/useSelectedMenu';
 import { WorkSpaceMenuItem } from '@finnect/interface/SlideMenuInterface';
 
 const WorkSpace = () => {
-  const [menus, setMenus] = useState<any[]>([
-    {
-      key: 'WorkSpace',
-      title: 'WorkSpace',
-      items: [],
-    },
-  ]);
-
-  const [modalVisible, setModalVisible] = useState<boolean>(false);
-  const [newItemTitle, setNewItemTitle] = useState<string>('');
+  const [menus, setMenus] = useRecoilState<any[]>(menusState);
+  const [modalVisible, setModalVisible] =
+    useRecoilState<boolean>(modalVisibleState);
+  const [newItemTitle, setNewItemTitle] =
+    useRecoilState<string>(newItemTitleState);
 
   const handleWorkSpaceClick = useRecoilCallback(({ set }) => (e: any) => {
     const selectedItem = e.domEvent.currentTarget.innerText;
@@ -38,7 +38,7 @@ const WorkSpace = () => {
         {
           key: newMenuItemKey,
           title: newItemTitle,
-          link: `/${menu.key}/option${menu.items.length + 1}`,
+          link: `/${menu.title}`,
         },
       ],
     }));
@@ -59,7 +59,7 @@ const WorkSpace = () => {
           <Menu.SubMenu key={menu.key} title={menu.title}>
             {menu.items.map((item: WorkSpaceMenuItem) => (
               <Menu.Item key={item.key} onClick={handleWorkSpaceClick}>
-                <>{item.title}</>
+                <NavLink to={`/${item.title}`}>{item.title}</NavLink>
               </Menu.Item>
             ))}
             <Menu.Item key={`add_${menu.key}`} onClick={handleAddMenuItemClick}>
