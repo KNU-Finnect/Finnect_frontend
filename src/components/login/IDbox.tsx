@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-
 import { Input, Typography } from 'antd';
 import styled from 'styled-components';
 
-const IDbox: React.FC = () => {
+const IDbox: React.FC<{
+  setUsername: React.Dispatch<React.SetStateAction<string>>;
+}> = ({ setUsername }) => {
   const [email, setEmail] = useState('');
   const [isValidEmail, setIsValidEmail] = useState(true);
 
@@ -22,6 +23,7 @@ const IDbox: React.FC = () => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
+    setUsername(e.target.value);
   };
 
   return (

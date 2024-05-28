@@ -8,8 +8,7 @@ export async function authApi(
 ): Promise<void> {
   try {
     const response = await axios.post(
-      `${BASE_URI}/users/signin`,
-      { username, password },
+      `${BASE_URI}/users/signin?username=${username}&password=${password}`,
       { withCredentials: true }
     );
     const accessToken = response.headers.authorization;
