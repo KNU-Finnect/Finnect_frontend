@@ -10,9 +10,16 @@ import PWbox from '@finnect/components/login/PWbox';
 
 import reactLogo from '@finnect/assets/react.svg';
 
+import { postSignup } from '@finnect/apis/signup/signup.api';
+import { SignupRequest } from '@finnect/apis/signup/signup.request';
+
 const SignupPage: React.FC = () => {
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [passwordCheck, setPasswordCheck] = useState('');
+  const [email, setEmail] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [isPasswordMatch, setIsPasswordMatch] = useState(true);
 
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -28,6 +35,28 @@ const SignupPage: React.FC = () => {
     setIsPasswordMatch(value === password);
   };
 
+  const handleSignup = async () => {
+    if (!isPasswordMatch) {
+      alert('비밀번호가 일치하지 않습니다.');
+      return;
+    }
+
+    const signupData: SignupRequest = {
+      username,
+      password,
+      email,
+      firstName,
+      lastName,
+    };
+
+    try {
+      const response = await postSignup(signupData);
+      console.log('Signup successful:', response.data);
+    } catch (error) {
+      console.error('Signup failed:', error);
+    }
+  };
+
   return (
     <SignupWrapper>
       <SignupContainer>
@@ -40,17 +69,21 @@ const SignupPage: React.FC = () => {
           </figure>
         </LogoWrapper>
         <InputWrapper>
-          <Namebox />
+          <Namebox setFirstName={setFirstName} setLastName={setLastName} />
           <PWbox password={password} onPasswordChange={handlePasswordChange} />
           <PWCheckbox
             passwordCheck={passwordCheck}
             onPasswordCheckChange={handlePasswordCheckChange}
             isPasswordMatch={isPasswordMatch}
           />
-          <IDCheckbox />
+          <IDCheckbox setUsername={setUsername} setEmail={setEmail} />
         </InputWrapper>
         <Space direction='vertical' style={{ width: '100%' }}>
-          <Button type='primary' style={{ width: '100%' }}>
+          <Button
+            type='primary'
+            style={{ width: '100%' }}
+            onClick={handleSignup}
+          >
             회원가입
           </Button>
           <Button style={{ width: '100%' }}>메인페이지로 이동하기</Button>

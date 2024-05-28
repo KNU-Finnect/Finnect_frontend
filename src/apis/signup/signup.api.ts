@@ -1,8 +1,8 @@
 import axios, { AxiosResponse } from 'axios';
 
-import { signupRequest } from './signup.request';
+import { SignupRequest } from './signup.request';
 
-export async function Signup(data: signupRequest): Promise<AxiosResponse> {
+export async function postSignup(data: SignupRequest): Promise<AxiosResponse> {
   const url = `${import.meta.env.VITE_BASE_URL}/signup`;
 
   try {

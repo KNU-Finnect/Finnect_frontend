@@ -16,30 +16,6 @@
   "tabWidth": 2,
   "trailingComma": "es5",
   "useTabs": false,
-  "vueIndentScriptAndStyle": false,
+  "vueIndentScriptAndStyle": false
 
-  "plugins": ["@trivago/prettier-plugin-sort-imports"],
-  "importOrder": [
-    "^react",
-
-    "<THIRD_PARTY_MODULES>",
-
-    "^(@finnect/components)(.*)$",
-    "^(@finnect/pages)(.*)$",
-    "^(@finnect/hooks)(.*)$",
-    "^(@finnect/assets)(.*)$",
-
-    "^(@finnect/constants)(.*)$",
-    "^(@finnect/utils)(.*)$",
-    "^(@finnect/apis)(.*)$",
-    "^(@finnect/apis)(.*)$",
-
-    "^(@finnect/interfaces)(.*)$",
-
-    "^(@finnect/styles)(.*)$",
-
-    "^(.*)/(.*)$"
-  ],
-  "importOrderSeparation": true,
-  "importOrderSortSpecifiers": false
 }

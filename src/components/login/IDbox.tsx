@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
+
 import { Input, Typography } from 'antd';
+import styled from 'styled-components';
 
 const IDbox: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -27,8 +28,8 @@ const IDbox: React.FC = () => {
     <IdboxWrapper>
       <Typography.Title level={5}>E-mail</Typography.Title>
       <InputWrapper>
-        <Input 
-          placeholder='input e-mail' 
+        <Input
+          placeholder='input e-mail'
           value={email}
           onChange={handleChange}
         />
