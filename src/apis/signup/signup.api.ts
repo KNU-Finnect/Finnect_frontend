@@ -1,9 +1,10 @@
 import axios, { AxiosResponse } from 'axios';
 
+import { BASE_URI } from '@finnect/constants/URL';
 import { SignupRequest } from './signup.request';
 
 export async function postSignup(data: SignupRequest): Promise<AxiosResponse> {
-  const url = `${import.meta.env.VITE_BASE_URL}/signup`;
+  const url = `${BASE_URI}/signup`;
 
   try {
     const response = await axios.post(url, data, {
