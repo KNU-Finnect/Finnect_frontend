@@ -25,7 +25,7 @@ const InviteModal = ({
   return (
     <Modal
       title='초대하기'
-      visible={visible}
+      open={visible}
       onCancel={onClose}
       footer={[
         <Button key='cancel' onClick={onClose}>

@@ -3,65 +3,66 @@ import IDbox from '@finnect/components/login/IDbox';
 import PWbox from '@finnect/components/login/PWbox';
 import styled from 'styled-components';
 import reactLogo from '@finnect/assets/react.svg';
-import { Button,Space } from 'antd';
+import { Button, Space } from 'antd';
 
 const SigninPage: React.FC = () => {
-    const [password, setPassword] = useState('');
-  
-    const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      setPassword(e.target.value);
-    };
+  const [password, setPassword] = useState('');
 
-    return (
-        <SignInWrapper>
-            <SignInContainer>
-                <LogoWrapper>
-                <figure className='Logo'>
-                    <img src={reactLogo} alt='logo' />
-                    {/* <figcaption>
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(e.target.value);
+  };
+
+  return (
+    <SignInWrapper>
+      <SignInContainer>
+        <LogoWrapper>
+          <figure className='Logo'>
+            <img src={reactLogo} alt='logo' />
+            {/* <figcaption>
                         <img src={finnectSVG} alt='finnect' />
                     </figcaption> */}
-                </figure>
-                </LogoWrapper>
-                <InputWrapper>
-                    <IDbox />
-                    <PWbox password={password} onPasswordChange={handlePasswordChange}/>
-                </InputWrapper>
-                <Space direction="vertical" style={{ width: '100%' }}>
-                    <Button type="primary" style={{ width: '100%' }}>로그인</Button>   
-                    <Button style={{ width: '100%' }}>회원가입</Button>
-                </Space>
-                
-            </SignInContainer>
-        </SignInWrapper>   
-    )
-}
+          </figure>
+        </LogoWrapper>
+        <InputWrapper>
+          <IDbox />
+          <PWbox password={password} onPasswordChange={handlePasswordChange} />
+        </InputWrapper>
+        <Space direction='vertical' style={{ width: '100%' }}>
+          <Button type='primary' style={{ width: '100%' }}>
+            로그인
+          </Button>
+          <Button style={{ width: '100%' }}>회원가입</Button>
+        </Space>
+      </SignInContainer>
+    </SignInWrapper>
+  );
+};
 
 export default SigninPage;
 
 const SignInWrapper = styled.div`
-    display: flex;
-    padding: 2rem;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  padding: 2rem;
+  align-items: center;
+  justify-content: center;
 `;
 
 const InputWrapper = styled.div`
-    margin-bottom:1rem;
+  margin-bottom: 1rem;
 `;
 
 const SignInContainer = styled.div`
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 `;
 
 const LogoWrapper = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 
-    img {
-        width: 191px;
-    }
+  img {
+    width: 191px;
+  }
 `;

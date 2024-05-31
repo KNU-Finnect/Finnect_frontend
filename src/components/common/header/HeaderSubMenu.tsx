@@ -46,8 +46,8 @@ const HeaderSubMenu = () => {
       <Dropdown
         overlay={menu}
         trigger={['click']}
-        visible={visible}
-        onVisibleChange={(flag) => setVisible(flag)}
+        open={visible}
+        onOpenChange={(flag) => setVisible(flag)}
       >
         <Space size='middle'>
           <Text style={{ fontFamily: 'inherit', color: '#606060' }}>

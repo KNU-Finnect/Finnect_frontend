@@ -17,7 +17,9 @@ const SignupPage: React.FC = () => {
     setIsPasswordMatch(e.target.value === passwordCheck);
   };
 
-  const handlePasswordCheckChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handlePasswordCheckChange = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const value = e.target.value;
     setPasswordCheck(value);
     setIsPasswordMatch(value === password);
@@ -37,21 +39,23 @@ const SignupPage: React.FC = () => {
         <InputWrapper>
           <Namebox />
           <PWbox password={password} onPasswordChange={handlePasswordChange} />
-          <PWCheckbox 
-            passwordCheck={passwordCheck} 
-            onPasswordCheckChange={handlePasswordCheckChange} 
-            isPasswordMatch={isPasswordMatch} 
+          <PWCheckbox
+            passwordCheck={passwordCheck}
+            onPasswordCheckChange={handlePasswordCheckChange}
+            isPasswordMatch={isPasswordMatch}
           />
           <IDCheckbox />
         </InputWrapper>
-        <Space direction="vertical" style={{ width: '100%' }}>
-          <Button type="primary" style={{ width: '100%' }}>회원가입</Button>
+        <Space direction='vertical' style={{ width: '100%' }}>
+          <Button type='primary' style={{ width: '100%' }}>
+            회원가입
+          </Button>
           <Button style={{ width: '100%' }}>메인페이지로 이동하기</Button>
         </Space>
       </SignupContainer>
     </SignupWrapper>
   );
-}
+};
 
 export default SignupPage;
 
