@@ -1,8 +1,7 @@
+import { useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
-
 import { Menu, Modal, Input } from 'antd';
 import { useRecoilCallback, useRecoilState } from 'recoil';
-
 import { PlusOutlined } from '@ant-design/icons';
 import {
   menusState,
@@ -11,13 +10,33 @@ import {
 } from '@finnect/atoms/header/useHeaderMenu';
 import { selectedWorkSpaceState } from '@finnect/atoms/sider/useSelectedMenu';
 import { WorkSpaceMenuItem } from '@finnect/interface/SlideMenuInterface';
+import { useGetWorkSpaceQuery } from '@finnect/hooks/queries/workspace/useGetWorkSpaceQuery';
+import { usePostWorkSpaceQuery } from '@finnect/hooks/queries/workspace/usePostWorkSpaceQuery';
 
 const WorkSpace = () => {
+  const { data, isPending, isError, error, refetch } = useGetWorkSpaceQuery();
+  const {
+    mutate,
+    isPending: isPosting,
+    isError: isPostError,
+    error: postError,
+  } = usePostWorkSpaceQuery();
   const [menus, setMenus] = useRecoilState<any[]>(menusState);
   const [modalVisible, setModalVisible] =
     useRecoilState<boolean>(modalVisibleState);
   const [newItemTitle, setNewItemTitle] =
     useRecoilState<string>(newItemTitleState);
+
+  useEffect(() => {
+    if (data) {
+      const workspaces = data.result.workspaces.map((workspace: any) => ({
+        key: workspace.workspaceId,
+        title: workspace.workspaceName,
+        link: `/${workspace.workspaceName}`,
+      }));
+      setMenus([{ key: 'workspaces', title: 'Workspaces', items: workspaces }]);
+    }
+  }, [data, setMenus]);
 
   const handleWorkSpaceClick = useRecoilCallback(({ set }) => (e: any) => {
     const selectedItem = e.domEvent.currentTarget.innerText;
@@ -30,27 +49,28 @@ const WorkSpace = () => {
   };
 
   const handleModalOk = () => {
-    const newMenuItemKey = `${menus[0].key}_1`;
-    const updatedMenus = menus.map((menu) => ({
-      ...menu,
-      items: [
-        ...menu.items,
-        {
-          key: newMenuItemKey,
-          title: newItemTitle,
-          link: `/${menu.title}`,
+    mutate(
+      { workspaceName: newItemTitle },
+      {
+        onSuccess: () => {
+          setModalVisible(false);
+          refetch();
+          setNewItemTitle('');
         },
-      ],
-    }));
-    setMenus(updatedMenus);
-    setModalVisible(false);
-    setNewItemTitle('');
+      }
+    );
   };
 
   const handleModalCancel = () => {
     setModalVisible(false);
     setNewItemTitle('');
   };
+
+  if (isPending) return <div>Loading...</div>;
+  if (isError) return <div>Error: {error?.message}</div>;
+  if (isPosting) return <div>Adding Workspace...</div>;
+  if (isPostError)
+    return <div>Error Adding Workspace: {postError?.message}</div>;
 
   return (
     <>
@@ -59,7 +79,7 @@ const WorkSpace = () => {
           <Menu.SubMenu key={menu.key} title={menu.title}>
             {menu.items.map((item: WorkSpaceMenuItem) => (
               <Menu.Item key={item.key} onClick={handleWorkSpaceClick}>
-                <NavLink to={`/${item.title}`}>{item.title}</NavLink>
+                <NavLink to={item.link}>{item.title}</NavLink>
               </Menu.Item>
             ))}
             <Menu.Item key={`add_${menu.key}`} onClick={handleAddMenuItemClick}>
@@ -70,7 +90,7 @@ const WorkSpace = () => {
       </Menu>
       <Modal
         title='새로운 워크스페이스 추가하기'
-        visible={modalVisible}
+        open={modalVisible}
         onOk={handleModalOk}
         onCancel={handleModalCancel}
       >
