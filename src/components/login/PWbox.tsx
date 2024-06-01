@@ -1,7 +1,9 @@
 import React from 'react';
-import styled from 'styled-components';
-import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
+
 import { Input, Typography } from 'antd';
+import styled from 'styled-components';
+
+import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 
 interface PWboxProps {
   password: string;
@@ -15,8 +17,10 @@ const PWbox: React.FC<PWboxProps> = ({ password, onPasswordChange }) => {
       <Input.Password
         value={password}
         onChange={onPasswordChange}
-        placeholder="input password"
-        iconRender={(visible) => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
+        placeholder='input password'
+        iconRender={(visible) =>
+          visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
+        }
       />
     </PWboxWrapper>
   );

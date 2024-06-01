@@ -1,7 +1,9 @@
 import React from 'react';
-import styled from 'styled-components';
-import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
+
 import { Input, Typography } from 'antd';
+import styled from 'styled-components';
+
+import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 
 interface PWCheckboxProps {
   passwordCheck: string;
@@ -9,7 +11,11 @@ interface PWCheckboxProps {
   isPasswordMatch: boolean;
 }
 
-const PWCheckbox: React.FC<PWCheckboxProps> = ({ passwordCheck, onPasswordCheckChange, isPasswordMatch }) => {
+const PWCheckbox: React.FC<PWCheckboxProps> = ({
+  passwordCheck,
+  onPasswordCheckChange,
+  isPasswordMatch,
+}) => {
   return (
     <PWCheckboxWrapper>
       <Typography.Title level={5}>Password Check</Typography.Title>
@@ -17,10 +23,14 @@ const PWCheckbox: React.FC<PWCheckboxProps> = ({ passwordCheck, onPasswordCheckC
         <Input.Password
           value={passwordCheck}
           onChange={onPasswordCheckChange}
-          placeholder="input password"
-          iconRender={(visible) => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
+          placeholder='input password'
+          iconRender={(visible) =>
+            visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
+          }
         />
-        {!isPasswordMatch && <ErrorMessage>비밀번호가 일치하지 않습니다.</ErrorMessage>}
+        {!isPasswordMatch && (
+          <ErrorMessage>비밀번호가 일치하지 않습니다.</ErrorMessage>
+        )}
       </InputWrapper>
     </PWCheckboxWrapper>
   );
