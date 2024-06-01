@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
-import { Button, Space } from 'antd';
+import { Button, Space, message } from 'antd';
 import styled from 'styled-components';
 import reactLogo from '@finnect/assets/react.svg';
 
 import { authApi } from '@finnect/apis/auth/auth.api';
 import IDbox from '@finnect/components/login/IDbox';
 import PWbox from '@finnect/components/login/PWbox';
+import { useNavigate } from 'react-router-dom';
 
 const SigninPage: React.FC = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
@@ -17,11 +19,23 @@ const SigninPage: React.FC = () => {
 
   const handleLogin = async () => {
     try {
-      await authApi(username, password);
-      console.log('Login successful');
+      const response = await authApi(username, password);
+      console.log('Login response:', response);
+      if (response.data.status === 200) {
+        console.log('Login successful');
+        navigate('/');
+        message.error('로그인 성공.');
+      } else {
+        message.error('로그인 실패: 아이디 또는 비밀번호를 확인해주세요.');
+      }
     } catch (error) {
       console.error('Login failed:', error);
+      message.error('로그인 실패: 서버 오류가 발생했습니다.');
     }
+  };
+
+  const handleSignup = () => {
+    navigate('/signup');
   };
 
   return (
@@ -44,7 +58,9 @@ const SigninPage: React.FC = () => {
           >
             로그인
           </Button>
-          <Button style={{ width: '100%' }}>회원가입</Button>
+          <Button style={{ width: '100%' }} onClick={handleSignup}>
+            회원가입
+          </Button>
         </Space>
       </SignInContainer>
     </SignInWrapper>

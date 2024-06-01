@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { Button, Space } from 'antd';
+import { Button, Space, message } from 'antd';
 import styled from 'styled-components';
 
 import IDCheckbox from '@finnect/components/login/IDCheckbox';
@@ -11,6 +11,8 @@ import PWbox from '@finnect/components/login/PWbox';
 import reactLogo from '@finnect/assets/react.svg';
 
 import { postSignup } from '@finnect/apis/signup/signup.api';
+import { useNavigate } from 'react-router-dom';
+import { authApi } from '@finnect/apis/auth/auth.api';
 
 const SignupPage: React.FC = () => {
   const [username, setUsername] = useState('');
@@ -20,6 +22,7 @@ const SignupPage: React.FC = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [isPasswordMatch, setIsPasswordMatch] = useState(true);
+  const navigate = useNavigate();
 
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
@@ -52,6 +55,23 @@ const SignupPage: React.FC = () => {
     } catch (error) {
       console.error('Signup failed:', error);
     }
+
+    try {
+      const response = await authApi(email, password);
+      console.log('Signup successful:', response.data.status);
+      if (response.data.status === 200) {
+        navigate('/');
+        message.success('회원가입 성공.');
+      } else {
+        message.error('회원가입 실패.');
+      }
+    } catch (error) {
+      console.error('Signup failed:', error);
+    }
+  };
+
+  const handleHome = () => {
+    navigate('/');
   };
 
   return (
@@ -83,7 +103,9 @@ const SignupPage: React.FC = () => {
           >
             회원가입
           </Button>
-          <Button style={{ width: '100%' }}>메인페이지로 이동하기</Button>
+          <Button style={{ width: '100%' }} onClick={handleHome}>
+            메인페이지로 이동하기
+          </Button>
         </Space>
       </SignupContainer>
     </SignupWrapper>
