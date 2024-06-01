@@ -32,8 +32,7 @@ const IDCheckbox: React.FC<IDCheckboxProps> = ({ setUsername, setEmail }) => {
     setEmailState(value);
     setEmail(value);
 
-    const idPart = value.split('@')[0];
-    setUsername(idPart);
+    setUsername(value);
   };
 
   const handleEmailCheck = async () => {
