@@ -11,7 +11,6 @@ import PWbox from '@finnect/components/login/PWbox';
 import reactLogo from '@finnect/assets/react.svg';
 
 import { postSignup } from '@finnect/apis/signup/signup.api';
-import { SignupRequest } from '@finnect/apis/signup/signup.request';
 
 const SignupPage: React.FC = () => {
   const [username, setUsername] = useState('');
@@ -41,16 +40,14 @@ const SignupPage: React.FC = () => {
       return;
     }
 
-    const signupData: SignupRequest = {
-      username,
-      password,
-      email,
-      firstName,
-      lastName,
-    };
-
     try {
-      const response = await postSignup(signupData);
+      const response = await postSignup(
+        username,
+        password,
+        email,
+        firstName,
+        lastName
+      );
       console.log('Signup successful:', response.data);
     } catch (error) {
       console.error('Signup failed:', error);
