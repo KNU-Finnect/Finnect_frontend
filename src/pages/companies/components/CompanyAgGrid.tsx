@@ -73,7 +73,7 @@ const CompanyAgGrid = () => {
       </div>
       <Modal
         title='속성 추가하기'
-        visible={columnModalVisible}
+        open={columnModalVisible}
         onCancel={hideColumnModal}
         footer={null}
       >
@@ -81,7 +81,7 @@ const CompanyAgGrid = () => {
       </Modal>
       <Modal
         title='회사 추가하기'
-        visible={companyModalVisible}
+        open={companyModalVisible}
         onCancel={hideCompanyModal}
         footer={null}
       >
