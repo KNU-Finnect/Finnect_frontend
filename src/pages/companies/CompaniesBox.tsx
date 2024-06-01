@@ -1,8 +1,9 @@
 import { Layout, Button, theme } from 'antd';
 import styled from 'styled-components';
 
-import { SaveOutlined, SettingOutlined } from '@ant-design/icons';
 import CompanyAgGrid from '@finnect/pages/companies/components/CompanyAgGrid';
+
+import { SaveOutlined, SettingOutlined } from '@ant-design/icons';
 
 const { Content } = Layout;
 

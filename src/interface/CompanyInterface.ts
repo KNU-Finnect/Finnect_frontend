@@ -4,3 +4,8 @@ export interface CompanyInterface {
   Categories: string;
   About: string;
 }
+
+export interface CompanyColumnInterface {
+  name: string;
+  type: string;
+}
