@@ -21,7 +21,7 @@ const SigninPage: React.FC = () => {
     try {
       const response = await authApi(username, password);
       console.log('Login response:', response);
-      if (response.data.status === 200) {
+      if (response == 200) {
         console.log('Login successful');
         navigate('/');
         message.error('로그인 성공.');

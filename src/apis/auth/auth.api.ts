@@ -12,8 +12,10 @@ export async function authApi(
       { withCredentials: true }
     );
     const accessToken = response.headers.authorization;
-
+    console.log(response);
+    console.log(response.data.status);
     localStorage.setItem('accessToken', accessToken);
+    return response.data;
   } catch (error) {
     console.error('Error during sign in:', error);
   }

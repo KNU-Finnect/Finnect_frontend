@@ -58,8 +58,8 @@ const SignupPage: React.FC = () => {
 
     try {
       const response = await authApi(email, password);
-      console.log('Signup successful:', response.data.status);
-      if (response.data.status === 200) {
+      console.log('Signup successful:', response);
+      if (response === 200) {
         navigate('/');
         message.success('회원가입 성공.');
       } else {
