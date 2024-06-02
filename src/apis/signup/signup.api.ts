@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 
-import { BASE_URI } from '@finnect/constants/URL';
+import { BASE_URI } from '@finnect/constants/URI';
 
 export async function postSignup(
   username: string,
