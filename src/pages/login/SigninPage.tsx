@@ -21,10 +21,10 @@ const SigninPage: React.FC = () => {
     try {
       const response = await authApi(username, password);
       console.log('Login response:', response);
-      if (response == 200) {
+      if (response.status == 200) {
         console.log('Login successful');
         navigate('/');
-        message.error('로그인 성공.');
+        return message.success('로그인 성공.');
       } else {
         message.error('로그인 실패: 아이디 또는 비밀번호를 확인해주세요.');
       }
