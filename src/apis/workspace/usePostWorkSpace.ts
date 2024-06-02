@@ -1,4 +1,4 @@
-import { Instance } from '@finnect/apis/API_JWT';
+import { axiosClient } from '../AxiosClient';
 
 export const usePostWorkspace = async ({
   workspaceName,
@@ -6,7 +6,7 @@ export const usePostWorkspace = async ({
   workspaceName: string;
 }) => {
   try {
-    const response = await Instance.post(`/workspaces`, { workspaceName });
+    const response = await axiosClient.post(`/workspaces`, { workspaceName });
     return response.data;
   } catch (error) {
     console.error(error);

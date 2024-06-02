@@ -4,6 +4,7 @@ import { refresh } from '@finnect/apis/auth/refresh.api';
 
 export const axiosClient = axios.create({
   baseURL: BASE_URI,
+  timeout: 10000,
   headers: {
     'Content-Type': 'application/json',
   },
