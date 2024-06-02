@@ -4,19 +4,18 @@ import { BASE_URI } from '@finnect/constants/URI';
 
 interface AuthAPIRequest {
   status: number;
+  headers: any;
 }
 export async function refresh(): Promise<AuthAPIRequest> {
   try {
     const response = await axios.post(`${BASE_URI}/users/reissue`, {
       withCredentials: true,
     });
-    console.log(response.data.status);
-    const accessToken = response.headers.authorization;
-    console.log(response.data.status);
-    localStorage.setItem('accessToken', accessToken);
+    console.log(response);
+    console.log('refresh successful');
     return response.data;
   } catch (error) {
-    console.error('Error during sign in:', error);
+    console.error('fail to refresh');
     throw error;
   }
 }
@@ -36,9 +35,10 @@ export async function refreshWorkSpace(
     const accessToken = response.headers.authorization;
     console.log(response.data.status);
     localStorage.setItem('accessToken', accessToken);
-    return response.data;
+    console.log('refresh successful');
+    return response;
   } catch (error) {
-    console.error('Error during sign in:', error);
+    console.error('fail to refresh');
     throw error;
   }
 }
