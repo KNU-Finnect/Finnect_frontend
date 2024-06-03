@@ -4,14 +4,14 @@ import { IPeopleProps } from '@finnect/interface/PeopleInterface';
 
 import { BASE_URI } from '@finnect/constants/URI';
 
-export const postPeople = async (
+export const patchPeople = async (
   personName: string,
   personRole: string,
   personEmail: string,
   personPhone: string
 ): Promise<IPeopleProps> => {
   try {
-    const response = await axiosClient.post(`${BASE_URI}/workspaces/people`, {
+    const response = await axiosClient.patch(`${BASE_URI}/workspaces/people`, {
       personName,
       personRole,
       personEmail,
