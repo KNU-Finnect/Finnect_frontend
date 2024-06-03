@@ -1,8 +1,11 @@
 import { useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
+
 import { Menu, Modal, Input } from 'antd';
-import { useRecoilCallback, useRecoilState } from 'recoil';
 import { PlusOutlined } from '@ant-design/icons';
+
+import { useRecoilCallback, useRecoilState } from 'recoil';
+
 import {
   menusState,
   modalVisibleState,
@@ -12,7 +15,10 @@ import {
   selectedWorkSpaceState,
   selectedWorkSpaceIdState,
 } from '@finnect/atoms/sider/useSelectedMenu';
+
 import { WorkSpaceMenuItem } from '@finnect/interface/SlideMenuInterface';
+
+import { refreshWorkSpace } from '@finnect/apis/auth/refresh.api';
 import { useGetWorkSpaceQuery } from '@finnect/hooks/queries/workspace/useGetWorkSpaceQuery';
 import { usePostWorkSpaceQuery } from '@finnect/hooks/queries/workspace/usePostWorkSpaceQuery';
 
@@ -50,6 +56,7 @@ const WorkSpace = () => {
       (item: WorkSpaceMenuItem) => {
         set(selectedWorkSpaceState, item.title);
         set(selectedWorkSpaceIdState, item.key);
+        refreshWorkSpace();
         localStorage.setItem('selectedWorkSpace', item.title);
         localStorage.setItem('selectedWorkSpaceId', item.key.toString());
       }
