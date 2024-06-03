@@ -1,8 +1,8 @@
 import { axiosClient } from '../AxiosClient';
 
-export const useGetWorkspace = async () => {
+export const useGetWCompany = async () => {
   try {
-    const response = await axiosClient.get(`/workspaces`);
+    const response = await axiosClient.get(`/workspaces/companies`);
 
     return response.data;
   } catch (error) {

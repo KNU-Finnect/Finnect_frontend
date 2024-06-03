@@ -1,5 +1,6 @@
-import { IPeopleProps } from '@finnect/interface/PeopleInterface';
 import { Form, Input, Button } from 'antd';
+
+import { IPeopleProps } from '@finnect/interface/PeopleInterface';
 
 interface PeopleFormProps {
   onCreatePeople: (person: IPeopleProps) => void;
@@ -8,29 +9,41 @@ interface PeopleFormProps {
 const PeopleForm = ({ onCreatePeople }: PeopleFormProps) => {
   const [formPeople] = Form.useForm();
 
-  const handleFinish = ({ nickname, role, phone }: IPeopleProps) => {
-    onCreatePeople({ nickname, role, phone });
+  const handleFinish = ({
+    personName,
+    personRole,
+    personEmail,
+    personPhone,
+  }: IPeopleProps) => {
+    onCreatePeople({ personName, personRole, personEmail, personPhone });
     formPeople.resetFields();
   };
 
   return (
     <Form form={formPeople} onFinish={handleFinish}>
       <Form.Item
-        name='nickname'
+        name='personName'
         label='Nickname'
         rules={[{ required: true, message: 'Please input the nickname!' }]}
       >
         <Input />
       </Form.Item>
       <Form.Item
-        name='role'
+        name='personRole'
         label='Role'
         rules={[{ required: true, message: 'Please select the role!' }]}
       >
         <Input />
       </Form.Item>
       <Form.Item
-        name='phone'
+        name='personEmail'
+        label='Email'
+        rules={[{ required: true, message: 'Please input the email!' }]}
+      >
+        <Input />
+      </Form.Item>
+      <Form.Item
+        name='personPhone'
         label='Phone'
         rules={[{ required: true, message: 'Please input the phone!' }]}
       >

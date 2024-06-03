@@ -1,10 +1,13 @@
-import axios from 'axios';
+import { axiosClient } from '@finnect/apis/AxiosClient';
 
-export const useGetPeople = async () => {
+import { IPeopleAxiosProps } from '@finnect/interface/PeopleInterface';
+
+export const useGetPeople = async (): Promise<IPeopleAxiosProps> => {
   try {
-    const response = await axios.get(`/workspaces/members`);
+    const response = await axiosClient.get(`/workspaces/people`);
     return response.data;
   } catch (error) {
     console.error(error);
+    throw error;
   }
 };

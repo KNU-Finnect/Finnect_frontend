@@ -2,14 +2,14 @@ import { axiosClient } from '@finnect/apis/AxiosClient';
 
 import { IPeopleProps } from '@finnect/interface/PeopleInterface';
 
-export const postPeople = async (
+export const patchPeople = async (
   personName: string,
   personRole: string,
   personEmail: string,
   personPhone: string
 ): Promise<IPeopleProps> => {
   try {
-    const response = await axiosClient.post(`/workspaces/people`, {
+    const response = await axiosClient.patch(`/workspaces/people`, {
       personName,
       personRole,
       personEmail,

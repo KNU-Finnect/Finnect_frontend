@@ -5,6 +5,11 @@ export interface CompanyInterface {
   About: string;
 }
 
+export interface ICompanyPostProps {
+  domain: string;
+  companyName: string;
+}
+
 export interface CompanyColumnInterface {
   name: string;
   type: string;

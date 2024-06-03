@@ -6,6 +6,7 @@ interface AuthAPIRequest {
   status: number;
   headers: any;
 }
+
 export async function refresh(): Promise<AuthAPIRequest> {
   try {
     const response = await axios.post(`${BASE_URI}/users/reissue`, {
@@ -25,7 +26,7 @@ export async function refreshWorkSpace(
 ): Promise<AuthAPIRequest> {
   try {
     const response = await axios.post(
-      `${BASE_URI}/users/reissue`,
+      `${BASE_URI}/users/reissue-workspace`,
       { workspaceId },
       {
         withCredentials: true,

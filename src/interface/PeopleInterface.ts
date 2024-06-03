@@ -1,5 +1,13 @@
+export interface IPeopleAxiosProps {
+  status: number;
+  result: {
+    people: IPeopleProps[];
+  };
+}
+
 export interface IPeopleProps {
-  nickname: string;
-  role: string;
-  phone: string;
+  personName: string;
+  personRole: string;
+  personEmail: string;
+  personPhone: string;
 }

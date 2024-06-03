@@ -1,17 +1,26 @@
 import { useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
+
 import { Menu, Modal, Input } from 'antd';
-import { useRecoilCallback, useRecoilState } from 'recoil';
 import { PlusOutlined } from '@ant-design/icons';
+
+import { useRecoilCallback, useRecoilState } from 'recoil';
+
 import {
   menusState,
   modalVisibleState,
   newItemTitleState,
 } from '@finnect/atoms/header/useHeaderMenu';
-import { selectedWorkSpaceState } from '@finnect/atoms/sider/useSelectedMenu';
+import {
+  selectedWorkSpaceState,
+  selectedWorkSpaceIdState,
+} from '@finnect/atoms/sider/useSelectedMenu';
+
 import { WorkSpaceMenuItem } from '@finnect/interface/SlideMenuInterface';
+
 import { useGetWorkSpaceQuery } from '@finnect/hooks/queries/workspace/useGetWorkSpaceQuery';
 import { usePostWorkSpaceQuery } from '@finnect/hooks/queries/workspace/usePostWorkSpaceQuery';
+import { useRefreshQuery } from '@finnect/hooks/queries/auth/useRefreshQuery';
 
 const WorkSpace = () => {
   const { data, isPending, isError, error, refetch } = useGetWorkSpaceQuery();
@@ -26,6 +35,7 @@ const WorkSpace = () => {
     useRecoilState<boolean>(modalVisibleState);
   const [newItemTitle, setNewItemTitle] =
     useRecoilState<string>(newItemTitleState);
+  const { mutate: refreshData } = useRefreshQuery();
 
   useEffect(() => {
     if (data) {
@@ -38,15 +48,21 @@ const WorkSpace = () => {
     }
   }, [data, setMenus]);
 
-  const handleWorkSpaceClick = useRecoilCallback(({ set }) => (e: any) => {
-    const selectedItem = e.domEvent.currentTarget.innerText;
-    set(selectedWorkSpaceState, selectedItem);
-    localStorage.setItem('selectedWorkSpace', selectedItem);
-  });
-
   const handleAddMenuItemClick = () => {
     setModalVisible(true);
   };
+
+  const handleWorkSpaceClick = useRecoilCallback(
+    ({ set }) =>
+      (item: WorkSpaceMenuItem) => {
+        set(selectedWorkSpaceState, item.title);
+        set(selectedWorkSpaceIdState, item.key);
+        refreshData(parseInt(item.key));
+
+        localStorage.setItem('selectedWorkSpace', item.title);
+        localStorage.setItem('selectedWorkSpaceId', item.key);
+      }
+  );
 
   const handleModalOk = () => {
     mutate(
@@ -78,7 +94,10 @@ const WorkSpace = () => {
         {menus.map((menu) => (
           <Menu.SubMenu key={menu.key} title={menu.title}>
             {menu.items.map((item: WorkSpaceMenuItem) => (
-              <Menu.Item key={item.key} onClick={handleWorkSpaceClick}>
+              <Menu.Item
+                key={item.key}
+                onClick={() => handleWorkSpaceClick(item)}
+              >
                 <NavLink to={item.link}>{item.title}</NavLink>
               </Menu.Item>
             ))}

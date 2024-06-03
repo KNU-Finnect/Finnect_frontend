@@ -27,8 +27,13 @@ const PeopleAgGrid = () => {
     };
   }, []);
 
-  const handleCreatePeople = ({ nickname, role, phone }: IPeopleProps) => {
-    addPerson({ nickname, role, phone });
+  const handleCreatePeople = ({
+    personName,
+    personRole,
+    personEmail,
+    personPhone,
+  }: IPeopleProps) => {
+    addPerson({ personName, personRole, personEmail, personPhone });
     hidePeopleModal();
   };
 

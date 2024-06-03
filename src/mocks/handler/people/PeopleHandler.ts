@@ -1,4 +1,4 @@
-import { IPeopleProps } from '@finnect/interface/PeopleInterface';
+import { IMemberProps } from '@finnect/interface/MemberInterface';
 import { http, HttpResponse } from 'msw';
 
 export const PeopleHandler = [
@@ -23,7 +23,7 @@ export const PeopleHandler = [
   }),
 
   http.post('/workspaces/members', async ({ request }) => {
-    const { nickname, role, phone } = (await request.json()) as IPeopleProps;
+    const { nickname, role, phone } = (await request.json()) as IMemberProps;
 
     if (!nickname || !role || !phone) {
       return HttpResponse.json(

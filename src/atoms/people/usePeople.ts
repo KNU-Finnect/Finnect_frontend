@@ -12,12 +12,13 @@ export const columnDefsPeopleState = atom<ColDef[]>({
   key: 'columnDefsPeopleState',
   default: [
     {
-      headerName: 'Nickname',
-      field: 'nickname',
+      headerName: 'Name',
+      field: 'personName',
       checkboxSelection: true,
     },
-    { headerName: 'Role', field: 'role' },
-    { headerName: 'Phone', field: 'phone' },
+    { headerName: 'Role', field: 'personRole' },
+    { headerName: 'Email', field: 'personEmail' },
+    { headerName: 'Phone', field: 'personPhone' },
   ],
 });
 

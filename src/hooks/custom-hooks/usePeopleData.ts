@@ -20,29 +20,28 @@ export const usePeopleData = () => {
 
   useEffect(() => {
     if (data) {
-      setRowData(data.result.members);
+      setRowData(data.result.people);
     }
-    console.log('data', data);
+  }, [data, setRowData]);
 
-    if (isPending) {
-      console.log('Fetching row data...');
-    }
-
-    if (isError) {
-      console.error('Error fetching row data:', error);
-    }
-  }, [setRowData, data, isPending, isError, error]);
-
-  const addPerson = ({ nickname, role, phone }: IPeopleProps) => {
+  const addPerson = ({
+    personName,
+    personRole,
+    personEmail,
+    personPhone,
+  }: IPeopleProps) => {
     mutate(
-      { nickname, role, phone },
+      { personName, personRole, personEmail, personPhone },
       {
         onSuccess: () => {
-          setRowData((prevData) => [...prevData, { nickname, role, phone }]);
+          setRowData((prevData) => [
+            ...prevData,
+            { personName, personRole, personEmail, personPhone },
+          ]);
         },
       }
     );
   };
 
-  return { rowData, columnDefs, addPerson };
+  return { rowData, columnDefs, addPerson, isPending, isError, error };
 };
