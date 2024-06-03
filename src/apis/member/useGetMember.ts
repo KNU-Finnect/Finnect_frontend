@@ -2,11 +2,9 @@ import { axiosClient } from '@finnect/apis/AxiosClient';
 
 import { IMemberProps } from '@finnect/interface/MemberInterface';
 
-import { BASE_URI } from '@finnect/constants/URI';
-
 export const useGetMember = async (): Promise<IMemberProps> => {
   try {
-    const response = await axiosClient.get(`${BASE_URI}/workspaces/members`);
+    const response = await axiosClient.get(`/workspaces/members`);
     return response.data;
   } catch (error) {
     console.error(error);
