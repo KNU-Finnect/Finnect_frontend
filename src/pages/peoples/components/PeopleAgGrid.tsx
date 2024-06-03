@@ -8,8 +8,8 @@ import PeopleForm from '@finnect/components/common/modal/people/PeopleForm';
 
 import { IPeopleProps } from '@finnect/interface/PeopleInterface';
 
-import { usePeopleModal } from '@finnect/hooks/custom-hooks/usePeopleModal';
-import { usePeopleData } from '@finnect/hooks/custom-hooks/usePeopleData';
+import { usePeopleModal } from '@finnect/hooks/custom-hooks/people/usePeopleModal';
+import { usePeopleData } from '@finnect/hooks/custom-hooks/people/usePeopleData';
 
 import { PlusOutlined } from '@ant-design/icons';
 import 'ag-grid-community/styles/ag-grid.css';
