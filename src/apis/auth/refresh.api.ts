@@ -21,13 +21,13 @@ export async function refresh(): Promise<AuthAPIRequest> {
   }
 }
 
-export async function refreshWorkSpace(): Promise<AuthAPIRequest> {
+export async function refreshWorkSpace(
+  workspaceId: number
+): Promise<AuthAPIRequest> {
   try {
-    const workspaceId = localStorage.getItem('selectedWorkSpaceId');
-    const parsedWorkspaceId = workspaceId ? parseInt(workspaceId, 10) : null;
     const response = await axios.post(
       `${BASE_URI}/users/reissue-workspace`,
-      { workspaceId: parsedWorkspaceId },
+      { workspaceId },
       {
         withCredentials: true,
       }

@@ -18,9 +18,9 @@ import {
 
 import { WorkSpaceMenuItem } from '@finnect/interface/SlideMenuInterface';
 
-import { refreshWorkSpace } from '@finnect/apis/auth/refresh.api';
 import { useGetWorkSpaceQuery } from '@finnect/hooks/queries/workspace/useGetWorkSpaceQuery';
 import { usePostWorkSpaceQuery } from '@finnect/hooks/queries/workspace/usePostWorkSpaceQuery';
+import { useRefreshQuery } from '@finnect/hooks/queries/auth/useRefreshQuery';
 
 const WorkSpace = () => {
   const { data, isPending, isError, error, refetch } = useGetWorkSpaceQuery();
@@ -35,6 +35,7 @@ const WorkSpace = () => {
     useRecoilState<boolean>(modalVisibleState);
   const [newItemTitle, setNewItemTitle] =
     useRecoilState<string>(newItemTitleState);
+  const { mutate: refreshData } = useRefreshQuery();
 
   useEffect(() => {
     if (data) {
@@ -56,9 +57,10 @@ const WorkSpace = () => {
       (item: WorkSpaceMenuItem) => {
         set(selectedWorkSpaceState, item.title);
         set(selectedWorkSpaceIdState, item.key);
-        refreshWorkSpace();
+        refreshData(parseInt(item.key));
+
         localStorage.setItem('selectedWorkSpace', item.title);
-        localStorage.setItem('selectedWorkSpaceId', item.key.toString());
+        localStorage.setItem('selectedWorkSpaceId', item.key);
       }
   );
 
