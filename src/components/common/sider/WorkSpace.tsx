@@ -8,7 +8,10 @@ import {
   modalVisibleState,
   newItemTitleState,
 } from '@finnect/atoms/header/useHeaderMenu';
-import { selectedWorkSpaceState } from '@finnect/atoms/sider/useSelectedMenu';
+import {
+  selectedWorkSpaceState,
+  selectedWorkSpaceIdState,
+} from '@finnect/atoms/sider/useSelectedMenu';
 import { WorkSpaceMenuItem } from '@finnect/interface/SlideMenuInterface';
 import { useGetWorkSpaceQuery } from '@finnect/hooks/queries/workspace/useGetWorkSpaceQuery';
 import { usePostWorkSpaceQuery } from '@finnect/hooks/queries/workspace/usePostWorkSpaceQuery';
@@ -38,15 +41,19 @@ const WorkSpace = () => {
     }
   }, [data, setMenus]);
 
-  const handleWorkSpaceClick = useRecoilCallback(({ set }) => (e: any) => {
-    const selectedItem = e.domEvent.currentTarget.innerText;
-    set(selectedWorkSpaceState, selectedItem);
-    localStorage.setItem('selectedWorkSpace', selectedItem);
-  });
-
   const handleAddMenuItemClick = () => {
     setModalVisible(true);
   };
+
+  const handleWorkSpaceClick = useRecoilCallback(
+    ({ set }) =>
+      (item: WorkSpaceMenuItem) => {
+        set(selectedWorkSpaceState, item.title);
+        set(selectedWorkSpaceIdState, item.key);
+        localStorage.setItem('selectedWorkSpace', item.title);
+        localStorage.setItem('selectedWorkSpaceId', item.key.toString());
+      }
+  );
 
   const handleModalOk = () => {
     mutate(
@@ -78,7 +85,10 @@ const WorkSpace = () => {
         {menus.map((menu) => (
           <Menu.SubMenu key={menu.key} title={menu.title}>
             {menu.items.map((item: WorkSpaceMenuItem) => (
-              <Menu.Item key={item.key} onClick={handleWorkSpaceClick}>
+              <Menu.Item
+                key={item.key}
+                onClick={() => handleWorkSpaceClick(item)}
+              >
                 <NavLink to={item.link}>{item.title}</NavLink>
               </Menu.Item>
             ))}
