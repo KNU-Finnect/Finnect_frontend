@@ -1,34 +1,30 @@
 import { useEffect } from 'react';
 
 import { ColDef } from 'ag-grid-community';
-import axios from 'axios';
 import { useRecoilState } from 'recoil';
 
 import {
   rowDataState,
   columnDefsState,
 } from '@finnect/atoms/company/useCompany';
-import {
-  CompanyInterface,
-  CompanyColumnInterface,
-} from '@finnect/interface/CompanyInterface';
+
+import { useGetWC } from '@finnect/hooks/queries/company/useGetWC';
+import { usePostWC } from '@finnect/hooks/queries/company/usePostWC';
+
+import { CompanyColumnInterface } from '@finnect/interface/CompanyInterface';
 
 export const useCompanyData = () => {
   const [rowData, setRowData] = useRecoilState(rowDataState);
   const [columnDefs, setColumnDefs] = useRecoilState(columnDefsState);
+  const { data, refetch } = useGetWC();
+  const { mutate } = usePostWC();
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get('/api/companies');
-        setRowData(response.data);
-      } catch (error) {
-        console.error('Error fetching row data:', error);
-      }
-    };
-
-    fetchData();
-  }, [setRowData]);
+    if (data) {
+      console.log(data.result.companies);
+      setRowData(data.result.companies);
+    }
+  }, [setRowData, data]);
 
   const addColumn = ({ name, type }: CompanyColumnInterface) => {
     let newColumnDef: ColDef;
@@ -57,16 +53,14 @@ export const useCompanyData = () => {
   };
 
   const addCompany = async (name: string, domain: string) => {
-    try {
-      const response = await axios.post('/api/new/company', {
-        Companies: name,
-        Domains: domain,
-      });
-      const newCompany: CompanyInterface = response.data;
-      setRowData((prevData) => [...prevData, newCompany]);
-    } catch (error) {
-      console.error('Error adding company:', error);
-    }
+    mutate(
+      { companyName: name, domain: domain },
+      {
+        onSuccess: () => {
+          refetch();
+        },
+      }
+    );
   };
 
   return {

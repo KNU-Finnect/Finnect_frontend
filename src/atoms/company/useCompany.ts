@@ -15,11 +15,11 @@ export const columnDefsState = atom<ColDef[]>({
   default: [
     {
       headerName: 'Companies',
-      field: 'Companies',
+      field: 'companyName',
       checkboxSelection: true,
       rowDrag: true,
     },
-    { headerName: 'Domains', field: 'Domains' },
+    { headerName: 'Domains', field: 'domain' },
     {
       headerName: 'Categories',
       field: 'Categories',
