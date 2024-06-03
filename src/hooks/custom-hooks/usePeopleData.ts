@@ -29,14 +29,15 @@ export const usePeopleData = () => {
     personRole,
     personEmail,
     personPhone,
+    companyId,
   }: IPeopleProps) => {
     mutate(
-      { personName, personRole, personEmail, personPhone },
+      { personName, personRole, personEmail, personPhone, companyId },
       {
         onSuccess: () => {
           setRowData((prevData) => [
             ...prevData,
-            { personName, personRole, personEmail, personPhone },
+            { personName, personRole, personEmail, personPhone, companyId },
           ]);
         },
       }

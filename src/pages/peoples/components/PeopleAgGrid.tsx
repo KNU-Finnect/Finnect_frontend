@@ -31,9 +31,10 @@ const PeopleAgGrid = () => {
     personName,
     personRole,
     personEmail,
+    companyId,
     personPhone,
   }: IPeopleProps) => {
-    addPerson({ personName, personRole, personEmail, personPhone });
+    addPerson({ personName, personRole, personEmail, companyId, personPhone });
     hidePeopleModal();
   };
 

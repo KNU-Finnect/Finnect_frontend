@@ -11,9 +11,10 @@ export const usePatchPeopleQuery = () => {
       personName,
       personRole,
       personEmail,
+      companyId,
       personPhone,
     }: IPeopleProps) =>
-      patchPeople(personName, personRole, personEmail, personPhone),
+      patchPeople(personName, personRole, personEmail, companyId, personPhone),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['patchPeople'] });
     },

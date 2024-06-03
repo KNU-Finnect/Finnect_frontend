@@ -11,9 +11,10 @@ export const usePostPeopleQuery = () => {
       personName,
       personRole,
       personEmail,
+      companyId,
       personPhone,
     }: IPeopleProps) =>
-      postPeople(personName, personRole, personEmail, personPhone),
+      postPeople(personName, personRole, personEmail, companyId, personPhone),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['postPeople'] });
     },

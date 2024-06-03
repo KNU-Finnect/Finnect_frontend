@@ -6,6 +6,7 @@ export const postPeople = async (
   personName: string,
   personRole: string,
   personEmail: string,
+  companyId: number,
   personPhone: string
 ): Promise<IPeopleProps> => {
   try {
@@ -13,6 +14,7 @@ export const postPeople = async (
       personName,
       personRole,
       personEmail,
+      companyId,
       personPhone,
     });
     return response.data;
