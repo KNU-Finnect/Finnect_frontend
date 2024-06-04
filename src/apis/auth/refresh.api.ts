@@ -1,5 +1,6 @@
+import axios from 'axios';
+
 import { BASE_URI } from '@finnect/constants/URI';
-import { axiosClient } from '../AxiosClient';
 
 interface AuthAPIRequest {
   status: number;
@@ -8,7 +9,7 @@ interface AuthAPIRequest {
 
 export async function refresh(): Promise<AuthAPIRequest> {
   try {
-    const response = await axiosClient.post(`${BASE_URI}/users/reissue`, {
+    const response = await axios.post(`${BASE_URI}/users/reissue`, {
       withCredentials: true,
     });
     console.log(response);
@@ -24,7 +25,7 @@ export async function refreshWorkSpace(
   workspaceId: number
 ): Promise<AuthAPIRequest> {
   try {
-    const response = await axiosClient.post(
+    const response = await axios.post(
       `${BASE_URI}/users/reissue-workspace`,
       { workspaceId },
       {
