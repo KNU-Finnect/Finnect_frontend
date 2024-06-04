@@ -23,3 +23,27 @@ export async function authApi(
     throw error;
   }
 }
+
+// export async function logout(): Promise<AuthAPIRequest> {
+//   try {
+//     const response = await axios.post(`${BASE_URI}/users/logout`, {
+//       withCredentials: true,
+//     });
+//     console.log(response.data.status);
+//     localStorage.removeItem('accessToken');
+//     return response.data;
+//   } catch (error) {
+//     console.error('Error during sign out:', error);
+//     throw error;
+//   }
+// }
+
+export const logout = () => {
+  try {
+    localStorage.removeItem('accessToken');
+    console.log('Logout successful');
+  } catch (error) {
+    console.error('Error during logout:', error);
+    throw error;
+  }
+};
