@@ -1,7 +1,6 @@
 import axios from 'axios';
 
 import { BASE_URI } from '@finnect/constants/URI';
-
 interface AuthAPIRequest {
   status: number;
 }
