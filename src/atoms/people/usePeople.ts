@@ -16,6 +16,7 @@ export const columnDefsPeopleState = atom<ColDef[]>({
       field: 'personName',
       checkboxSelection: true,
     },
+    { headerName: 'Company', field: 'companyName' },
     { headerName: 'Role', field: 'personRole' },
     { headerName: 'Email', field: 'personEmail' },
     { headerName: 'Phone', field: 'personPhone' },

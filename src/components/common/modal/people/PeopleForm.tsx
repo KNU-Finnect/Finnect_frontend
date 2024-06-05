@@ -1,13 +1,8 @@
 import { Form, Input, Button, Select } from 'antd';
-import { useEffect } from 'react';
-import { useRecoilState } from 'recoil';
-import {
-  companiesState,
-  isCompanySelectedState,
-} from '@finnect/atoms/company/useSelectCompany'; // 경로를 맞게 변경하세요
+
+import { useSelectCompany } from '@finnect/hooks/custom-hooks/people/useSelectCompany';
+
 import { IPeopleProps } from '@finnect/interface/PeopleInterface';
-import { useGetWC } from '@finnect/hooks/queries/company/useGetWC';
-import { ICompanyAxiosProps } from '@finnect/interface/PeopleInterface';
 
 interface PeopleFormProps {
   onCreatePeople: (person: IPeopleProps) => void;
@@ -15,18 +10,8 @@ interface PeopleFormProps {
 
 const PeopleForm = ({ onCreatePeople }: PeopleFormProps) => {
   const [formPeople] = Form.useForm();
-  const { data: CompanyData } = useGetWC();
-
-  const [companies, setCompanies] = useRecoilState(companiesState);
-  const [isCompanySelected, setIsCompanySelected] = useRecoilState(
-    isCompanySelectedState
-  );
-
-  useEffect(() => {
-    if (CompanyData) {
-      setCompanies(CompanyData.result.companies);
-    }
-  }, [CompanyData, setCompanies]);
+  const { companies, isCompanySelected, setIsCompanySelected } =
+    useSelectCompany();
 
   const handleFinish = (values: IPeopleProps) => {
     const companyId = formPeople.getFieldValue('companyId');
@@ -47,7 +32,7 @@ const PeopleForm = ({ onCreatePeople }: PeopleFormProps) => {
         rules={[{ required: true, message: 'Please select a company!' }]}
       >
         <Select placeholder='Select a company' onChange={handleCompanyChange}>
-          {companies.map((company: ICompanyAxiosProps) => (
+          {companies.map((company) => (
             <Select.Option key={company.companyId} value={company.companyId}>
               {company.companyName}
             </Select.Option>

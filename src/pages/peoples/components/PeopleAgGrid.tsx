@@ -54,9 +54,9 @@ const PeopleAgGrid = () => {
           rowData={rowData}
           columnDefs={columnDefs}
           defaultColDef={defaultColDef}
-          rowSelection='multiple'
+          rowSelection='single'
           suppressRowClickSelection={true}
-          rowDragManaged={true}
+          rowDragManaged={false}
         />
       </div>
       <Modal
