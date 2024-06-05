@@ -40,13 +40,8 @@ const CompaniesBox = () => {
       }}
     >
       <ButtonLayout>
-        <div>
-          <Button type='primary' icon={<SettingOutlined />} style={buttonStyle}>
-            View Setting
-          </Button>
-        </div>
-        <Button type='primary' icon={<SaveOutlined />} style={buttonStyle}>
-          Save
+        <Button type='primary' icon={<SettingOutlined />} style={buttonStyle}>
+          View Setting
         </Button>
       </ButtonLayout>
       <CompanyAgGrid />
