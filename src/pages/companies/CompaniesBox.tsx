@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import CompanyAgGrid from '@finnect/pages/companies/components/CompanyAgGrid';
 
-import { SaveOutlined, SettingOutlined } from '@ant-design/icons';
+import { SettingOutlined } from '@ant-design/icons';
 
 const { Content } = Layout;
 
