@@ -1,13 +1,16 @@
-import { useDeletePeople } from '@finnect/apis/people/useDeletePeople';
+import { useMutation } from '@tanstack/react-query';
 
-import { useQuery } from '@tanstack/react-query';
+import { deletePeople } from '@finnect/apis/people/useDeletePeople';
+
+import { queryClient } from '@finnect/hooks/queries/Http';
 
 export const useDeletePeopleQuery = () => {
-  const { data, isPending, isError, error, refetch } = useQuery({
-    queryKey: ['getPeople'],
-    queryFn: useDeletePeople,
-    refetchOnMount: true,
+  const { mutate, isPending, isError, error } = useMutation({
+    mutationFn: (personId: string) => deletePeople(personId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['deletePeople'] });
+    },
   });
 
-  return { data, isPending, isError, error, refetch };
+  return { mutate, isPending, isError, error };
 };

@@ -11,12 +11,19 @@ import { IPeopleProps } from '@finnect/interface/PeopleInterface';
 import { usePeopleModal } from '@finnect/hooks/custom-hooks/people/usePeopleModal';
 import { usePeopleData } from '@finnect/hooks/custom-hooks/people/usePeopleData';
 
-import { PlusOutlined } from '@ant-design/icons';
+import { DeleteOutlined, PlusOutlined } from '@ant-design/icons';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-quartz.css';
 
 const PeopleAgGrid = () => {
-  const { rowData, columnDefs, addPerson } = usePeopleData();
+  const {
+    rowData,
+    columnDefs,
+    handleDeletePerson,
+    selectedPerson,
+    setSelectedPerson,
+    addPerson,
+  } = usePeopleData();
 
   const { peopleModalVisible, showPeopleModal, hidePeopleModal } =
     usePeopleModal();
@@ -48,6 +55,15 @@ const PeopleAgGrid = () => {
         >
           People 추가하기
         </Button>
+        <Button
+          type='dashed'
+          onClick={handleDeletePerson}
+          icon={<DeleteOutlined />}
+          disabled={!selectedPerson}
+          style={{ marginLeft: '8px' }}
+        >
+          선택된 People 삭제하기
+        </Button>
       </div>
       <div className='ag-theme-quartz' style={{ height: '500px' }}>
         <AgGridReact
@@ -55,6 +71,7 @@ const PeopleAgGrid = () => {
           columnDefs={columnDefs}
           defaultColDef={defaultColDef}
           rowSelection='single'
+          onRowSelected={(event) => setSelectedPerson(event.node.data)}
           suppressRowClickSelection={true}
           rowDragManaged={false}
         />

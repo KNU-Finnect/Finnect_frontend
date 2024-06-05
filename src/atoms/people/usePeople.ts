@@ -1,9 +1,9 @@
 import { ColDef } from 'ag-grid-community';
 import { atom } from 'recoil';
 
-import { IPeopleProps } from '@finnect/interface/PeopleInterface';
+import { IPeopleAxiosProps } from '@finnect/interface/PeopleInterface';
 
-export const rowPeopleDataState = atom<IPeopleProps[]>({
+export const rowPeopleDataState = atom<IPeopleAxiosProps[]>({
   key: 'rowPeopleDataState',
   default: [],
 });
@@ -21,6 +21,11 @@ export const columnDefsPeopleState = atom<ColDef[]>({
     { headerName: 'Email', field: 'personEmail' },
     { headerName: 'Phone', field: 'personPhone' },
   ],
+});
+
+export const selectedPersonState = atom<IPeopleAxiosProps | null>({
+  key: 'selectedPersonState',
+  default: null,
 });
 
 export const peopleModalVisibleState = atom<boolean>({

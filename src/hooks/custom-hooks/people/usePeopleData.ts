@@ -5,18 +5,23 @@ import { useRecoilState } from 'recoil';
 import {
   columnDefsPeopleState,
   rowPeopleDataState,
+  selectedPersonState,
 } from '@finnect/atoms/people/usePeople';
 
-import { IPeopleProps } from '@finnect/interface/PeopleInterface';
+import { IPeopleAxiosProps } from '@finnect/interface/PeopleInterface';
 
 import { usePostPeopleQuery } from '@finnect/hooks/queries/people/usePostPeopleQuery';
 import { useGetPeopleQuery } from '@finnect/hooks/queries/people/useGetPeopleQuery';
+import { useDeletePeopleQuery } from '@finnect/hooks/queries/people/useDeletePeopleQuery';
 
 export const usePeopleData = () => {
   const [rowData, setRowData] = useRecoilState(rowPeopleDataState);
   const [columnDefs] = useRecoilState(columnDefsPeopleState);
   const { mutate } = usePostPeopleQuery();
+  const { mutate: deletePerson } = useDeletePeopleQuery();
   const { data, isPending, isError, error } = useGetPeopleQuery();
+  const [selectedPerson, setSelectedPerson] =
+    useRecoilState(selectedPersonState);
 
   useEffect(() => {
     if (data) {
@@ -30,19 +35,54 @@ export const usePeopleData = () => {
     personEmail,
     personPhone,
     companyId,
-  }: IPeopleProps) => {
+  }: {
+    personName: string;
+    personRole: string;
+    personEmail: string;
+    personPhone: string;
+    companyId: number;
+  }) => {
     mutate(
       { personName, personRole, personEmail, personPhone, companyId },
       {
         onSuccess: () => {
-          setRowData((prevData) => [
-            ...prevData,
-            { personName, personRole, personEmail, personPhone, companyId },
-          ]);
+          setRowData(
+            (prevData) =>
+              [
+                ...prevData,
+                { personName, personRole, personEmail, personPhone, companyId },
+              ] as IPeopleAxiosProps[]
+          );
         },
       }
     );
   };
 
-  return { rowData, columnDefs, addPerson, isPending, isError, error };
+  const handleDeletePerson = () => {
+    console.log(selectedPerson);
+    if (selectedPerson) {
+      deletePerson(selectedPerson.personId, {
+        onSuccess: () => {
+          setRowData((prevData) =>
+            prevData.filter(
+              (person) => person.personId !== selectedPerson.personId
+            )
+          );
+          setSelectedPerson(null);
+        },
+      });
+    }
+  };
+
+  return {
+    rowData,
+    columnDefs,
+    handleDeletePerson,
+    selectedPerson,
+    setSelectedPerson,
+    addPerson,
+    isPending,
+    isError,
+    error,
+  };
 };
