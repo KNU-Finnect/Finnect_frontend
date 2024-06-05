@@ -1,10 +1,10 @@
 import { useMutation } from '@tanstack/react-query';
-import { refreshWorkSpace } from '@finnect/apis/auth/refresh.api';
+import { refreshWorkSpace2 } from '@finnect/apis/auth/refresh.api';
 import { queryClient } from '@finnect/hooks/queries/Http';
 
 export const useRefreshQuery = () => {
   const { mutate, isPending, isError, error } = useMutation({
-    mutationFn: (workspaceId: number) => refreshWorkSpace(workspaceId),
+    mutationFn: (workspaceId: number) => refreshWorkSpace2(workspaceId),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['getRefresh'] });
     },
