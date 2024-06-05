@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import CompanyAgGrid from '@finnect/pages/companies/components/CompanyAgGrid';
 
-import { SaveOutlined, SettingOutlined } from '@ant-design/icons';
+import { SettingOutlined } from '@ant-design/icons';
 
 const { Content } = Layout;
 
@@ -40,13 +40,8 @@ const CompaniesBox = () => {
       }}
     >
       <ButtonLayout>
-        <div>
-          <Button type='primary' icon={<SettingOutlined />} style={buttonStyle}>
-            View Setting
-          </Button>
-        </div>
-        <Button type='primary' icon={<SaveOutlined />} style={buttonStyle}>
-          Save
+        <Button type='primary' icon={<SettingOutlined />} style={buttonStyle}>
+          View Setting
         </Button>
       </ButtonLayout>
       <CompanyAgGrid />

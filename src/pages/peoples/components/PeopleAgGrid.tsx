@@ -8,15 +8,22 @@ import PeopleForm from '@finnect/components/common/modal/people/PeopleForm';
 
 import { IPeopleProps } from '@finnect/interface/PeopleInterface';
 
-import { usePeopleModal } from '@finnect/hooks/custom-hooks/usePeopleModal';
-import { usePeopleData } from '@finnect/hooks/custom-hooks/usePeopleData';
+import { usePeopleModal } from '@finnect/hooks/custom-hooks/people/usePeopleModal';
+import { usePeopleData } from '@finnect/hooks/custom-hooks/people/usePeopleData';
 
-import { PlusOutlined } from '@ant-design/icons';
+import { DeleteOutlined, PlusOutlined } from '@ant-design/icons';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-quartz.css';
 
 const PeopleAgGrid = () => {
-  const { rowData, columnDefs, addPerson } = usePeopleData();
+  const {
+    rowData,
+    columnDefs,
+    handleDeletePerson,
+    selectedPerson,
+    setSelectedPerson,
+    addPerson,
+  } = usePeopleData();
 
   const { peopleModalVisible, showPeopleModal, hidePeopleModal } =
     usePeopleModal();
@@ -31,9 +38,10 @@ const PeopleAgGrid = () => {
     personName,
     personRole,
     personEmail,
+    companyId,
     personPhone,
   }: IPeopleProps) => {
-    addPerson({ personName, personRole, personEmail, personPhone });
+    addPerson({ personName, personRole, personEmail, companyId, personPhone });
     hidePeopleModal();
   };
 
@@ -47,15 +55,25 @@ const PeopleAgGrid = () => {
         >
           People 추가하기
         </Button>
+        <Button
+          type='dashed'
+          onClick={handleDeletePerson}
+          icon={<DeleteOutlined />}
+          disabled={!selectedPerson}
+          style={{ marginLeft: '8px' }}
+        >
+          선택된 People 삭제하기
+        </Button>
       </div>
       <div className='ag-theme-quartz' style={{ height: '500px' }}>
         <AgGridReact
           rowData={rowData}
           columnDefs={columnDefs}
           defaultColDef={defaultColDef}
-          rowSelection='multiple'
+          rowSelection='single'
+          onRowSelected={(event) => setSelectedPerson(event.node.data)}
           suppressRowClickSelection={true}
-          rowDragManaged={true}
+          rowDragManaged={false}
         />
       </div>
       <Modal
