@@ -1,11 +1,9 @@
 import { ColDef } from 'ag-grid-community';
 import { atom } from 'recoil';
 
-import { CompanyCategories } from '@finnect/pages/companies/components/CompanyCategories';
+import { RowData } from '@finnect/interface/CompanyInterface';
 
-import { CompanyInterface } from '@finnect/interface/CompanyInterface';
-
-export const rowDataState = atom<CompanyInterface[]>({
+export const rowDataState = atom<RowData[]>({
   key: 'rowDataState',
   default: [],
 });
@@ -19,17 +17,23 @@ export const columnDefsState = atom<ColDef[]>({
       checkboxSelection: true,
       rowDrag: true,
     },
-    { headerName: 'Domains', field: 'domain' },
-    {
-      headerName: 'Categories',
-      field: 'Categories',
-      cellEditor: 'agSelectCellEditor',
-      cellEditorParams: {
-        values: CompanyCategories,
-      },
-    },
-    { headerName: 'About', field: 'About' },
+    { headerName: 'Domains', field: 'domain', filter: true },
   ],
+});
+
+export const isPendingState = atom<boolean>({
+  key: 'isPendingState',
+  default: false,
+});
+
+export const isErrorState = atom<boolean>({
+  key: 'isErrorState',
+  default: false,
+});
+
+export const errorState = atom<any>({
+  key: 'errorState',
+  default: null,
 });
 
 export const columnModalVisibleState = atom<boolean>({

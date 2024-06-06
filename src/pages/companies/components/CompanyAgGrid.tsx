@@ -3,10 +3,11 @@ import { useMemo } from 'react';
 import { AgGridReact } from 'ag-grid-react';
 import { Button, Modal } from 'antd';
 
+import { useCompanyViewData } from '@finnect/hooks/custom-hooks/company/useCompanyViewData'; // 새로운 커스텀 훅 import
+
 import ColumnForm from '@finnect/components/common/modal/company/ColumnForm';
 import CompanyForm from '@finnect/components/common/modal/company/CompanyForm';
 
-import { useCompanyData } from '@finnect/hooks/custom-hooks/company/useCompanyData';
 import { useCompanyModal } from '@finnect/hooks/custom-hooks/company/useCompanyModal';
 
 import { PlusOutlined } from '@ant-design/icons';
@@ -14,7 +15,6 @@ import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-quartz.css';
 
 const CompanyAgGrid = () => {
-  const { rowData, columnDefs, addColumn, addCompany } = useCompanyData();
   const {
     columnModalVisible,
     companyModalVisible,
@@ -24,23 +24,17 @@ const CompanyAgGrid = () => {
     hideCompanyModal,
   } = useCompanyModal();
 
+  const { rowData, columnDefs, isPending, isError, error } =
+    useCompanyViewData();
+
   const defaultColDef = useMemo(() => {
     return {
-      filter: true,
       editable: true,
-      floatingFilter: true,
     };
   }, []);
 
-  const handleCreateColumn = (values: { name: string; type: string }) => {
-    addColumn({ name: values.name, type: values.type });
-    hideColumnModal();
-  };
-
-  const handleCreateCompany = (values: { name: string; domain: string }) => {
-    addCompany(values.name, values.domain);
-    hideCompanyModal();
-  };
+  if (isPending) return <div>Loading...</div>;
+  if (isError) return <div>Error: {error?.message}</div>;
 
   return (
     <div style={{ padding: '16px' }}>
@@ -63,8 +57,8 @@ const CompanyAgGrid = () => {
       </div>
       <div className='ag-theme-quartz' style={{ height: '500px' }}>
         <AgGridReact
-          rowData={rowData}
           columnDefs={columnDefs}
+          rowData={rowData}
           defaultColDef={defaultColDef}
           rowSelection='multiple'
           suppressRowClickSelection={true}
@@ -77,7 +71,7 @@ const CompanyAgGrid = () => {
         onCancel={hideColumnModal}
         footer={null}
       >
-        <ColumnForm onCreate={handleCreateColumn} />
+        <ColumnForm onCreate={() => {}} />
       </Modal>
       <Modal
         title='회사 추가하기'
@@ -85,7 +79,7 @@ const CompanyAgGrid = () => {
         onCancel={hideCompanyModal}
         footer={null}
       >
-        <CompanyForm onCreateCompany={handleCreateCompany} />
+        <CompanyForm onCreateCompany={() => {}} />
       </Modal>
     </div>
   );

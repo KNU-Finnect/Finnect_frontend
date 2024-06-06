@@ -15,45 +15,48 @@ export interface CompanyColumnInterface {
   type: string;
 }
 
+export interface IViewCompany {
+  companyId: number;
+  domain: string;
+  companyName: string;
+  rowId: number;
+  cells: {
+    columnId: number;
+    value: string;
+    peopleId: number;
+    companyId: number;
+    userId: number;
+  }[];
+}
+
+export interface IViewColumn {
+  columnId: number;
+  index: number;
+  hided: boolean;
+  columnType: string;
+  columnName: string;
+  sorting: string;
+}
+
 export interface ICVDataProps {
   status: number;
   result: {
     viewId: number;
     viewName: string;
-    filters: [
-      {
-        filterId: number;
-        columnId: number;
-        condition: string;
-        value: string;
-      },
-    ];
-    viewColumns: [
-      {
-        columnId: number;
-        index: number;
-        hided: boolean;
-        columnType: string;
-        columnName: string;
-        sorting: string;
-      },
-    ];
-    viewCompanies: [
-      {
-        companyId: number;
-        domain: string;
-        companyName: string;
-        rowId: number;
-        cells: [
-          {
-            columnId: number;
-            value: string;
-            peopleId: number;
-            companyId: number;
-            userId: number;
-          },
-        ];
-      },
-    ];
+    filters: {
+      filterId: number;
+      columnId: number;
+      condition: string;
+      value: string;
+    }[];
+    viewColumns: IViewColumn[];
+    viewCompanies: IViewCompany[];
   };
+}
+
+export interface RowData {
+  companyId: number;
+  companyName: string;
+  domain: string;
+  [key: string]: any; // 인덱스 시그니처 추가
 }

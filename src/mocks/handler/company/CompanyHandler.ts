@@ -115,6 +115,28 @@ export const CompanyHandler = [
               },
             ],
           },
+          {
+            companyId: 13,
+            domain: 'www.samsung.com',
+            companyName: 'Samsung',
+            rowId: 1,
+            cells: [
+              {
+                columnId: 0,
+                value: '',
+                peopleId: 0,
+                companyId: 0,
+                userId: 0,
+              },
+              {
+                columnId: 1,
+                value: '',
+                peopleId: 0,
+                companyId: 0,
+                userId: 0,
+              },
+            ],
+          },
         ],
       },
     });
