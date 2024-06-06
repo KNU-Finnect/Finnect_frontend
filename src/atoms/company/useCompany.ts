@@ -3,6 +3,8 @@ import { atom } from 'recoil';
 
 import { RowData } from '@finnect/interface/CompanyInterface';
 
+import CustomCellRenderer from '@finnect/pages/companies/components/CustomCellRenderer';
+
 export const rowDataState = atom<RowData[]>({
   key: 'rowDataState',
   default: [],
@@ -16,6 +18,8 @@ export const columnDefsState = atom<ColDef[]>({
       field: 'companyName',
       checkboxSelection: true,
       rowDrag: true,
+      cellRenderer: CustomCellRenderer,
+      width: 250,
     },
     { headerName: 'Domains', field: 'domain', filter: true },
   ],
