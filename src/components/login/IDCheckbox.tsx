@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Input, Typography, Space, Button } from 'antd';
+import { Input, Typography, Space, Button, message } from 'antd';
 import styled from 'styled-components';
 import { checkEmail, checkEmailCode } from '@finnect/apis/signup/signup.api';
+
 interface IDCheckboxProps {
   setUsername: (username: string) => void;
   setEmail: (email: string) => void;
@@ -13,6 +14,7 @@ const IDCheckbox: React.FC<IDCheckboxProps> = ({ setUsername, setEmail }) => {
   const [isEmailSent, setIsEmailSent] = useState(false);
   const [emailCode, setEmailCode] = useState('');
   const [, setIsCodeValid] = useState(false);
+  const [isCodeChecked, setIsCodeChecked] = useState(false);
 
   const validateEmail = (email: string) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -56,9 +58,13 @@ const IDCheckbox: React.FC<IDCheckboxProps> = ({ setUsername, setEmail }) => {
       const response = await checkEmailCode(email, codeNumber);
       console.log('Code check response:', response);
       setIsCodeValid(true);
+      setIsCodeChecked(true);
+      message.success('이메일 인증이 완료되었습니다.');
     } catch (error) {
       console.error('Error during email code check:', error);
       setIsCodeValid(false);
+      setIsCodeChecked(false);
+      message.error('이메일 인증에 실패했습니다. 다시 시도해주세요.');
       throw error;
     }
   };
@@ -105,6 +111,7 @@ const IDCheckbox: React.FC<IDCheckboxProps> = ({ setUsername, setEmail }) => {
               확인
             </Button>
           </CheckInputWrapper>
+          {isCodeChecked && <SuccessMessage>인증되었습니다.</SuccessMessage>}{' '}
         </Space>
       </InputWrapper>
     </IdCheckboxWrapper>

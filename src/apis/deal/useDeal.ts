@@ -33,3 +33,17 @@ export async function getDealDetail(dealId: number): Promise<AxiosResponse> {
     throw error;
   }
 }
+
+export async function getDealList(): Promise<AxiosResponse> {
+  // const url = `${BASE_URI}/workspaces/deals`;
+  const url = `api/workspaces/deals`;
+
+  try {
+    const response = await axiosClient.get(url, {});
+    console.log(response);
+    return response;
+  } catch (error) {
+    console.error('Error during get deal list:', error);
+    throw error;
+  }
+}

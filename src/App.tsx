@@ -10,6 +10,7 @@ import WorkSpacePage from '@finnect/pages/workspace/WorkSpacePage';
 
 import { GlobalStyle } from '@finnect/styles/GlobalStyle';
 import Theme from '@finnect/styles/Theme';
+import DealDetail from './pages/deals/DealDetial';
 
 const router = createBrowserRouter([
   {
@@ -17,7 +18,10 @@ const router = createBrowserRouter([
     element: <RootPage />,
     id: 'root',
     errorElement: <ErrorPage />,
-    children: [{ path: '/:workspaceId', element: <WorkSpacePage /> }],
+    children: [
+      { path: '/:workspaceId', element: <WorkSpacePage /> },
+      { path: '/:workspaceId/deals', element: <DealDetail /> },
+    ],
   },
   {
     path: '/signin',

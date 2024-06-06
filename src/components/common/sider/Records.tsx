@@ -3,13 +3,21 @@ import { useRecoilCallback } from 'recoil';
 
 import { SettingOutlined } from '@ant-design/icons';
 import { selectedMenuItemState } from '@finnect/atoms/sider/useSelectedMenu';
+import { useNavigate } from 'react-router-dom';
 
 const Records = () => {
+  const navigate = useNavigate();
+
   const handleMenuClick = useRecoilCallback(({ set }) => (e: any) => {
     const selectedItem = e.domEvent.currentTarget.innerText;
     set(selectedMenuItemState, selectedItem);
     localStorage.setItem('selectedMenuItem', selectedItem);
+
+    const selectedSpace = localStorage.getItem('selectedWorkSpace');
+    navigate(`/${selectedSpace}`);
   });
+
+  console.log('test');
 
   return (
     <Menu.SubMenu

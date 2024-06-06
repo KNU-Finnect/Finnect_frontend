@@ -6,6 +6,7 @@ import styled from 'styled-components';
 
 import SiderBox from '@finnect/components/common/sider/SiderBox';
 import { StyledSliderWrapper } from '@finnect/styles/Layout';
+import HeaderBox from '@finnect/components/common/header/HeaderBox';
 
 const CustomLayout = styled(Layout)`
   width: 100vw;
@@ -31,6 +32,7 @@ const RootPage = () => {
           <SiderBox />
         </StyledSliderWrapper>
         <Layout>
+          <HeaderBox />
           <Outlet />
         </Layout>
       </Layout>

@@ -19,3 +19,12 @@ export interface IDealProps {
   dealName: string;
   userId: number;
 }
+
+export interface IDealRow {
+  company: string;
+  text: string;
+  user: string;
+  date: string;
+  currency: number;
+  select: string;
+}
