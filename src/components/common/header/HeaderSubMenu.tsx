@@ -1,4 +1,4 @@
-import { Typography, Space, Dropdown, Menu } from 'antd';
+import { Typography, Space, Dropdown, Menu, message } from 'antd';
 import { useRecoilState } from 'recoil';
 
 import {
@@ -28,6 +28,7 @@ const HeaderSubMenu = () => {
       logout();
       navigate('/signin');
       console.log('로그아웃');
+      return message.success('로그아웃 성공.');
     } else if (e.key === 'invite') {
       setInviteModalVisible(true);
     }
