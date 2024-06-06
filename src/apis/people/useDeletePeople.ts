@@ -1,8 +1,8 @@
 import { axiosClient } from '@finnect/apis/AxiosClient';
 
-export const useDeletePeople = async () => {
+export const deletePeople = async (personId: string) => {
   try {
-    const response = await axiosClient.delete(`/workspaces/people`);
+    const response = await axiosClient.delete(`/workspaces/people/${personId}`);
     return response.data;
   } catch (error) {
     console.error(error);

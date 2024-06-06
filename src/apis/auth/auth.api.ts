@@ -17,8 +17,8 @@ export async function authApi(
     const accessToken = response.headers.authorization;
     console.log(response.data.status);
     localStorage.setItem('accessToken', accessToken);
+
     const refreshToken = response.data.result;
-    console.log(response.data.result);
     localStorage.setItem('refreshToken', refreshToken);
     return response.data;
   } catch (error) {

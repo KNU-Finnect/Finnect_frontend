@@ -6,8 +6,8 @@ import { Button, Modal } from 'antd';
 import ColumnForm from '@finnect/components/common/modal/company/ColumnForm';
 import CompanyForm from '@finnect/components/common/modal/company/CompanyForm';
 
-import { useCompanyData } from '@finnect/hooks/custom-hooks/useCompanyData';
-import { useCompanyModal } from '@finnect/hooks/custom-hooks/useCompanyModal';
+import { useCompanyData } from '@finnect/hooks/custom-hooks/company/useCompanyData';
+import { useCompanyModal } from '@finnect/hooks/custom-hooks/company/useCompanyModal';
 
 import { PlusOutlined } from '@ant-design/icons';
 import 'ag-grid-community/styles/ag-grid.css';

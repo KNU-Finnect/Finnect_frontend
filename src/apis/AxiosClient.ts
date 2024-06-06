@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { BASE_URI } from '@finnect/constants/URI';
-import { refresh } from '@finnect/apis/auth/refresh.api';
+import { refresh2 } from '@finnect/apis/auth/refresh.api';
 
 export const axiosClient = axios.create({
   baseURL: BASE_URI,
@@ -38,7 +38,7 @@ axiosClient.interceptors.response.use(
       originalRequest._retry = true;
 
       try {
-        const refreshResponse = await refresh();
+        const refreshResponse = await refresh2();
         const newToken = refreshResponse.headers.authorization;
 
         localStorage.setItem('accessToken', newToken);
