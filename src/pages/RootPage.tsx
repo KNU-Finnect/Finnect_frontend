@@ -1,4 +1,5 @@
-import { Outlet } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useNavigate, Outlet } from 'react-router-dom';
 
 import { Layout } from 'antd';
 import styled from 'styled-components';
@@ -14,6 +15,15 @@ const CustomLayout = styled(Layout)`
 `;
 
 const RootPage = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const accessToken = localStorage.getItem('accessToken');
+    if (!accessToken) {
+      navigate('/signin');
+    }
+  }, [navigate]);
+
   return (
     <CustomLayout>
       <Layout style={{ width: '100%', display: 'flex' }}>

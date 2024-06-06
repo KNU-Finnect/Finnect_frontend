@@ -1,4 +1,4 @@
-import { Typography, Space, Dropdown, Menu } from 'antd';
+import { Typography, Space, Dropdown, Menu, message } from 'antd';
 import { useRecoilState } from 'recoil';
 
 import {
@@ -11,10 +11,13 @@ import {
   selectedInviteModalState,
 } from '@finnect/atoms/header/useHeaderMenu';
 import InviteModal from '@finnect/components/common/modal/header/InviteModal';
+import { logout } from '@finnect/apis/auth/auth.api';
+import { useNavigate } from 'react-router-dom';
 
 const { Text } = Typography;
 
 const HeaderSubMenu = () => {
+  const navigate = useNavigate();
   const [visible, setVisible] = useRecoilState(selectedHeaderMenuState);
   const [inviteModalVisible, setInviteModalVisible] = useRecoilState(
     selectedInviteModalState
@@ -22,8 +25,10 @@ const HeaderSubMenu = () => {
 
   const handleMenuClick = (e: any) => {
     if (e.key === 'logout') {
-      // 로그아웃 처리
+      logout();
+      navigate('/signin');
       console.log('로그아웃');
+      return message.success('로그아웃 성공.');
     } else if (e.key === 'invite') {
       setInviteModalVisible(true);
     }
