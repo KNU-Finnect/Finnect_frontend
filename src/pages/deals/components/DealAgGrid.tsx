@@ -8,6 +8,7 @@ import { Button, Modal } from 'antd';
 import styled from 'styled-components';
 import DealForm from '@finnect/components/common/modal/deals/DealForm';
 import DealCustomCell from './DealCustomCell';
+import ColumnForm from '@finnect/components/common/modal/deals/DealColumnForm';
 
 interface DealData {
   companyId: number;
@@ -25,6 +26,7 @@ const DealAgGrid = () => {
   >([]);
   const [rowData, setRowData] = useState<IDealRow[]>([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isColumnModalVisible, setIsColumnModalVisible] = useState(false);
 
   const defaultColDef = useMemo(
     () => ({
@@ -55,6 +57,8 @@ const DealAgGrid = () => {
           field: 'dealName',
           headerName: 'Deal Name',
           cellRenderer: DealCustomCell,
+          checkboxSelection: true,
+          rowDrag: true,
           width: 250,
         },
         { field: 'companyId', headerName: 'Company ID' },
@@ -102,6 +106,19 @@ const DealAgGrid = () => {
     fetchData();
   };
 
+  const showColumnModal = () => {
+    setIsColumnModalVisible(true);
+  };
+
+  const handleColumnCancel = () => {
+    setIsColumnModalVisible(false);
+  };
+
+  const handleAddColumnSuccess = () => {
+    setIsColumnModalVisible(false);
+    fetchData();
+  };
+
   return (
     <DealAgGridWrapper>
       <ButtonWrapper>
@@ -109,6 +126,7 @@ const DealAgGrid = () => {
           type='primary'
           icon={<PlusOutlined />}
           style={{ marginRight: '12px' }}
+          onClick={showColumnModal}
         >
           속성 추가하기
         </Button>
@@ -126,6 +144,14 @@ const DealAgGrid = () => {
           rowDragManaged={true}
         />
       </div>
+      <Modal
+        title='속성 추가하기'
+        visible={isColumnModalVisible}
+        onCancel={handleColumnCancel}
+        footer={null}
+      >
+        <ColumnForm onAddSuccess={handleAddColumnSuccess} />
+      </Modal>
       <Modal
         title='딜 추가하기'
         visible={isModalVisible}

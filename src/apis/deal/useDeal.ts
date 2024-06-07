@@ -66,13 +66,19 @@ export async function postDealCreate(
   }
 }
 
-export async function postDealColumnCreate(
-  columnName: string,
-  columnType: string,
-  columnIndex: number,
-  isHide: boolean,
-  dtype: string
-): Promise<AxiosResponse> {
+export const postDealColumnCreate = async ({
+  columnName,
+  columnType,
+  columnIndex,
+  isHide,
+  dtype,
+}: {
+  columnName: string;
+  columnType: string;
+  columnIndex: number;
+  isHide: boolean;
+  dtype: string;
+}) => {
   const url = `${BASE_URI}/workspaces/deals/columns`;
 
   try {
@@ -89,4 +95,4 @@ export async function postDealColumnCreate(
     console.error('Error during post deal column create:', error);
     throw error;
   }
-}
+};
