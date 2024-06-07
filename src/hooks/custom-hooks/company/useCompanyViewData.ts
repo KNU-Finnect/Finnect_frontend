@@ -49,7 +49,7 @@ export const useCompanyViewData = () => {
       });
 
       setColumnDefs(combinedColumns);
-      setRowData([...rowData, ...rows]);
+      setRowData(rows);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
