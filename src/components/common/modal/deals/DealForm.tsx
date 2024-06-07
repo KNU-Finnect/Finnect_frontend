@@ -5,12 +5,6 @@ import styled from 'styled-components';
 const DealForm = () => {
   const { companies } = useSelectCompany();
 
-  //   const handleCompanyChange = (value) => {
-  //     const selected = companies.find((company) => company.companyId === value);
-  //     setSelectedCompany(selected);
-  //     setIsCompanySelected(true);
-  //   };
-
   return (
     <DealFormWrapper>
       <FormWrapper>
@@ -20,10 +14,7 @@ const DealForm = () => {
             name='company'
             rules={[{ required: true, message: '회사를 선택해주세요.' }]}
           >
-            <Select
-              placeholder='회사를 선택하세요'
-              //   onChange={handleCompanyChange}
-            >
+            <Select placeholder='회사를 선택하세요'>
               {companies.map((company) => (
                 <Select.Option
                   key={company.companyId}

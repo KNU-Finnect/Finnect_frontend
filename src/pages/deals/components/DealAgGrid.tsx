@@ -1,11 +1,12 @@
 import { PlusOutlined } from '@ant-design/icons';
+import { useState, useEffect, useMemo } from 'react';
 import { getDealList } from '@finnect/apis/deal/useDeal';
 import { IDealRow } from '@finnect/interface/DealInterface';
 import { ColDef } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
-import { Button } from 'antd';
-import { useState, useMemo, useEffect } from 'react';
+import { Button, Modal } from 'antd';
 import styled from 'styled-components';
+import DealForm from '@finnect/components/common/modal/deals/DealForm';
 
 interface DealData {
   companyId: number;
@@ -22,6 +23,7 @@ const DealAgGrid = () => {
     (ColDef<IDealRow> | ColDef<any, any>)[]
   >([]);
   const [rowData, setRowData] = useState<IDealRow[]>([]);
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   const defaultColDef = useMemo(
     () => ({
@@ -38,24 +40,20 @@ const DealAgGrid = () => {
         const response = await getDealList();
         const result = response.data.result;
 
-        // Extract columns from viewColumns
         const columns = result.viewColumns.map((col: any) => ({
           field: col.columnName,
           headerName: col.columnName,
           columnId: col.columnId,
         }));
 
-        // Add predefined columns
         const predefinedColumns = [
           { field: 'dealName', headerName: 'Deal Name' },
           { field: 'companyId', headerName: 'Company ID' },
           { field: 'userId', headerName: 'User ID' },
         ];
 
-        // Set column definitions
         setColDefs([...predefinedColumns, ...columns]);
 
-        // Transform row data
         const rows = result.viewDeals.map((deal: DealData) => {
           const row: any = {
             dealName: deal.dealName,
@@ -85,6 +83,14 @@ const DealAgGrid = () => {
     fetchDealList();
   }, []);
 
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
+
   return (
     <DealAgGridWrapper>
       <ButtonWrapper>
@@ -95,7 +101,7 @@ const DealAgGrid = () => {
         >
           속성 추가하기
         </Button>
-        <Button type='primary' icon={<PlusOutlined />}>
+        <Button type='primary' icon={<PlusOutlined />} onClick={showModal}>
           딜 추가하기
         </Button>
       </ButtonWrapper>
@@ -109,6 +115,14 @@ const DealAgGrid = () => {
           rowDragManaged={true}
         />
       </div>
+      <Modal
+        title='딜 추가하기'
+        visible={isModalVisible}
+        onCancel={handleCancel}
+        footer={null}
+      >
+        <DealForm />
+      </Modal>
     </DealAgGridWrapper>
   );
 };

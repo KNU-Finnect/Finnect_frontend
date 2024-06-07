@@ -46,3 +46,22 @@ export async function getDealList(page: number = 1): Promise<AxiosResponse> {
     throw error;
   }
 }
+
+export async function postDealCreate(
+  dealName: string,
+  companyId: number
+): Promise<AxiosResponse> {
+  const url = `${BASE_URI}/workspaces/deals`;
+
+  try {
+    const response = await axiosClient.post(url, {
+      dealName,
+      companyId,
+    });
+    console.log(response);
+    return response;
+  } catch (error) {
+    console.error('Error during post deal create:', error);
+    throw error;
+  }
+}
