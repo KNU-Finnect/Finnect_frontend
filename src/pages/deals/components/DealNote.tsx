@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-
-const DealNote = () => {
+interface DealMainProps {}
+const DealNote: React.FC<DealMainProps> = () => {
   return <DealNoteWrapper>Note</DealNoteWrapper>;
 };
 

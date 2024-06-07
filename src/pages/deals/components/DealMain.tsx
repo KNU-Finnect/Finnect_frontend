@@ -1,22 +1,24 @@
-import styled from 'styled-components';
-import { IDealRow } from '@finnect/interface/DealInterface';
+import { IDealProps } from '@finnect/interface/DealInterface';
+import { Col, Row, Statistic } from 'antd';
 interface DealMainProps {
-  deal: IDealRow;
+  deal: IDealProps;
 }
 
 const DealMain: React.FC<DealMainProps> = ({ deal }) => {
   return (
-    <DealNoteWrapper>
-      Main
-      {deal.company}
-      {deal.people}
-      {deal.currency}
-      {deal.date}
-      {deal.select}
-    </DealNoteWrapper>
+    <>
+      <Row gutter={16}>
+        <Col span={12}>
+          <Statistic title='Company Name' value={deal.companyId} />
+        </Col>
+      </Row>
+      <Row gutter={16}>
+        <Col span={12}>
+          <Statistic title='User' value={deal.userId} />
+        </Col>
+      </Row>
+    </>
   );
 };
 
 export default DealMain;
-
-const DealNoteWrapper = styled.div``;

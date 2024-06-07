@@ -99,7 +99,7 @@ const DealAgGrid = () => {
 
   const handleAddSuccess = () => {
     setIsModalVisible(false);
-    fetchData(); // 모달이 닫힐 때마다 데이터 다시 불러오기
+    fetchData();
   };
 
   return (

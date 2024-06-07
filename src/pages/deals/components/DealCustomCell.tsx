@@ -9,6 +9,7 @@ import {
 import styled from 'styled-components';
 import { LuPanelLeftOpen } from 'react-icons/lu';
 import { Button } from 'antd';
+import DealDetailModal from './DealDetialModal';
 
 const Container = styled.div`
   position: relative;
@@ -63,15 +64,15 @@ const DealCustomCell = (params: {
   return (
     <Container>
       <Value>{params.value}</Value>
-      <StyledButton className='button' onClick={() => handleButtonClick()}>
+      <StyledButton className='button' onClick={handleButtonClick}>
         <Icon size={11.5} />
-        보기
+        더보기
       </StyledButton>
-      {/* <CompanyRDModal
+      <DealDetailModal
         visible={isModalVisible}
         onClose={handleModalClose}
-        rowData={rowData}
-      /> */}
+        deal={rowData}
+      />
     </Container>
   );
 };

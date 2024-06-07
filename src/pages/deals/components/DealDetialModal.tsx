@@ -1,12 +1,15 @@
 import { useState } from 'react';
 import { Modal, Tabs } from 'antd';
 
-import { IDealRow } from '@finnect/interface/DealInterface';
+import DealMain from './DealMain';
+import DealNote from './DealNote';
+import DealActivity from './DealActivity';
+import { IDealProps } from '@finnect/interface/DealInterface';
 
 interface DealDetailModalProps {
   visible: boolean;
   onClose: () => void;
-  deal: IDealRow;
+  deal: IDealProps;
 }
 
 const DealDetailModal: React.FC<DealDetailModalProps> = ({
@@ -36,11 +39,13 @@ const DealDetailModal: React.FC<DealDetailModalProps> = ({
 
   return (
     <Modal
-      title={deal.company}
+      title={deal.dealName}
       open={visible}
       onOk={onClose}
       onCancel={onClose}
       width={1024}
+      styles={{ body: { height: '620px' } }}
+      footer={null}
     >
       <Tabs
         defaultActiveKey='main'
