@@ -1,30 +1,19 @@
-import { useEffect } from 'react';
-
 import { ColDef } from 'ag-grid-community';
 import { useRecoilState } from 'recoil';
 
-import {
-  rowDataState,
-  columnDefsState,
-} from '@finnect/atoms/company/useCompany';
+import { columnDefsState } from '@finnect/atoms/company/useCompany';
 
 import { useGetWC } from '@finnect/hooks/queries/company/useGetWC';
 import { usePostWC } from '@finnect/hooks/queries/company/usePostWC';
 
 import { CompanyColumnInterface } from '@finnect/interface/CompanyInterface';
+import { useGetCV } from '@finnect/hooks/queries/company/useGetCV';
 
 export const useCompanyData = () => {
-  const [rowData, setRowData] = useRecoilState(rowDataState);
   const [columnDefs, setColumnDefs] = useRecoilState(columnDefsState);
-  const { data, refetch } = useGetWC();
+  const { refetch: CompanyList } = useGetWC();
+  const { refetch: CV } = useGetCV();
   const { mutate } = usePostWC();
-
-  useEffect(() => {
-    if (data) {
-      console.log(data.result.companies);
-      setRowData(data.result.companies);
-    }
-  }, [setRowData, data]);
 
   const addColumn = ({ name, type }: CompanyColumnInterface) => {
     let newColumnDef: ColDef;
@@ -57,14 +46,14 @@ export const useCompanyData = () => {
       { companyName: name, domain: domain },
       {
         onSuccess: () => {
-          refetch();
+          CV();
+          CompanyList();
         },
       }
     );
   };
 
   return {
-    rowData,
     columnDefs,
     addColumn,
     addCompany,

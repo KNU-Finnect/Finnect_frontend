@@ -4,7 +4,6 @@ import { Layout } from 'antd';
 import { useRecoilState } from 'recoil';
 
 import { selectedMenuItemState } from '@finnect/atoms/sider/useSelectedMenu';
-import HeaderBox from '@finnect/components/common/header/HeaderBox';
 import CompaniesBox from '@finnect/pages/companies/CompaniesBox';
 import DealsBox from '@finnect/pages/deals/DealsBox';
 import PeoplesBox from '@finnect/pages/peoples/PeoplesBox';
@@ -17,7 +16,7 @@ const WorkSpacePage = () => {
   useEffect(() => {
     const value = localStorage.getItem('selectedMenuItem');
     setSelectedMenuItem(value);
-  }, [selectedMenuItem]);
+  }, [selectedMenuItem, setSelectedMenuItem]);
 
   const renderComponent = () => {
     switch (selectedMenuItem) {
@@ -32,12 +31,7 @@ const WorkSpacePage = () => {
     }
   };
 
-  return (
-    <Layout>
-      <HeaderBox />
-      {renderComponent()}
-    </Layout>
-  );
+  return <Layout>{renderComponent()}</Layout>;
 };
 
 export default WorkSpacePage;
