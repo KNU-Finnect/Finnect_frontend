@@ -21,6 +21,7 @@ export interface IDealProps {
 }
 
 export interface IDealRow {
+  people: string;
   company: string;
   text: string;
   user: string;

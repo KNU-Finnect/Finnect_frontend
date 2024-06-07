@@ -34,9 +34,8 @@ export async function getDealDetail(dealId: number): Promise<AxiosResponse> {
   }
 }
 
-export async function getDealList(): Promise<AxiosResponse> {
-  // const url = `${BASE_URI}/workspaces/deals`;
-  const url = `api/workspaces/deals`;
+export async function getDealList(page: number = 1): Promise<AxiosResponse> {
+  const url = `${BASE_URI}/workspaces/deals/views/origin?page=${page}`;
 
   try {
     const response = await axiosClient.get(url, {});
