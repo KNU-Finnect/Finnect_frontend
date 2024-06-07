@@ -36,7 +36,7 @@ const Icon = styled(LuPanelLeftOpen)`
   margin-right: 4px;
 `;
 
-const CustomCellRenderer = (params: {
+const DealCustomCell = (params: {
   data: any;
   value:
     | string
@@ -48,17 +48,17 @@ const CustomCellRenderer = (params: {
     | null
     | undefined;
 }) => {
-  // const rowData = params.data;
+  const rowData = params.data;
 
-  // const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
-  // const handleButtonClick = () => {
-  //   setIsModalVisible(true);
-  // };
+  const handleButtonClick = () => {
+    setIsModalVisible(true);
+  };
 
-  // const handleModalClose = () => {
-  //   setIsModalVisible(false);
-  // };
+  const handleModalClose = () => {
+    setIsModalVisible(false);
+  };
 
   return (
     <Container>
@@ -67,13 +67,13 @@ const CustomCellRenderer = (params: {
         <Icon size={11.5} />
         보기
       </StyledButton>
-      {/* <CompanyRDModal
+      <CompanyRDModal
         visible={isModalVisible}
         onClose={handleModalClose}
         rowData={rowData}
-      /> */}
+      />
     </Container>
   );
 };
 
-export default CustomCellRenderer;
+export default DealCustomCell;
