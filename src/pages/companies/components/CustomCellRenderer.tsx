@@ -3,11 +3,13 @@ import {
   JSXElementConstructor,
   ReactNode,
   ReactPortal,
+  useState,
 } from 'react';
 
 import styled from 'styled-components';
 import { LuPanelLeftOpen } from 'react-icons/lu';
 import { Button } from 'antd';
+import CompanyRDModal from './CompanyRDModal';
 
 const Container = styled.div`
   position: relative;
@@ -49,23 +51,30 @@ const CustomCellRenderer = (params: {
 }) => {
   const rowData = params.data;
 
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const handleButtonClick = () => {
+    setIsModalVisible(true);
+  };
+
+  const handleModalClose = () => {
+    setIsModalVisible(false);
+  };
+
   return (
     <Container>
       <Value>{params.value}</Value>
-      <StyledButton
-        className='button'
-        onClick={() => handleButtonClick(rowData)}
-      >
+      <StyledButton className='button' onClick={() => handleButtonClick()}>
         <Icon size={11.5} />
         보기
       </StyledButton>
+      <CompanyRDModal
+        visible={isModalVisible}
+        onClose={handleModalClose}
+        rowData={rowData}
+      />
     </Container>
   );
-};
-
-const handleButtonClick = (rowData: string) => {
-  console.log('보기 버튼 클릭:', rowData);
-  alert('보기 버튼 클릭:');
 };
 
 export default CustomCellRenderer;
