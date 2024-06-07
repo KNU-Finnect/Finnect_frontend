@@ -67,11 +67,11 @@ const DealCustomCell = (params: {
         <Icon size={11.5} />
         보기
       </StyledButton>
-      <CompanyRDModal
+      {/* <CompanyRDModal
         visible={isModalVisible}
         onClose={handleModalClose}
         rowData={rowData}
-      />
+      /> */}
     </Container>
   );
 };

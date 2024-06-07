@@ -7,6 +7,7 @@ import { AgGridReact } from 'ag-grid-react';
 import { Button, Modal } from 'antd';
 import styled from 'styled-components';
 import DealForm from '@finnect/components/common/modal/deals/DealForm';
+import DealCustomCell from './DealCustomCell';
 
 interface DealData {
   companyId: number;
@@ -50,7 +51,12 @@ const DealAgGrid = () => {
       }));
 
       const predefinedColumns = [
-        { field: 'dealName', headerName: 'Deal Name' },
+        {
+          field: 'dealName',
+          headerName: 'Deal Name',
+          cellRenderer: DealCustomCell,
+          width: 250,
+        },
         { field: 'companyId', headerName: 'Company ID' },
         { field: 'userId', headerName: 'User ID' },
       ];
