@@ -58,5 +58,49 @@ export interface RowData {
   companyId: number;
   companyName: string;
   domain: string;
-  [key: string]: any; // 인덱스 시그니처 추가
+  [key: string]: any;
+}
+
+export interface ICVDetailDataProps {
+  status: number;
+  result: {
+    company: {
+      companyId: number;
+      domain: string;
+      companyName: string;
+    };
+    cells: ICVDCellsProps[];
+  };
+}
+
+export interface ICVDCellsProps {
+  columnId: number;
+  value: string;
+  userId: number;
+  peopleId: number;
+  columnType: string;
+  columnName: string;
+}
+
+export interface ICVPDetailDataProps {
+  status: number;
+  result: {
+    people: ICVPPeopleProps[];
+  };
+}
+
+export interface ICVPPeopleProps {
+  companyId: number;
+  personId: number;
+  personName: string;
+  personRole: string;
+  personEmail: string;
+  personPhone: string;
+}
+
+export interface IPRowData {
+  personName: string;
+  personRole: string;
+  personEmail: string;
+  personPhone: string;
 }
