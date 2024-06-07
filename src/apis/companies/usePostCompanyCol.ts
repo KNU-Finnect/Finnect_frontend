@@ -18,7 +18,7 @@ export const postWCompany = async ({
   dtype: 'string';
 }) => {
   try {
-    const response = await axiosClient.post(`/workspaces`, {
+    const response = await axiosClient.post(`/workspaces/companies/columns`, {
       columnId,
       workspaceId,
       columnName,
