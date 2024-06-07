@@ -35,53 +35,53 @@ const DealAgGrid = () => {
   );
 
   useEffect(() => {
-    const fetchDealList = async () => {
-      try {
-        const response = await getDealList();
-        const result = response.data.result;
+    fetchData();
+  }, []);
 
-        const columns = result.viewColumns.map((col: any) => ({
-          field: col.columnName,
-          headerName: col.columnName,
-          columnId: col.columnId,
-        }));
+  const fetchData = async () => {
+    try {
+      const response = await getDealList();
+      const result = response.data.result;
 
-        const predefinedColumns = [
-          { field: 'dealName', headerName: 'Deal Name' },
-          { field: 'companyId', headerName: 'Company ID' },
-          { field: 'userId', headerName: 'User ID' },
-        ];
+      const columns = result.viewColumns.map((col: any) => ({
+        field: col.columnName,
+        headerName: col.columnName,
+        columnId: col.columnId,
+      }));
 
-        setColDefs([...predefinedColumns, ...columns]);
+      const predefinedColumns = [
+        { field: 'dealName', headerName: 'Deal Name' },
+        { field: 'companyId', headerName: 'Company ID' },
+        { field: 'userId', headerName: 'User ID' },
+      ];
 
-        const rows = result.viewDeals.map((deal: DealData) => {
-          const row: any = {
-            dealName: deal.dealName,
-            companyId: deal.companyId,
-            userId: deal.userId,
-          };
+      setColDefs([...predefinedColumns, ...columns]);
 
-          deal.cells.forEach((cell) => {
-            const column = columns.find(
-              (col: any) => col.columnId === cell.columnId
-            );
-            if (column) {
-              row[column.field] = cell.value;
-            }
-          });
+      const rows = result.viewDeals.map((deal: DealData) => {
+        const row: any = {
+          dealName: deal.dealName,
+          companyId: deal.companyId,
+          userId: deal.userId,
+        };
 
-          return row;
+        deal.cells.forEach((cell) => {
+          const column = columns.find(
+            (col: any) => col.columnId === cell.columnId
+          );
+          if (column) {
+            row[column.field] = cell.value;
+          }
         });
 
-        setRowData(rows);
-        console.log('Transformed deal list:', rows);
-      } catch (error) {
-        console.error('Error fetching deal list:', error);
-      }
-    };
+        return row;
+      });
 
-    fetchDealList();
-  }, []);
+      setRowData(rows);
+      console.log('Transformed deal list:', rows);
+    } catch (error) {
+      console.error('Error fetching deal list:', error);
+    }
+  };
 
   const showModal = () => {
     setIsModalVisible(true);
@@ -89,6 +89,11 @@ const DealAgGrid = () => {
 
   const handleCancel = () => {
     setIsModalVisible(false);
+  };
+
+  const handleAddSuccess = () => {
+    setIsModalVisible(false);
+    fetchData(); // 모달이 닫힐 때마다 데이터 다시 불러오기
   };
 
   return (
@@ -121,7 +126,7 @@ const DealAgGrid = () => {
         onCancel={handleCancel}
         footer={null}
       >
-        <DealForm />
+        <DealForm onAddSuccess={handleAddSuccess} />
       </Modal>
     </DealAgGridWrapper>
   );

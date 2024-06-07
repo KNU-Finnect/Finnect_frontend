@@ -1,14 +1,25 @@
-import { useSelectCompany } from '@finnect/hooks/custom-hooks/people/useSelectCompany';
 import { Form, Input, Button, Select } from 'antd';
 import styled from 'styled-components';
+import { postDealCreate } from '@finnect/apis/deal/useDeal';
+import { useSelectCompany } from '@finnect/hooks/custom-hooks/people/useSelectCompany';
 
-const DealForm = () => {
+const DealForm = ({ onAddSuccess }: { onAddSuccess: () => void }) => {
   const { companies } = useSelectCompany();
+  const [form] = Form.useForm();
+
+  const onFinish = async (values: any) => {
+    try {
+      await postDealCreate(values.name, values.company);
+      onAddSuccess();
+    } catch (error) {
+      console.error('Error during post deal create:', error);
+    }
+  };
 
   return (
     <DealFormWrapper>
       <FormWrapper>
-        <Form>
+        <Form form={form} onFinish={onFinish}>
           <Form.Item
             label='거래 회사 선택'
             name='company'
