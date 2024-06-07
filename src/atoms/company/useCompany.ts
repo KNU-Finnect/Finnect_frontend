@@ -25,21 +25,6 @@ export const columnDefsState = atom<ColDef[]>({
   ],
 });
 
-export const isPendingState = atom<boolean>({
-  key: 'isPendingState',
-  default: false,
-});
-
-export const isErrorState = atom<boolean>({
-  key: 'isErrorState',
-  default: false,
-});
-
-export const errorState = atom<any>({
-  key: 'errorState',
-  default: null,
-});
-
 export const columnModalVisibleState = atom<boolean>({
   key: 'columnModalVisibleState',
   default: false,
