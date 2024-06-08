@@ -21,7 +21,7 @@ const SigninPage: React.FC = () => {
       const response = await authApi(username, password);
       console.log('Login response:', response);
       if (response.status === 200) {
-        localStorage.setItem('personalName', response.personalName);
+        localStorage.setItem('personalName', response.result.personalName);
 
         console.log('Login successful');
 

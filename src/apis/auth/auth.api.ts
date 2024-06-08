@@ -3,6 +3,7 @@ import axios from 'axios';
 import { BASE_URI } from '@finnect/constants/URI';
 
 interface AuthAPIRequest {
+  result: any;
   status: number;
   personalName: string;
 }
@@ -20,7 +21,7 @@ export async function authApi(
     console.log(response.data.status);
     localStorage.setItem('accessToken', accessToken);
 
-    const refreshToken = response.data.result;
+    const refreshToken = response.data.result.refreshToken;
     localStorage.setItem('refreshToken', refreshToken);
     return response.data;
   } catch (error) {
