@@ -1,11 +1,11 @@
 import { ColDef } from 'ag-grid-community';
 import { atom } from 'recoil';
 
-import { CompanyCategories } from '@finnect/pages/companies/components/CompanyCategories';
+import { RowData } from '@finnect/interface/CompanyInterface';
 
-import { CompanyInterface } from '@finnect/interface/CompanyInterface';
+import CustomCellRenderer from '@finnect/pages/companies/components/CustomCellRenderer';
 
-export const rowDataState = atom<CompanyInterface[]>({
+export const rowDataState = atom<RowData[]>({
   key: 'rowDataState',
   default: [],
 });
@@ -18,17 +18,10 @@ export const columnDefsState = atom<ColDef[]>({
       field: 'companyName',
       checkboxSelection: true,
       rowDrag: true,
+      cellRenderer: CustomCellRenderer,
+      width: 250,
     },
-    { headerName: 'Domains', field: 'domain' },
-    {
-      headerName: 'Categories',
-      field: 'Categories',
-      cellEditor: 'agSelectCellEditor',
-      cellEditorParams: {
-        values: CompanyCategories,
-      },
-    },
-    { headerName: 'About', field: 'About' },
+    { headerName: 'Domains', field: 'domain', filter: true },
   ],
 });
 

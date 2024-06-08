@@ -19,7 +19,7 @@ export const usePeopleData = () => {
   const [columnDefs] = useRecoilState(columnDefsPeopleState);
   const { mutate } = usePostPeopleQuery();
   const { mutate: deletePerson } = useDeletePeopleQuery();
-  const { data, isPending, isError, error } = useGetPeopleQuery();
+  const { data, isPending, isError, error, refetch } = useGetPeopleQuery();
   const [selectedPerson, setSelectedPerson] =
     useRecoilState(selectedPersonState);
 
@@ -53,6 +53,7 @@ export const usePeopleData = () => {
                 { personName, personRole, personEmail, personPhone, companyId },
               ] as IPeopleAxiosProps[]
           );
+          refetch();
         },
       }
     );

@@ -16,7 +16,7 @@ const WorkSpacePage = () => {
   useEffect(() => {
     const value = localStorage.getItem('selectedMenuItem');
     setSelectedMenuItem(value);
-  }, [selectedMenuItem]);
+  }, [selectedMenuItem, setSelectedMenuItem]);
 
   const renderComponent = () => {
     switch (selectedMenuItem) {
