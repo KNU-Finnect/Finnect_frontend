@@ -16,8 +16,10 @@ export interface IDealResultProps {
 export interface IDealProps {
   companyId: number;
   workspaceId: number;
-  dealName: string;
   userId: number;
+  userName: string;
+  companyName: string;
+  dealName: string;
 }
 
 export interface IDealRow {
