@@ -38,11 +38,11 @@ export const postAddMember = async (
 };
 
 export const postInviteMember = async (
-  email: string[]
+  emails: string[]
 ): Promise<InviteProps> => {
   try {
     const response = await axiosClient.post(`/workspaces/invitation`, {
-      email,
+      emails,
     });
     return response.data;
   } catch (error) {
