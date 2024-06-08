@@ -1,21 +1,34 @@
 import { Form, Input, Select, Button, Checkbox } from 'antd';
 
+import { usePostWCCol } from '@finnect/hooks/queries/company/usePostWCCol';
+import { useGetCV } from '@finnect/hooks/queries/company/useGetCV';
+
 const { Option } = Select;
 
 const ColumnForm = () => {
   const [form] = Form.useForm();
+  const { refetch } = useGetCV();
+  const { mutate, isPending, isError, error } = usePostWCCol();
 
   const handleFinish = (values: {
     workspaceId: number;
-    columnName: 'string';
-    columnType: 'string';
+    columnName: string;
+    columnType: string;
     isHided: boolean;
   }) => {
     values.workspaceId = parseInt(
       localStorage.getItem('selectedWorkSpaceId') || '0'
     );
-    console.log(values);
-    form.resetFields();
+
+    mutate(values, {
+      onSuccess: () => {
+        refetch();
+        form.resetFields();
+      },
+      onError: (error) => {
+        console.error('Error adding column:', error);
+      },
+    });
   };
 
   return (
@@ -37,7 +50,6 @@ const ColumnForm = () => {
           <Option value='NUMBER'>Number</Option>
           <Option value='DATE'>Date</Option>
           <Option value='STATUS'>Status</Option>
-          <Option value='SELECT'>Select</Option>
           <Option value='CURRENCY'>Currency</Option>
           <Option value='RATING'>Rating</Option>
           <Option value='CHECKBOX'>Checkbox</Option>
@@ -54,9 +66,12 @@ const ColumnForm = () => {
         <Checkbox />
       </Form.Item>
       <Form.Item>
-        <Button type='primary' htmlType='submit'>
+        <Button type='primary' htmlType='submit' loading={isPending}>
           Add
         </Button>
+        {isError && (
+          <span style={{ color: 'red' }}>Error: {error?.message}</span>
+        )}
       </Form.Item>
     </Form>
   );
