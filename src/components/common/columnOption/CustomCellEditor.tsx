@@ -1,40 +1,36 @@
 import { useState } from 'react';
 
-import { DatePicker } from 'antd';
-import dayjs from 'dayjs';
+import { Input } from 'antd';
 
 import { usePWcpCellQ } from '@finnect/hooks/queries/company/usePWcpCellQ';
 import { useGetCV } from '@finnect/hooks/queries/company/useGetCV';
 
-const CustomDateEditor = (props: any) => {
+const CustomCellEditor = (props: any) => {
   const { refetch } = useGetCV();
+
   const { mutate, isPending } = usePWcpCellQ(() => {
     refetch();
   });
-  const [value, setValue] = useState(dayjs(props.value));
-  const handleChange = (date: any) => {
-    setValue(dayjs(date));
+  const [value, setValue] = useState(props.value);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setValue(e.target.value);
   };
 
   const handleSave = async () => {
     await mutate({
       columnId: props.colDef.columnId,
       rowId: props.data.rowId,
-      value: value.format('YYYY-MM-DD'),
+      value,
     });
-    refetch();
   };
 
   return (
     <>
-      <DatePicker
-        value={value.toDate()}
-        onChange={handleChange}
-        onBlur={handleSave}
-      />
+      <Input value={value} onChange={handleChange} onBlur={handleSave} />
       {isPending && <span>Loading...</span>}
     </>
   );
 };
 
-export default CustomDateEditor;
+export default CustomCellEditor;

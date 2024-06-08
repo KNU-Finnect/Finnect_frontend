@@ -31,7 +31,12 @@ const CustomCategoryEditor = (props: any) => {
 
   return (
     <>
-      <Select value={value} onChange={handleChange} onBlur={handleSave}>
+      <Select
+        value={value}
+        onChange={handleChange}
+        onBlur={handleSave}
+        style={{ width: '100%' }}
+      >
         {CompanyCategories.map((category) => (
           <Option key={category} value={category}>
             {category}

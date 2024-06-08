@@ -24,7 +24,6 @@ const CustomCategoryEditor = (props: any) => {
       columnId: props.colDef.columnId,
       rowId: props.data.rowId,
       value,
-      companyId: props.data.companyId,
     });
     refetch();
   };
