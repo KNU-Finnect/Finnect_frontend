@@ -8,7 +8,13 @@ const DealColumnForm = ({ onAddSuccess }: { onAddSuccess: () => void }) => {
 
   const handleFinish = async (values: { name: string; type: string }) => {
     try {
-      await postDealColumnCreate(values.name, values.type);
+      await postDealColumnCreate({
+        columnName: values.name,
+        columnType: values.type,
+        columnIndex: 0,
+        isHide: false,
+        dtype: 'DEAL',
+      });
       onAddSuccess();
       form.resetFields();
     } catch (error) {
