@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Button, Space, message } from 'antd';
 import styled from 'styled-components';
 import reactLogo from '@finnect/assets/react.svg';
-
 import { authApi } from '@finnect/apis/auth/auth.api';
 import IDbox from '@finnect/components/login/IDbox';
 import PWbox from '@finnect/components/login/PWbox';
@@ -22,7 +21,10 @@ const SigninPage: React.FC = () => {
       const response = await authApi(username, password);
       console.log('Login response:', response);
       if (response.status === 200) {
+        localStorage.setItem('personalName', response.personalName);
+
         console.log('Login successful');
+
         navigate('/');
         return message.success('로그인 성공.');
       } else {
@@ -30,8 +32,12 @@ const SigninPage: React.FC = () => {
       }
     } catch (error) {
       console.error('Login failed:', error);
-      message.error('로그인 실패: 서버 오류가 발생했습니다.');
+      message.error('로그인 실패: 아이디 또는 비밀번호를 확인해주세요.');
     }
+  };
+
+  const handleEnterPress = () => {
+    handleLogin();
   };
 
   const handleSignup = () => {
@@ -48,7 +54,11 @@ const SigninPage: React.FC = () => {
         </LogoWrapper>
         <InputWrapper>
           <IDbox setUsername={setUsername} />
-          <PWbox password={password} onPasswordChange={handlePasswordChange} />
+          <PWbox
+            password={password}
+            onPasswordChange={handlePasswordChange}
+            onEnterPress={handleEnterPress}
+          />
         </InputWrapper>
         <Space direction='vertical' style={{ width: '100%' }}>
           <Button

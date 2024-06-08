@@ -4,6 +4,7 @@ import { BASE_URI } from '@finnect/constants/URI';
 
 interface AuthAPIRequest {
   status: number;
+  personalName: string;
 }
 export async function authApi(
   username: string,
@@ -14,6 +15,7 @@ export async function authApi(
       `${BASE_URI}/users/signin?username=${username}&password=${password}`,
       { withCredentials: true }
     );
+    localStorage.clear();
     const accessToken = response.headers.authorization;
     console.log(response.data.status);
     localStorage.setItem('accessToken', accessToken);

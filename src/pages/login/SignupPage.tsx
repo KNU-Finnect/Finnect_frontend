@@ -87,7 +87,13 @@ const SignupPage: React.FC = () => {
         </LogoWrapper>
         <InputWrapper>
           <Namebox setFirstName={setFirstName} setLastName={setLastName} />
-          <PWbox password={password} onPasswordChange={handlePasswordChange} />
+          <PWbox
+            password={password}
+            onPasswordChange={handlePasswordChange}
+            onEnterPress={function (): void {
+              throw new Error('error');
+            }}
+          />
           <PWCheckbox
             passwordCheck={passwordCheck}
             onPasswordCheckChange={handlePasswordCheckChange}
