@@ -27,7 +27,7 @@ const DealActivity: React.FC<{ dealId: number }> = ({ dealId }) => {
 
   return (
     <DealNoteWrapper>
-      <h2>Activity</h2>
+      <h2>LOG</h2>
       {dealLogs.length > 0 ? (
         <List
           itemLayout='horizontal'

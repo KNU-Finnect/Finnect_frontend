@@ -11,10 +11,13 @@ import DealCustomCell from './DealCustomCell';
 import ColumnForm from '@finnect/components/common/modal/deals/DealColumnForm';
 
 interface DealData {
-  dealId: any;
-  companyId: number;
+  dealId: number;
   dealName: string;
-  userId: number;
+  companyName: string;
+  userName: string;
+  createdDate: string;
+  dealAmount: number;
+  category: string;
   cells: {
     columnId: number;
     value: string;
@@ -47,14 +50,7 @@ const DealAgGrid = () => {
       const response = await getDealList();
       const result = response.data.result;
 
-      const columns = result.viewColumns.map((col: any) => ({
-        field: col.columnName,
-        headerName: col.columnName,
-        columnId: col.columnId,
-        dealId: col.dealId,
-      }));
-
-      const predefinedColumns = [
+      const columns = [
         {
           field: 'dealName',
           headerName: 'Deal Name',
@@ -63,31 +59,24 @@ const DealAgGrid = () => {
           rowDrag: true,
           width: 250,
         },
-        { field: 'companyId', headerName: 'Company ID' },
-        { field: 'userId', headerName: 'User ID' },
+        { field: 'companyName', headerName: 'Company Name' },
+        { field: 'userName', headerName: '책임자' },
+        { field: 'createdDate', headerName: '생성일' },
+        { field: 'dealAmount', headerName: '거래액' },
+        { field: 'category', headerName: 'Category' },
       ];
 
-      setColDefs([...predefinedColumns, ...columns]);
+      setColDefs(columns);
 
-      const rows = result.viewDeals.map((deal: DealData) => {
-        const row: any = {
-          dealName: deal.dealName,
-          companyId: deal.companyId,
-          userId: deal.userId,
-          dealId: deal.dealId,
-        };
-
-        deal.cells.forEach((cell) => {
-          const column = columns.find(
-            (col: any) => col.columnId === cell.columnId
-          );
-          if (column) {
-            row[column.field] = cell.value;
-          }
-        });
-
-        return row;
-      });
+      const rows = result.viewDeals.map((deal: DealData) => ({
+        dealId: deal.dealId,
+        dealName: deal.dealName,
+        companyName: deal.companyName,
+        userName: deal.userName,
+        createdDate: new Date(deal.createdDate).toLocaleDateString(),
+        dealAmount: deal.dealAmount,
+        category: deal.category,
+      }));
 
       setRowData(rows);
       console.log('Transformed deal list:', rows);
