@@ -5,7 +5,6 @@ export const postWCompany = async ({
   workspaceId,
   columnName,
   columnType,
-  columnIndex,
   isHided,
   dtype,
 }: {
@@ -13,7 +12,6 @@ export const postWCompany = async ({
   workspaceId: number;
   columnName: 'string';
   columnType: 'string';
-  columnIndex: number;
   isHided: boolean;
   dtype: 'string';
 }) => {
@@ -23,7 +21,6 @@ export const postWCompany = async ({
       workspaceId,
       columnName,
       columnType,
-      columnIndex,
       isHided,
       dtype,
     });

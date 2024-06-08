@@ -1,5 +1,5 @@
-// import { axiosClient } from '../AxiosClient';
-import axios from 'axios';
+import { axiosClient } from '@finnect/apis/AxiosClient';
+// import axios from 'axios';
 
 import { ICVPDetailDataProps } from '@finnect/interface/CompanyInterface';
 
@@ -7,8 +7,8 @@ export const GetCVPDetailData = async (
   companyId: number
 ): Promise<ICVPDetailDataProps> => {
   try {
-    const response = await axios.get(
-      `/api/workspaces/companies?companyId=${companyId}`
+    const response = await axiosClient.get(
+      `/workspaces/people?companyId=${companyId}`
     );
 
     return response.data;
