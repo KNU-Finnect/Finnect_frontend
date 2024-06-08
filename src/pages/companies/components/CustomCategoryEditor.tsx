@@ -1,7 +1,8 @@
-import { Select } from 'antd';
 import { useState } from 'react';
 
-import { usePWcpCellQ } from '@finnect/hooks/queries/company/usePWcpCellQ';
+import { Select } from 'antd';
+
+import { usePWcpCellQ } from '@finnect/hooks/queries/colOption/usePWcpCellQ';
 import { useGetCV } from '@finnect/hooks/queries/company/useGetCV';
 
 import { CompanyCategories } from '@finnect/pages/companies/components/CompanyCategories';

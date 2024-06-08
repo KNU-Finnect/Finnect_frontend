@@ -4,15 +4,18 @@ import { useState } from 'react';
 import { usePWcpCellQ } from '@finnect/hooks/queries/colOption/usePWcpCellQ';
 import { useGetCV } from '@finnect/hooks/queries/company/useGetCV';
 
-import { StatusCategory } from '@finnect/components/common/columnOption/StatusCategory';
+import { useGetPeopleQuery } from '@finnect/hooks/queries/people/useGetPeopleQuery';
+
+import { IPeopleAxiosProps } from '@finnect/interface/PeopleInterface';
 
 const { Option } = Select;
 
-const CustomCategoryEditor = (props: any) => {
+const CustomPersonEditor = (props: any) => {
   const { refetch } = useGetCV();
   const { mutate, isPending } = usePWcpCellQ(() => {
     refetch();
   });
+  const { data } = useGetPeopleQuery();
   const [value, setValue] = useState(props.value);
 
   const handleChange = (newValue: string) => {
@@ -36,9 +39,9 @@ const CustomCategoryEditor = (props: any) => {
         onBlur={handleSave}
         style={{ width: '100%' }}
       >
-        {StatusCategory.map((category: string) => (
-          <Option key={category} value={category}>
-            {category}
+        {data?.result?.people?.map((data: IPeopleAxiosProps) => (
+          <Option key={data.personId} value={data.personName}>
+            {data.personName}
           </Option>
         ))}
       </Select>
@@ -47,4 +50,4 @@ const CustomCategoryEditor = (props: any) => {
   );
 };
 
-export default CustomCategoryEditor;
+export default CustomPersonEditor;
