@@ -5,28 +5,40 @@ import reactLogo from '@finnect/assets/react.svg';
 import { authApi } from '@finnect/apis/auth/auth.api';
 import IDbox from '@finnect/components/login/IDbox';
 import PWbox from '@finnect/components/login/PWbox';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { postAddMember } from '@finnect/apis/member/usePostMember';
 
 const InviteSigninPage: React.FC = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
+  const { workspaceId: workspaceIdParam, workspaceName } = useParams();
+
+  const workspaceId = workspaceIdParam ? parseInt(workspaceIdParam, 10) : null;
 
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
   };
 
   const handleLogin = async () => {
+    if (workspaceId === null) {
+      return message.error('유효하지 않은 워크스페이스 ID입니다.');
+    }
+
     try {
       const response = await authApi(username, password);
+      const response2 = await postAddMember(workspaceId);
       console.log('Login response:', response);
-      if (response.status === 200) {
+      if (response.status === 200 && response2.status === 200) {
         localStorage.setItem('personalName', response.personalName);
 
         console.log('Login successful');
 
+        localStorage.setItem('selectedWorkSpace', workspaceName as string);
+        localStorage.setItem('selectedWorkSpaceId', workspaceIdParam as string);
+
         navigate('/');
-        return message.success('로그인 성공.');
+        return message.success('로그인 및 초대 성공.');
       } else {
         message.error('로그인 실패: 아이디 또는 비밀번호를 확인해주세요.');
       }
@@ -38,10 +50,6 @@ const InviteSigninPage: React.FC = () => {
 
   const handleEnterPress = () => {
     handleLogin();
-  };
-
-  const handleSignup = () => {
-    navigate('/signup');
   };
 
   return (
@@ -67,9 +75,6 @@ const InviteSigninPage: React.FC = () => {
             onClick={handleLogin}
           >
             로그인
-          </Button>
-          <Button style={{ width: '100%' }} onClick={handleSignup}>
-            회원가입
           </Button>
         </Space>
       </SignInContainer>

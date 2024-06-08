@@ -3,3 +3,8 @@ export interface IMemberProps {
   role: string;
   phone: string;
 }
+
+export interface InviteMemeberProps {
+  status: number;
+  workspaceId: number;
+}

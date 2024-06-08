@@ -7,7 +7,6 @@ import HeaderBox from '@finnect/components/common/header/HeaderBox';
 
 import SiderBox from '@finnect/components/common/sider/SiderBox';
 import { StyledSliderWrapper } from '@finnect/styles/Layout';
-import HeaderBox from '@finnect/components/common/header/HeaderBox';
 
 const CustomLayout = styled(Layout)`
   width: 100vw;
