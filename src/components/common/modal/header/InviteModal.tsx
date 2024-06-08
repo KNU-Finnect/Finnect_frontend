@@ -1,10 +1,10 @@
-import { Modal, Input, Button } from 'antd';
+import { Modal, Input, Button, message } from 'antd';
 import { useRecoilState } from 'recoil';
-
 import {
   emailState,
   invitedEmailsState,
 } from '@finnect/atoms/header/useInviteModal';
+import { postInviteMember } from '@finnect/apis/member/usePostMember';
 
 const InviteModal = ({
   visible,
@@ -17,9 +17,16 @@ const InviteModal = ({
   const [invitedEmails, setInvitedEmails] =
     useRecoilState<string[]>(invitedEmailsState);
 
-  const handleInvite = () => {
-    setInvitedEmails([...invitedEmails, email]);
-    setEmail('');
+  const handleInvite = async () => {
+    try {
+      await postInviteMember([email]);
+      setInvitedEmails([...invitedEmails, email]);
+      setEmail('');
+      message.success('초대장이 성공적으로 전송되었습니다.');
+      onClose();
+    } catch (error) {
+      message.error('초대장 전송에 실패했습니다. 다시 시도해 주세요.');
+    }
   };
 
   return (

@@ -10,6 +10,7 @@ import WorkSpacePage from '@finnect/pages/workspace/WorkSpacePage';
 
 import { GlobalStyle } from '@finnect/styles/GlobalStyle';
 import Theme from '@finnect/styles/Theme';
+import InviteSigninPage from './pages/login/InviteSigninPage';
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,11 @@ const router = createBrowserRouter([
   {
     path: '/signup',
     element: <SignupPage />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: '/signin/:workspaceId/:workspaceName',
+    element: <InviteSigninPage />,
     errorElement: <ErrorPage />,
   },
 ]);

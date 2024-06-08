@@ -11,8 +11,6 @@ const Records = () => {
     localStorage.setItem('selectedMenuItem', selectedItem);
   });
 
-  console.log('test');
-
   return (
     <Menu.SubMenu
       key='records'
