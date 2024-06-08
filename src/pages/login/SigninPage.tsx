@@ -21,10 +21,10 @@ const SigninPage: React.FC = () => {
       const response = await authApi(username, password);
       console.log('Login response:', response);
       if (response.status === 200) {
-        console.log('Login successful');
-        localStorage.removeItem('selectedWorkSpace');
-        localStorage.removeItem('selectedMenuItem');
         localStorage.setItem('personalName', response.personalName);
+
+        console.log('Login successful');
+
         navigate('/');
         return message.success('로그인 성공.');
       } else {
