@@ -2,6 +2,7 @@ import { axiosClient } from '@finnect/apis/AxiosClient';
 import {
   IMemberProps,
   InviteMemeberProps,
+  InviteProps,
 } from '@finnect/interface/MemberInterface';
 
 export const postMember = async (
@@ -28,6 +29,20 @@ export const postAddMember = async (
   try {
     const response = await axiosClient.post(`/workspaces/members`, {
       workspaceId,
+    });
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
+export const postInviteMember = async (
+  email: string[]
+): Promise<InviteProps> => {
+  try {
+    const response = await axiosClient.post(`/workspaces/invitation`, {
+      email,
     });
     return response.data;
   } catch (error) {
