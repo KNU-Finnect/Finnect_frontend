@@ -2,7 +2,8 @@ import '@blocknote/core/fonts/inter.css';
 import { useCreateBlockNote } from '@blocknote/react';
 import { BlockNoteView } from '@blocknote/mantine';
 import '@blocknote/mantine/style.css';
-import { Button } from 'antd';
+import { Button, Input } from 'antd';
+import './styles.css';
 
 interface DnoteProps {
   handleAdd: () => void;
@@ -13,6 +14,8 @@ const Dnote: React.FC<DnoteProps> = ({ handleAdd }) => {
 
   return (
     <>
+      <Input placeholder='input title' allowClear />
+
       <BlockNoteView editor={editor} data-theming-css-variables-demo />
       <br />
       <Button type='primary' onClick={handleAdd}>

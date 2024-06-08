@@ -38,3 +38,24 @@ export async function getDealNoteList(dealId: number): Promise<AxiosResponse> {
     throw error;
   }
 }
+export async function postDealNote(
+  dealId: number,
+  title: string,
+  bodyText: string
+): Promise<AxiosResponse> {
+  const url = `${BASE_URI}/workspace/deals/${dealId}/notes`;
+
+  const requestBody = {
+    dealId,
+    title,
+    bodyText,
+  };
+
+  try {
+    const response = await axiosClient.post(url, requestBody);
+    return response;
+  } catch (error) {
+    console.error('Error during post deal note:', error);
+    throw error;
+  }
+}
