@@ -23,7 +23,7 @@ const CustomPersonEditor = (props: any) => {
   };
 
   const handleSave = async () => {
-    await mutate({
+    mutate({
       columnId: props.colDef.columnId,
       rowId: props.data.rowId,
       value,

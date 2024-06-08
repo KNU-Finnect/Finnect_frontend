@@ -18,7 +18,7 @@ const CustomDateEditor = (props: any) => {
 
   const handleSave = async () => {
     if (value) {
-      await mutate({
+      mutate({
         columnId: props.colDef.columnId,
         rowId: props.data.rowId,
         value: value.format('YYYY-MM-DD'),

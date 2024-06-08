@@ -13,29 +13,28 @@ const CustomCheckBoxEditor = (props: any) => {
   const [value, setValue] = useState(props.value);
 
   const handleChange = async (e: CheckboxChangeEvent) => {
-    setValue(e.target.checked);
-    await mutate({
+    const newValue = e.target.checked ? 'true' : 'false';
+    setValue(newValue);
+    mutate({
       columnId: props.colDef.columnId,
       rowId: props.data.rowId,
-      value,
+      value: newValue,
     });
   };
 
   return (
-    <>
-      <Checkbox
-        checked={value}
-        onChange={handleChange}
-        style={{
-          width: '100%',
-          height: '100%',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-      />
+    <div
+      style={{
+        width: '100%',
+        height: '100%',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
+    >
+      <Checkbox checked={value === 'true'} onChange={handleChange} />
       {isPending && <span>Loading...</span>}
-    </>
+    </div>
   );
 };
 
