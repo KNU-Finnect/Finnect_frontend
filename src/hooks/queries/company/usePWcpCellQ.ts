@@ -10,13 +10,11 @@ export const usePWcpCellQ = (onSuccessCallback: () => void) => {
       columnId,
       rowId,
       value,
-      companyId,
     }: {
       columnId: number;
       rowId: number;
       value: string;
-      companyId: number;
-    }) => UsePWcpCellsHook({ columnId, rowId, value, companyId }),
+    }) => UsePWcpCellsHook({ columnId, rowId, value }),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['postCellCompany'] });
       onSuccessCallback();

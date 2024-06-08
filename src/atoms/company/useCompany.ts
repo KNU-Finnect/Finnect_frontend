@@ -3,7 +3,7 @@ import { atom } from 'recoil';
 
 import { RowData } from '@finnect/interface/CompanyInterface';
 
-import CustomCellRenderer from '@finnect/components/common/columnOption/CustomCellRenderer';
+import CustomCellRenderer from '@finnect/pages/companies/components/CustomCellRenderer';
 
 export const rowDataState = atom<RowData[]>({
   key: 'rowDataState',

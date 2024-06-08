@@ -9,7 +9,7 @@ import { useGetCV } from '@finnect/hooks/queries/company/useGetCV';
 
 import { RowData } from '@finnect/interface/CompanyInterface';
 
-import CustomCellEditor from '@finnect/pages/companies/components/CustomCellEditor';
+import CustomCellEditor from '@finnect/components/common/columnOption/CustomCellEditor';
 import CustomCategoryEditor from '@finnect/pages/companies/components/CustomCategoryEditor';
 
 export const useCompanyViewData = () => {
