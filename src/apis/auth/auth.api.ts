@@ -48,7 +48,7 @@ export async function logout(): Promise<AuthAPIRequest> {
 export async function logout2(): Promise<AuthAPIRequest> {
   const refreshToken = localStorage.getItem('refreshToken');
   try {
-    const response = await axios.post(
+    const response = await axiosClient.post(
       `${BASE_URI}/users/signout2`,
       { refreshToken },
       { withCredentials: true }
