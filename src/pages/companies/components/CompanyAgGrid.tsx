@@ -78,7 +78,7 @@ const CompanyAgGrid = () => {
         onCancel={hideColumnModal}
         footer={null}
       >
-        <ColumnForm onCreate={() => {}} />
+        <ColumnForm />
       </Modal>
       <Modal
         title='회사 추가하기'

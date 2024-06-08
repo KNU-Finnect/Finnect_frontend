@@ -1,9 +1,8 @@
 import { Layout } from 'antd';
 import { Menu } from 'antd';
 
-import Records from './Records';
-import Views from './Views';
-import WorkSpace from './WorkSpace';
+import Records from '@finnect/components/common/sider/Records';
+import WorkSpace from '@finnect/components/common/sider/WorkSpace';
 
 const { Sider } = Layout;
 
@@ -25,7 +24,6 @@ const SiderBox = () => {
       <br />
       <Menu theme='light' mode='inline' style={{ width: '100%' }}>
         <Records />
-        <Views />
       </Menu>
     </Sider>
   );

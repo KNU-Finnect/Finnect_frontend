@@ -25,12 +25,13 @@ const CompanyRDModal: React.FC<RowDetailsModalProps> = ({
   onClose,
   rowData,
 }) => {
-  console.log('rowData:', rowData.companyId);
+  // console.log('rowData:', rowData.companyId);
   const [activeTab, setActiveTab] = useState('main');
   const { data: companyData, isPending } = useGetCVD(rowData.companyId);
   const { data: companyPData } = useGetCVP(rowData.companyId);
+  console.log('모달창', companyData, companyPData);
 
-  console.log('companyPData:', companyPData);
+  // console.log('companyPData:', companyPData);
 
   const items = [
     {
