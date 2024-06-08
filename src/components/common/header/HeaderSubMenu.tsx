@@ -22,6 +22,7 @@ const HeaderSubMenu = () => {
   const [inviteModalVisible, setInviteModalVisible] = useRecoilState(
     selectedInviteModalState
   );
+  const personalName = localStorage.getItem('personalName');
 
   const handleMenuClick = (e: any) => {
     if (e.key === 'logout') {
@@ -56,7 +57,7 @@ const HeaderSubMenu = () => {
       >
         <Space size='middle'>
           <Text style={{ fontFamily: 'inherit', color: '#606060' }}>
-            본인이름
+            {personalName}
           </Text>
           <EllipsisOutlined
             style={{ fontSize: '20px', color: '#606060', cursor: 'pointer' }}

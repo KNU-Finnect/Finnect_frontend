@@ -24,6 +24,7 @@ const SigninPage: React.FC = () => {
         console.log('Login successful');
         localStorage.removeItem('selectedWorkSpace');
         localStorage.removeItem('selectedMenuItem');
+        localStorage.setItem('personalName', response.personalName);
         navigate('/');
         return message.success('로그인 성공.');
       } else {

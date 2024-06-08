@@ -4,6 +4,7 @@ import { BASE_URI } from '@finnect/constants/URI';
 
 interface AuthAPIRequest {
   status: number;
+  personalName: string;
 }
 export async function authApi(
   username: string,
