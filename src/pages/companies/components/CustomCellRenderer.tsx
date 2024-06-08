@@ -9,7 +9,11 @@ import {
 import styled from 'styled-components';
 import { LuPanelLeftOpen } from 'react-icons/lu';
 import { Button } from 'antd';
-import CompanyRDModal from './CompanyRDModal';
+
+import CompanyRDModal from '@finnect/pages/companies/components/CompanyRDModal';
+
+import { useGetCVD } from '@finnect/hooks/queries/company/useGetCVD';
+import { useGetCVP } from '@finnect/hooks/queries/company/useGetCVP';
 
 const Container = styled.div`
   position: relative;
@@ -52,8 +56,12 @@ const CustomCellRenderer = (params: {
   const rowData = params.data;
 
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const { refetch: getViewData } = useGetCVD(rowData.companyId);
+  const { refetch: getPeopleData } = useGetCVP(rowData.companyId);
 
   const handleButtonClick = () => {
+    getViewData();
+    getPeopleData();
     setIsModalVisible(true);
   };
 

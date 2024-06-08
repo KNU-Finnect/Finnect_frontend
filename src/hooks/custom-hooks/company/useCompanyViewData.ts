@@ -9,6 +9,9 @@ import { useGetCV } from '@finnect/hooks/queries/company/useGetCV';
 
 import { RowData } from '@finnect/interface/CompanyInterface';
 
+import CustomCellEditor from '@finnect/components/common/columnOption/CustomCellEditor';
+import CustomCategoryEditor from '@finnect/pages/companies/components/CustomCategoryEditor';
+
 export const useCompanyViewData = () => {
   const [rowData, setRowData] = useRecoilState(rowDataState);
   const [columnDefs, setColumnDefs] = useRecoilState(columnDefsState);
@@ -27,15 +30,25 @@ export const useCompanyViewData = () => {
         sortable: true,
         filter: true,
         hide: col.hided,
+        columnId: col.columnId,
+        cellEditor:
+          col.columnName === 'Category'
+            ? CustomCategoryEditor
+            : CustomCellEditor,
       }));
 
-      const combinedColumns = [...columnDefs, ...columnsFromApi];
+      const newColumns = columnsFromApi.filter((col) =>
+        columnDefs.every((existingCol) => existingCol.field !== col.field)
+      );
+
+      const combinedColumns = [...columnDefs, ...newColumns];
 
       const rows = data.result.viewCompanies.map((company) => {
         const row: RowData = {
           companyId: company.companyId,
           companyName: company.companyName,
           domain: company.domain,
+          rowId: company.rowId,
         };
         company.cells.forEach((cell) => {
           const column = data.result.viewColumns.find(
@@ -54,5 +67,11 @@ export const useCompanyViewData = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
-  return { rowData, columnDefs, isPending, isError, error };
+  return {
+    rowData,
+    columnDefs,
+    isPending,
+    isError,
+    error,
+  };
 };

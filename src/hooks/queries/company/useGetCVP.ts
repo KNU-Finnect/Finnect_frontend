@@ -6,7 +6,6 @@ export const useGetCVP = (companyId: number) => {
   const { data, isPending, isError, error, refetch } = useQuery({
     queryKey: ['getCVPData'],
     queryFn: () => GetCVPDetailData(companyId),
-    refetchOnMount: false,
   });
 
   return { data, isPending, isError, error, refetch };

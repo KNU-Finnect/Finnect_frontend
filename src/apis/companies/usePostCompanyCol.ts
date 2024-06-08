@@ -1,31 +1,23 @@
 import { axiosClient } from '../AxiosClient';
 
-export const postWCompany = async ({
-  columnId,
+export const postWCCol = async ({
   workspaceId,
   columnName,
   columnType,
-  columnIndex,
   isHided,
-  dtype,
 }: {
-  columnId: number;
   workspaceId: number;
-  columnName: 'string';
-  columnType: 'string';
-  columnIndex: number;
+  columnName: string;
+  columnType: string;
   isHided: boolean;
-  dtype: 'string';
 }) => {
   try {
     const response = await axiosClient.post(`/workspaces/companies/columns`, {
-      columnId,
       workspaceId,
       columnName,
       columnType,
-      columnIndex,
       isHided,
-      dtype,
+      dType: 'COMPANY',
     });
 
     return response.data;
