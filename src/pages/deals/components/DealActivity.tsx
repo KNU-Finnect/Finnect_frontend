@@ -1,5 +1,6 @@
 import { getDealLog } from '@finnect/apis/deal/useDealDetail';
 import React, { useEffect, useState } from 'react';
+import { Avatar, List } from 'antd';
 import styled from 'styled-components';
 
 const DealActivity: React.FC<{ dealId: number }> = ({ dealId }) => {
@@ -28,12 +29,25 @@ const DealActivity: React.FC<{ dealId: number }> = ({ dealId }) => {
     <DealNoteWrapper>
       <h2>Activity</h2>
       {dealLogs.length > 0 ? (
-        dealLogs.map((log) => (
-          <LogWrapper key={log.dealLogId}>
-            <p>{log.dealLog}</p>
-            <small>{new Date(log.savedTime).toLocaleString()}</small>
-          </LogWrapper>
-        ))
+        <List
+          itemLayout='horizontal'
+          dataSource={dealLogs}
+          renderItem={(log, index) => (
+            <List.Item>
+              <List.Item.Meta
+                avatar={
+                  <Avatar
+                    src={`https://api.dicebear.com/7.x/miniavs/svg?seed=${index}`}
+                  />
+                }
+                title={<LogTitle>{log.dealLog}</LogTitle>}
+                description={
+                  <small>{new Date(log.savedTime).toLocaleString()}</small>
+                }
+              />
+            </List.Item>
+          )}
+        />
       ) : (
         <p>No activity logs found.</p>
       )}
@@ -48,17 +62,6 @@ const DealNoteWrapper = styled.div`
   background-color: #f9f9f9;
 `;
 
-const LogWrapper = styled.div`
-  border-bottom: 1px solid #ddd;
-  padding: 8px 0;
-
-  p {
-    margin: 0;
-  }
-
-  small {
-    display: block;
-    color: #888;
-    margin-top: 4px;
-  }
+const LogTitle = styled.span`
+  font-weight: bold;
 `;

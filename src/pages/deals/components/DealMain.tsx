@@ -7,8 +7,6 @@ interface DealMainProps {
 }
 
 const DealMain: React.FC<DealMainProps> = ({ deal }) => {
-  console.log('main deal', deal);
-
   const fixedFields = [
     { label: 'dealName', value: deal.dealName, color: 'magenta' },
     { label: 'companyName', value: deal.companyName, color: 'green' },
@@ -16,7 +14,15 @@ const DealMain: React.FC<DealMainProps> = ({ deal }) => {
   ];
 
   const otherFields = Object.entries(deal).filter(
-    ([key]) => !['dealName', 'companyName', 'userName'].includes(key)
+    ([key]) =>
+      ![
+        'dealName',
+        'companyName',
+        'userName',
+        'dealId',
+        'companyId',
+        'userId',
+      ].includes(key)
   );
 
   return (
