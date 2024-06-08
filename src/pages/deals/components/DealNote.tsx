@@ -1,7 +1,10 @@
 import styled from 'styled-components';
-interface DealMainProps {}
-const DealNote: React.FC<DealMainProps> = () => {
-  return <DealNoteWrapper>Note</DealNoteWrapper>;
+interface DealMainProps {
+  dealId: number;
+}
+const DealNote: React.FC<DealMainProps> = ({ dealId }) => {
+  console.log('note deal', dealId);
+  return <DealNoteWrapper>{dealId}</DealNoteWrapper>;
 };
 
 export default DealNote;

@@ -11,6 +11,7 @@ import DealCustomCell from './DealCustomCell';
 import ColumnForm from '@finnect/components/common/modal/deals/DealColumnForm';
 
 interface DealData {
+  dealId: any;
   companyId: number;
   dealName: string;
   userId: number;
@@ -50,6 +51,7 @@ const DealAgGrid = () => {
         field: col.columnName,
         headerName: col.columnName,
         columnId: col.columnId,
+        dealId: col.dealId,
       }));
 
       const predefinedColumns = [
@@ -72,6 +74,7 @@ const DealAgGrid = () => {
           dealName: deal.dealName,
           companyId: deal.companyId,
           userId: deal.userId,
+          dealId: deal.dealId,
         };
 
         deal.cells.forEach((cell) => {

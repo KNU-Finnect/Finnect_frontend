@@ -14,6 +14,7 @@ export interface IDealResultProps {
 }
 
 export interface IDealProps {
+  dealId: number;
   companyId: number;
   workspaceId: number;
   userId: number;

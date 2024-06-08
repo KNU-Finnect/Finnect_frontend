@@ -10,6 +10,7 @@ interface DealDetailModalProps {
   visible: boolean;
   onClose: () => void;
   deal: IDealProps;
+  dealId: number;
 }
 
 const DealDetailModal: React.FC<DealDetailModalProps> = ({
@@ -28,12 +29,12 @@ const DealDetailModal: React.FC<DealDetailModalProps> = ({
     {
       key: 'note',
       label: 'Note',
-      children: <DealNote />,
+      children: <DealNote dealId={deal.dealId} />,
     },
     {
       key: 'activity',
       label: 'Activity',
-      children: <DealActivity />,
+      children: <DealActivity dealId={deal.dealId} />,
     },
   ];
 

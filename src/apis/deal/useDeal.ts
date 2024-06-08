@@ -21,19 +21,6 @@ export async function createDeal(
   }
 }
 
-export async function getDealDetail(dealId: number): Promise<AxiosResponse> {
-  const url = `${BASE_URI}/workspaces/deal/${dealId}/details`;
-
-  try {
-    const response = await axiosClient.get(url, {});
-    console.log(response);
-    return response;
-  } catch (error) {
-    console.error('Error during get deal detail:', error);
-    throw error;
-  }
-}
-
 export async function getDealList(page: number = 1): Promise<AxiosResponse> {
   const url = `${BASE_URI}/workspaces/deals/views/origin?page=${page}`;
 
