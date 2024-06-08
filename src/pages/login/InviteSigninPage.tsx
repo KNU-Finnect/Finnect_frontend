@@ -12,9 +12,13 @@ const InviteSigninPage: React.FC = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
-  const { workspaceId: workspaceIdParam, workspaceName } = useParams();
+  const { workspaceId: workspaceIdParam, workspaceName: encodedWorkspaceName } =
+    useParams();
 
   const workspaceId = workspaceIdParam ? parseInt(workspaceIdParam, 10) : null;
+  const workspaceName = encodedWorkspaceName
+    ? decodeURIComponent(encodedWorkspaceName)
+    : '';
 
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
