@@ -23,7 +23,7 @@
     "baseUrl": ".",
     "paths": {
       "@finnect/*": ["src/*"]
-    },
+    }
   },
   "include": ["src", "vite.config.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
