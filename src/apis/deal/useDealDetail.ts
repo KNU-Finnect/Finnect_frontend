@@ -59,3 +59,5 @@ export async function postDealNote(
     throw error;
   }
 }
+
+// export function getDealNote()
