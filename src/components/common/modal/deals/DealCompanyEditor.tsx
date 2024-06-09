@@ -1,5 +1,4 @@
-// src/components/DealCompanyEditor.tsx
-import React, { forwardRef, useImperativeHandle, useState } from 'react';
+import { forwardRef, useImperativeHandle, useState } from 'react';
 import { Select } from 'antd';
 
 const { Option } = Select;

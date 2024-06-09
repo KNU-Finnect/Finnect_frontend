@@ -45,11 +45,15 @@ const Dnote: React.FC<DnoteProps> = ({ handleAdd, fetchDealNotes, dealId }) => {
     if (document.length > 0) {
       const titleBlock = document[0];
       const bodyBlocks = document.slice(1);
-      setTitle(titleBlock.content[0].text);
+      console.log('bodyBlocks', bodyBlocks);
+      console.log('titleBlock', titleBlock['content']);
+      setTitle((titleBlock.content as any)[0].text);
 
       const bodyText = bodyBlocks
         .map((block: Block) =>
-          (block.content ?? []).map((c: { text: string }) => c.text).join(' ')
+          ((block.content as any) ?? [])
+            .map((c: { text: string }) => c.text)
+            .join(' ')
         )
         .join('\n\n');
 
