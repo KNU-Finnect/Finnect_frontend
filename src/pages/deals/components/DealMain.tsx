@@ -51,7 +51,10 @@ const DealMain: React.FC<DealMainProps> = ({ deal }) => {
 
 export default DealMain;
 
-const MainWrapper = styled.div``;
+const MainWrapper = styled.div`
+  height: 500px;
+  overflow-y: auto;
+`;
 
 const TitleWrapper = styled.h2``;
 
