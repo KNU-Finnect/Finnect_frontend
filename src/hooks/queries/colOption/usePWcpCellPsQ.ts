@@ -1,22 +1,24 @@
 import { useMutation } from '@tanstack/react-query';
 
-import { UsePWcpCellsHook } from '@finnect/apis/companies/usePWcpCellsHook';
+import { UsePWcpCellsPsHook } from '@finnect/apis/colOption/usePWcpCellsPsHook';
 
 import { queryClient } from '@finnect/hooks/queries/Http';
 
-export const usePWcpCellQ = (onSuccessCallback: () => void) => {
+export const usePWcpCellPQ = (onSuccessCallback: () => void) => {
   const { mutate, isPending, isError, error } = useMutation({
     mutationFn: ({
       columnId,
       rowId,
       value,
+      peopleId,
     }: {
       columnId: number;
       rowId: number;
       value: string;
-    }) => UsePWcpCellsHook({ columnId, rowId, value }),
+      peopleId: number;
+    }) => UsePWcpCellsPsHook({ columnId, rowId, value, peopleId }),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['postCellCompany'] });
+      queryClient.invalidateQueries({ queryKey: ['postCellPsCell'] });
       onSuccessCallback();
     },
   });

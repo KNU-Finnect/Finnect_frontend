@@ -29,11 +29,16 @@ export interface IViewCompany {
   }[];
 }
 
+export interface IViewColumnType {
+  type: string;
+  filterConditions: string[];
+}
+
 export interface IViewColumn {
   columnId: number;
   index: number;
   hided: boolean;
-  columnType: string;
+  columnType: IViewColumnType;
   columnName: string;
   sorting: string;
 }

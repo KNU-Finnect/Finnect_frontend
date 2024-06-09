@@ -7,7 +7,6 @@ import { queryClient } from '@finnect/hooks/queries/Http';
 export const usePostWCCol = () => {
   const { mutate, isPending, isError, error } = useMutation({
     mutationFn: ({
-      workspaceId,
       columnName,
       columnType,
       isHided,
@@ -18,7 +17,6 @@ export const usePostWCCol = () => {
       isHided: boolean;
     }) =>
       postWCCol({
-        workspaceId,
         columnName,
         columnType,
         isHided,
