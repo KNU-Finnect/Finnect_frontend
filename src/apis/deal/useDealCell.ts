@@ -8,7 +8,6 @@ export const patchDealCell = async ({
   columnId: number;
   rowId: number;
   value: string;
-  peopleId: number;
 }) => {
   try {
     const response = await axiosClient.patch(`/workspaces/dealcells`, {

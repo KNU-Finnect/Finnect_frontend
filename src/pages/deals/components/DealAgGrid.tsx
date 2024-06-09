@@ -1,6 +1,7 @@
 import { PlusOutlined } from '@ant-design/icons';
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useCallback } from 'react';
 import { getDealList } from '@finnect/apis/deal/useDeal';
+
 import { IDealRow } from '@finnect/interface/DealInterface';
 import { ColDef } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
@@ -9,8 +10,10 @@ import styled from 'styled-components';
 import DealForm from '@finnect/components/common/modal/deals/DealForm';
 import DealCustomCell from './DealCustomCell';
 import ColumnForm from '@finnect/components/common/modal/deals/DealColumnForm';
+import { patchDealCell } from '@finnect/apis/deal/useDealCell';
 
 interface DealData {
+  rowId: number;
   dealId: number;
   dealName: string;
   companyName: string;
@@ -71,6 +74,7 @@ const DealAgGrid = () => {
 
       const rows = result.viewDeals.map((deal: DealData) => {
         const dealRow: any = {
+          rowId: deal.rowId,
           dealId: deal.dealId,
           dealName: deal.dealName,
           companyName: deal.companyName,
@@ -85,6 +89,7 @@ const DealAgGrid = () => {
           )?.columnName;
           if (columnName) {
             dealRow[columnName] = cell.value;
+            dealRow[`columnId_${columnName}`] = cell.columnId;
           }
         });
 
@@ -97,6 +102,29 @@ const DealAgGrid = () => {
       console.error('Error fetching deal list:', error);
     }
   };
+
+  const patchHandler = useCallback(async (params: any) => {
+    try {
+      const columnId = params.data[`columnId_${params.colDef.field}`];
+      const rowId = params.data.rowId;
+      const value = params.newValue;
+
+      console.log('columnId:', columnId);
+      console.log('rowId:', rowId);
+      console.log('value:', value);
+
+      if (columnId) {
+        const response = await patchDealCell({
+          columnId,
+          rowId,
+          value,
+        });
+        console.log('Cell updated:', response);
+      }
+    } catch (error) {
+      console.error('Error updating cell:', error);
+    }
+  }, []);
 
   const showModal = () => {
     setIsModalVisible(true);
@@ -147,6 +175,7 @@ const DealAgGrid = () => {
           rowSelection='multiple'
           suppressRowClickSelection={true}
           rowDragManaged={true}
+          onCellValueChanged={patchHandler}
         />
       </div>
       <Modal
