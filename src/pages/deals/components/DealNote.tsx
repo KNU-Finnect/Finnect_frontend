@@ -29,23 +29,23 @@ const DealNote: React.FC<DealMainProps> = ({ dealId }) => {
     setIsModalVisible(false);
   };
 
-  useEffect(() => {
-    const fetchDealNotes = async () => {
-      try {
-        const response = await getDealNoteList(dealId);
-        const notes = response.data.result.notes.map((note: any) => ({
-          key: note.noteId,
-          title: note.title,
-          author: 'Author Name',
-          lastModified: new Date(note.createdDate).toLocaleString(),
-        }));
-        setDealNotes(notes);
-      } catch (error) {
-        setError('Failed to fetch deal notes');
-        console.error('Error during get deal notes:', error);
-      }
-    };
+  const fetchDealNotes = async () => {
+    try {
+      const response = await getDealNoteList(dealId);
+      const notes = response.data.result.notes.map((note: any) => ({
+        key: note.noteId,
+        title: note.title,
+        author: 'Author Name',
+        lastModified: new Date(note.createdDate).toLocaleString(),
+      }));
+      setDealNotes(notes);
+    } catch (error) {
+      setError('Failed to fetch deal notes');
+      console.error('Error during get deal notes:', error);
+    }
+  };
 
+  useEffect(() => {
     fetchDealNotes();
   }, [dealId]);
 
@@ -87,7 +87,11 @@ const DealNote: React.FC<DealMainProps> = ({ dealId }) => {
         onCancel={handleCancel}
         footer={null}
       >
-        <Dnote handleAdd={handleCancel} />
+        <Dnote
+          handleAdd={handleCancel}
+          fetchDealNotes={fetchDealNotes}
+          dealId={dealId}
+        />
       </Modal>
     </DealNoteWrapper>
   );
