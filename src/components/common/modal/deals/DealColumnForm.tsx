@@ -11,9 +11,8 @@ const DealColumnForm = ({ onAddSuccess }: { onAddSuccess: () => void }) => {
       await postDealColumnCreate({
         columnName: values.name,
         columnType: values.type,
-        columnIndex: 0,
         isHide: false,
-        dtype: 'DEAL',
+        dType: 'DEAL',
       });
       onAddSuccess();
       form.resetFields();
@@ -38,9 +37,9 @@ const DealColumnForm = ({ onAddSuccess }: { onAddSuccess: () => void }) => {
         rules={[{ required: true, message: 'Please select the type!' }]}
       >
         <Select>
-          <Option value='text'>Text</Option>
-          <Option value='number'>Number</Option>
-          <Option value='date'>Date</Option>
+          <Option value='TEXT'>TEXT</Option>
+          <Option value='NUMBER'>NUMBER</Option>
+          <Option value='DATE'>DATE</Option>
         </Select>
       </Form.Item>
       <Form.Item>

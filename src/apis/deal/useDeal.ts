@@ -56,15 +56,13 @@ export async function postDealCreate(
 export const postDealColumnCreate = async ({
   columnName,
   columnType,
-  columnIndex,
   isHide,
-  dtype,
+  dType,
 }: {
   columnName: string;
   columnType: string;
-  columnIndex: number;
   isHide: boolean;
-  dtype: string;
+  dType: string;
 }) => {
   const url = `${BASE_URI}/workspaces/deals/columns`;
 
@@ -72,14 +70,38 @@ export const postDealColumnCreate = async ({
     const response = await axiosClient.post(url, {
       columnName,
       columnType,
-      columnIndex,
       isHide,
-      dtype,
+      dType,
     });
     console.log(response);
     return response;
   } catch (error) {
     console.error('Error during post deal column create:', error);
     throw error;
+  }
+};
+
+export const patchDealCell = async ({
+  columnId,
+  rowId,
+  value,
+  peopleId,
+}: {
+  columnId: number;
+  rowId: number;
+  value: string;
+  peopleId: number;
+}) => {
+  try {
+    const response = await axiosClient.patch(`/workspaces/cells`, {
+      columnId,
+      rowId,
+      value,
+      peopleId,
+    });
+
+    return response.data;
+  } catch (error) {
+    console.error(error);
   }
 };

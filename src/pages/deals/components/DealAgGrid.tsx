@@ -25,9 +25,7 @@ interface DealData {
 }
 
 const DealAgGrid = () => {
-  const [colDefs, setColDefs] = useState<
-    (ColDef<IDealRow> | ColDef<any, any>)[]
-  >([]);
+  const [colDefs, setColDefs] = useState<ColDef[]>([]);
   const [rowData, setRowData] = useState<IDealRow[]>([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isColumnModalVisible, setIsColumnModalVisible] = useState(false);
@@ -49,6 +47,7 @@ const DealAgGrid = () => {
     try {
       const response = await getDealList();
       const result = response.data.result;
+      console.log('Deal list:', result);
 
       const columns = [
         {
@@ -61,22 +60,36 @@ const DealAgGrid = () => {
         },
         { field: 'companyName', headerName: 'Company Name' },
         { field: 'userName', headerName: '책임자' },
-        { field: 'createdDate', headerName: '생성일' },
-        { field: 'dealAmount', headerName: '거래액' },
-        { field: 'category', headerName: 'Category' },
       ];
 
-      setColDefs(columns);
-
-      const rows = result.viewDeals.map((deal: DealData) => ({
-        dealId: deal.dealId,
-        dealName: deal.dealName,
-        companyName: deal.companyName,
-        userName: deal.userName,
-        createdDate: new Date(deal.createdDate).toLocaleDateString(),
-        dealAmount: deal.dealAmount,
-        category: deal.category,
+      const additionalColumns = result.viewColumns.map((col: any) => ({
+        field: col.columnName,
+        headerName: col.columnName,
       }));
+
+      setColDefs([...columns, ...additionalColumns]);
+
+      const rows = result.viewDeals.map((deal: DealData) => {
+        const dealRow: any = {
+          dealId: deal.dealId,
+          dealName: deal.dealName,
+          companyName: deal.companyName,
+          userName: deal.userName,
+          createdDate: new Date(deal.createdDate).toLocaleDateString(),
+          dealAmount: deal.dealAmount,
+          category: deal.category,
+        };
+        deal.cells.forEach((cell) => {
+          const columnName = result.viewColumns.find(
+            (col: { columnId: number }) => col.columnId === cell.columnId
+          )?.columnName;
+          if (columnName) {
+            dealRow[columnName] = cell.value;
+          }
+        });
+
+        return dealRow;
+      });
 
       setRowData(rows);
       console.log('Transformed deal list:', rows);

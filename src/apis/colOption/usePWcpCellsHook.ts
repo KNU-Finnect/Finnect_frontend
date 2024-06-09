@@ -10,7 +10,7 @@ export const UsePWcpCellsHook = async ({
   value: string;
 }) => {
   try {
-    const response = await axiosClient.patch(`/workspaces/cells`, {
+    const response = await axiosClient.patch(`/s`, {
       columnId,
       rowId,
       value,
