@@ -38,11 +38,6 @@ const DealsBox = () => {
         alignItems: 'stretch',
       }}
     >
-      <ButtonLayout>
-        <Button type='primary' icon={<SettingOutlined />} style={buttonStyle}>
-          View Setting
-        </Button>
-      </ButtonLayout>
       <DealAgGrid />
     </Content>
   );
