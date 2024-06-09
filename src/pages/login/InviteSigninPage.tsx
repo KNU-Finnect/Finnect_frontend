@@ -40,6 +40,7 @@ const InviteSigninPage: React.FC = () => {
 
         localStorage.setItem('selectedWorkSpace', workspaceName as string);
         localStorage.setItem('selectedWorkSpaceId', workspaceIdParam as string);
+        localStorage.setItem('personalName', response.result.personalName);
 
         navigate('/');
         return message.success('로그인 및 초대 성공.');
