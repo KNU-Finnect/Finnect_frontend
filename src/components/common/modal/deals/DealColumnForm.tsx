@@ -40,6 +40,14 @@ const DealColumnForm = ({ onAddSuccess }: { onAddSuccess: () => void }) => {
           <Option value='TEXT'>TEXT</Option>
           <Option value='NUMBER'>NUMBER</Option>
           <Option value='DATE'>DATE</Option>
+          <Option value='SELECT'>SELECT</Option>
+          <Option value='PERSON'>PERSON</Option>
+          <Option value='PARTNER'>PARTNER</Option>
+          <Option value='CHECKBOX'>CHECKBOX</Option>
+          <Option value='RATING'>RATING</Option>
+          <Option value='CURRENCY'>CURRENCY</Option>
+          <Option value='STATUS'>STATUS</Option>
+          <Option value='URL'>URL</Option>
         </Select>
       </Form.Item>
       <Form.Item>
