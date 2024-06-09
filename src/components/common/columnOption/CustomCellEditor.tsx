@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import { Input } from 'antd';
 
-import { usePWcpCellQ } from '@finnect/hooks/queries/company/usePWcpCellQ';
+import { usePWcpCellQ } from '@finnect/hooks/queries/colOption/usePWcpCellQ';
 import { useGetCV } from '@finnect/hooks/queries/company/useGetCV';
 
 const CustomCellEditor = (props: any) => {

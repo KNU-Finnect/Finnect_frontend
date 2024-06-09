@@ -2,13 +2,18 @@ import { Form, Input, Select, Button, Checkbox } from 'antd';
 
 import { usePostWCCol } from '@finnect/hooks/queries/company/usePostWCCol';
 import { useGetCV } from '@finnect/hooks/queries/company/useGetCV';
+import { useGetColQ } from '@finnect/hooks/queries/colOption/useGetColQ';
+
+import { useCompanyModal } from '@finnect/hooks/custom-hooks/company/useCompanyModal';
 
 const { Option } = Select;
 
 const ColumnForm = () => {
   const [form] = Form.useForm();
   const { refetch } = useGetCV();
+  const { data } = useGetColQ();
   const { mutate, isPending, isError, error } = usePostWCCol();
+  const { hideColumnModal } = useCompanyModal();
 
   const handleFinish = (values: {
     workspaceId: number;
@@ -16,14 +21,12 @@ const ColumnForm = () => {
     columnType: string;
     isHided: boolean;
   }) => {
-    values.workspaceId = parseInt(
-      localStorage.getItem('selectedWorkSpaceId') || '0'
-    );
-
+    // console.log('values:', values);
     mutate(values, {
       onSuccess: () => {
         refetch();
         form.resetFields();
+        hideColumnModal();
       },
       onError: (error) => {
         console.error('Error adding column:', error);
@@ -46,15 +49,11 @@ const ColumnForm = () => {
         rules={[{ required: true, message: 'Please select the type!' }]}
       >
         <Select>
-          <Option value='TEXT'>Text</Option>
-          <Option value='NUMBER'>Number</Option>
-          <Option value='DATE'>Date</Option>
-          <Option value='STATUS'>Status</Option>
-          <Option value='CURRENCY'>Currency</Option>
-          <Option value='RATING'>Rating</Option>
-          <Option value='CHECKBOX'>Checkbox</Option>
-          <Option value='URL'>URL</Option>
-          <Option value='PERSON'>Person</Option>
+          {data?.result.map((col) => (
+            <Option key={col.type} value={col.type}>
+              {col.type}
+            </Option>
+          ))}
         </Select>
       </Form.Item>
       <Form.Item

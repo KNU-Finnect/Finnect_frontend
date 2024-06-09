@@ -9,8 +9,17 @@ import { useGetCV } from '@finnect/hooks/queries/company/useGetCV';
 
 import { RowData } from '@finnect/interface/CompanyInterface';
 
-import CustomCellEditor from '@finnect/components/common/columnOption/CustomCellEditor';
 import CustomCategoryEditor from '@finnect/pages/companies/components/CustomCategoryEditor';
+
+import CustomCellEditor from '@finnect/components/common/columnOption/CustomCellEditor';
+import CustomDateEditor from '@finnect/components/common/columnOption/CustomDateEditor';
+import CustomStatusEditor from '@finnect/components/common/columnOption/CustomStatusEditor';
+import CustomNumberEditor from '@finnect/components/common/columnOption/CustomNumberEditor';
+import CustomCurrencyEditor from '@finnect/components/common/columnOption/CustomCurrenctyEditor';
+import CustomRatingEditor from '@finnect/components/common/columnOption/CustomRatingEditor';
+import CustomCheckBoxEditor from '@finnect/components/common/columnOption/CustomCheckBoxEditor';
+import CustomPartnerEditor from '@finnect/components/common/columnOption/CustomPartnerEditor';
+import CustomPersonEditor from '@finnect/components/common/columnOption/CustomPersonEditor';
 
 export const useCompanyViewData = () => {
   const [rowData, setRowData] = useRecoilState(rowDataState);
@@ -24,18 +33,64 @@ export const useCompanyViewData = () => {
       data.result.viewColumns &&
       data.result.viewCompanies
     ) {
-      const columnsFromApi = data.result.viewColumns.map((col) => ({
-        headerName: col.columnName,
-        field: col.columnName,
-        sortable: true,
-        filter: true,
-        hide: col.hided,
-        columnId: col.columnId,
-        cellEditor:
-          col.columnName === 'Category'
-            ? CustomCategoryEditor
-            : CustomCellEditor,
-      }));
+      const columnsFromApi = data.result.viewColumns.map((col) => {
+        let cellEditor;
+
+        if (col.columnType) {
+          switch (col.columnType?.type) {
+            case 'SELECT':
+              cellEditor = CustomCategoryEditor;
+              break;
+            case 'PERSON':
+              cellEditor = CustomPersonEditor;
+              break;
+            case 'PARTNER':
+              cellEditor = CustomPartnerEditor;
+              break;
+            case 'CHECKBOX':
+              cellEditor = CustomCheckBoxEditor;
+              break;
+            case 'RATING':
+              cellEditor = CustomRatingEditor;
+              break;
+            case 'CURRENCY':
+              cellEditor = CustomCurrencyEditor;
+              break;
+            case 'TEXT':
+              cellEditor = CustomCellEditor;
+              break;
+            case 'NUMBER':
+              cellEditor = CustomNumberEditor;
+              break;
+            case 'STATUS':
+              cellEditor = CustomStatusEditor;
+              break;
+            case 'DATE':
+              cellEditor = CustomDateEditor;
+              break;
+            case 'URL':
+              cellEditor = CustomCellEditor;
+              break;
+            default:
+              cellEditor = CustomCellEditor;
+              break;
+          }
+        } else {
+          cellEditor = CustomCellEditor;
+        }
+
+        const column = {
+          headerName: col.columnName,
+          field: col.columnName,
+          sortable: true,
+          filter: true,
+          hide: col.hided,
+          columnId: col.columnId,
+          cellEditor: cellEditor,
+        };
+
+        return column;
+      });
 
       const newColumns = columnsFromApi.filter((col) =>
         columnDefs.every((existingCol) => existingCol.field !== col.field)

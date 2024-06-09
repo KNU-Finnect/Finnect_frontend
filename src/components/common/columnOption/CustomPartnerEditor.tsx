@@ -4,15 +4,17 @@ import { useState } from 'react';
 import { usePWcpCellQ } from '@finnect/hooks/queries/colOption/usePWcpCellQ';
 import { useGetCV } from '@finnect/hooks/queries/company/useGetCV';
 
-import { StatusCategory } from '@finnect/components/common/columnOption/StatusCategory';
+import { useGetWC } from '@finnect/hooks/queries/company/useGetWC';
+import { RowData } from '@finnect/interface/CompanyInterface';
 
 const { Option } = Select;
 
-const CustomCategoryEditor = (props: any) => {
+const CustomPartnerEditor = (props: any) => {
   const { refetch } = useGetCV();
   const { mutate, isPending } = usePWcpCellQ(() => {
     refetch();
   });
+  const { data } = useGetWC();
   const [value, setValue] = useState(props.value);
 
   const handleChange = (newValue: string) => {
@@ -36,9 +38,9 @@ const CustomCategoryEditor = (props: any) => {
         onBlur={handleSave}
         style={{ width: '100%' }}
       >
-        {StatusCategory.map((category: string) => (
-          <Option key={category} value={category}>
-            {category}
+        {data.result.companies.map((data: RowData) => (
+          <Option key={data.companyId} value={data.companyName}>
+            {data.companyName}
           </Option>
         ))}
       </Select>
@@ -47,4 +49,4 @@ const CustomCategoryEditor = (props: any) => {
   );
 };
 
-export default CustomCategoryEditor;
+export default CustomPartnerEditor;
