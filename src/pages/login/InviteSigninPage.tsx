@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Space, message } from 'antd';
 import styled from 'styled-components';
-import reactLogo from '@finnect/assets/react.svg';
+import reactLogo from '@finnect/assets/finnectLogo.svg';
 import { authApi } from '@finnect/apis/auth/auth.api';
 import IDbox from '@finnect/components/login/IDbox';
 import PWbox from '@finnect/components/login/PWbox';

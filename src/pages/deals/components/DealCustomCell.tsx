@@ -50,7 +50,6 @@ const DealCustomCell = (params: {
     | undefined;
 }) => {
   const rowData = params.data;
-
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const handleButtonClick = () => {
@@ -72,6 +71,7 @@ const DealCustomCell = (params: {
         visible={isModalVisible}
         onClose={handleModalClose}
         deal={rowData}
+        dealId={rowData.dealId}
       />
     </Container>
   );

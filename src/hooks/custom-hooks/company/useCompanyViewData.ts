@@ -35,48 +35,43 @@ export const useCompanyViewData = () => {
     ) {
       const columnsFromApi = data.result.viewColumns.map((col) => {
         let cellEditor;
-
-        if (col.columnType) {
-          switch (col.columnType?.type) {
-            case 'SELECT':
-              cellEditor = CustomCategoryEditor;
-              break;
-            case 'PERSON':
-              cellEditor = CustomPersonEditor;
-              break;
-            case 'PARTNER':
-              cellEditor = CustomPartnerEditor;
-              break;
-            case 'CHECKBOX':
-              cellEditor = CustomCheckBoxEditor;
-              break;
-            case 'RATING':
-              cellEditor = CustomRatingEditor;
-              break;
-            case 'CURRENCY':
-              cellEditor = CustomCurrencyEditor;
-              break;
-            case 'TEXT':
-              cellEditor = CustomCellEditor;
-              break;
-            case 'NUMBER':
-              cellEditor = CustomNumberEditor;
-              break;
-            case 'STATUS':
-              cellEditor = CustomStatusEditor;
-              break;
-            case 'DATE':
-              cellEditor = CustomDateEditor;
-              break;
-            case 'URL':
-              cellEditor = CustomCellEditor;
-              break;
-            default:
-              cellEditor = CustomCellEditor;
-              break;
-          }
-        } else {
-          cellEditor = CustomCellEditor;
+        switch (col.columnType?.type) {
+          case 'SELECT':
+            cellEditor = CustomCategoryEditor;
+            break;
+          case 'PERSON':
+            cellEditor = CustomPersonEditor;
+            break;
+          case 'PARTNER':
+            cellEditor = CustomPartnerEditor;
+            break;
+          case 'CHECKBOX':
+            cellEditor = CustomCheckBoxEditor;
+            break;
+          case 'RATING':
+            cellEditor = CustomRatingEditor;
+            break;
+          case 'CURRENCY':
+            cellEditor = CustomCurrencyEditor;
+            break;
+          case 'TEXT':
+            cellEditor = CustomCellEditor;
+            break;
+          case 'NUMBER':
+            cellEditor = CustomNumberEditor;
+            break;
+          case 'STATUS':
+            cellEditor = CustomStatusEditor;
+            break;
+          case 'DATE':
+            cellEditor = CustomDateEditor;
+            break;
+          case 'URL':
+            cellEditor = CustomCellEditor;
+            break;
+          default:
+            cellEditor = CustomCellEditor;
+            break;
         }
 
         const column = {

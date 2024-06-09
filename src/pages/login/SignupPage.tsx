@@ -8,7 +8,7 @@ import Namebox from '@finnect/components/login/Namebox';
 import PWCheckbox from '@finnect/components/login/PWCheckbox';
 import PWbox from '@finnect/components/login/PWbox';
 
-import reactLogo from '@finnect/assets/react.svg';
+import reactLogo from '@finnect/assets/finnectLogo.svg';
 
 import { postSignup } from '@finnect/apis/signup/signup.api';
 import { useNavigate } from 'react-router-dom';
