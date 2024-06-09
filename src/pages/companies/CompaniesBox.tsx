@@ -1,30 +1,13 @@
-import { Layout, Button, theme } from 'antd';
-import styled from 'styled-components';
+import { Layout, theme } from 'antd';
 
 import CompanyAgGrid from '@finnect/pages/companies/components/CompanyAgGrid';
 
-import { SettingOutlined } from '@ant-design/icons';
-
 const { Content } = Layout;
-
-const ButtonLayout = styled.div`
-  display: flex;
-  margin-bottom: 24px;
-  width: 100%;
-  justify-content: space-between;
-`;
 
 const CompaniesBox = () => {
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
-
-  const buttonStyle = {
-    background: '#06BA81',
-    borderColor: '#06BA81',
-    color: '#FFFFFF',
-    marginRight: '12px',
-  };
 
   return (
     <Content
@@ -39,11 +22,6 @@ const CompaniesBox = () => {
         alignItems: 'stretch',
       }}
     >
-      <ButtonLayout>
-        <Button type='primary' icon={<SettingOutlined />} style={buttonStyle}>
-          View Setting
-        </Button>
-      </ButtonLayout>
       <CompanyAgGrid />
     </Content>
   );
